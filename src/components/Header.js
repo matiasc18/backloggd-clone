@@ -1,9 +1,10 @@
 import React from 'react';
+import '../styles/header.css';
 
 const Header = () => {
   return (
-    <div id="header-div" className="container-fluid">
-      <h1 className="text-center">Language Tracker</h1>
+    <div id="header-div">
+      <h1>Language Tracker</h1>
     </div>
   )
 }
