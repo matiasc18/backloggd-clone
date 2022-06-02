@@ -1,3 +1,31 @@
-#landing-page {
-  background-color: black;
+#signup-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 50%;
+  width: 500px;
+  background-color: gray;
+}
+
+#signup-form h2 {
+  height: 25%;
+  margin: 0;
+}
+
+#signup-form div {
+  height: 18.75%;
+}
+
+.signup-col-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.form-label {
+  display: inline-block;
+}
+
+.form-label input {
+  display: block;
 }
