@@ -1,13 +1,12 @@
-#header-div {
-  position: fixed;
+header {
+  position: sticky;
   width: 100%;
   background-color: rgba(0,0,0, 0.3);
   color: white;
   display: flex;
   justify-content: center;
-  height: 90px;
 }
 
-#header-div h1 {
+header h1 {
   text-justify: center;
 }
