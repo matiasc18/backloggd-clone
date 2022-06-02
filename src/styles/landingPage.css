@@ -1,31 +1,35 @@
-#signup-form {
+
+
+/* #signup-page {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 100%;
+}
+
+#signup-form {
   height: 50%;
   width: 500px;
   background-color: gray;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-#signup-form h2 {
-  height: 25%;
+#signup-form > div > * {
+  padding: 0;
   margin: 0;
 }
 
-#signup-form div {
-  height: 18.75%;
+#signup-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.signup-col-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.form-label {
-  display: inline-block;
-}
-
-.form-label input {
-  display: block;
-}
+#signup-form > div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+} */
