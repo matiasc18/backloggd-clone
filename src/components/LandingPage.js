@@ -3,10 +3,35 @@ import '../styles/landingPage.css';
 
 const LandingPage = () => {
   return (
-    <div id="landing-page">
-      <form id="signup-form">
-      </form>
-    </div>
+    <form id="signup-form">
+      <h2>Create Account</h2>
+      <div className="signup-col-2">
+        <label for="first-name" className="form-label">
+          First Name <input id="first-name" type="text" placeholder="First Name"/>
+        </label>
+        <label for="last-name" className="form-label">
+          Last Name <input id="last-name" type="text" placeholder="Last Name"/>
+        </label>
+      </div>
+      <div className="signup-col-1">
+        <label for="username" className="form-label">
+          Username <input id="username" type="text" placeholder="Username"/>
+        </label>
+      </div>
+      <div className="signup-col-1">
+        <label for="email" className="form-label">
+          Email <input id="email" type="email" placeholder="Email"/>
+        </label>
+      </div>
+      <div className="signup-col-2">
+        <label for="password" className="form-label">
+          Password <input id="password" type="password" placeholder="Password"/>
+        </label>
+        <label for="confirm-password" className="form-label">
+          Confirm Password <input id="confirm-password" type="password" placeholder="Confirm Password"/>
+        </label>
+      </div>
+    </form>
   )
 }
 
