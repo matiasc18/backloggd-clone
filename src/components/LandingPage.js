@@ -3,40 +3,40 @@ import '../styles/landingPage.css';
 
 const LandingPage = () => {
   return (
-    <div className="container">
+    <main className="container">
       <div className="title">Sign Up</div>
-      <form action="#">
-        <div className="user-details">
-          <div className="input-box">
-            <span className="details">First Name</span>
-            <input type="text" placeholder="Enter your first name" required/>
+        <form action="#">
+          <div className="user-details">
+            <div className="input-box">
+              <span className="details">First Name</span>
+              <input type="text" placeholder="Enter your first name" required/>
+            </div>
+            <div className="input-box">
+              <span className="details">Last Name</span>
+              <input type="text" placeholder="Enter your last name" required/>
+            </div>
+            <div className="input-box">
+              <span className="details">Username</span>
+              <input type="text" placeholder="Enter your username" required/>
+            </div>
+            <div className="input-box">
+              <span className="details">Email</span>
+              <input type="email" placeholder="Enter your email" required/>
+            </div>
+            <div className="input-box">
+              <span className="details">Password</span>
+              <input type="password" placeholder="Enter your password" required/>
+            </div>
+            <div className="input-box">
+              <span className="details">Confirm Password</span>
+              <input type="password" placeholder="Confirm your password" required/>
+            </div>
           </div>
-          <div className="input-box">
-            <span className="details">Last Name</span>
-            <input type="text" placeholder="Enter your last name" required/>
+          <div className="button">
+            <input type="submit" value="Sign Up!" />
           </div>
-          <div className="input-box">
-            <span className="details">Username</span>
-            <input type="text" placeholder="Enter your username" required/>
-          </div>
-          <div className="input-box">
-            <span className="details">Email</span>
-            <input type="email" placeholder="Enter your email" required/>
-          </div>
-          <div className="input-box">
-            <span className="details">Password</span>
-            <input type="password" placeholder="Enter your password" required/>
-          </div>
-          <div className="input-box">
-            <span className="details">Confirm Password</span>
-            <input type="password" placeholder="Confirm your password" required/>
-          </div>
-        </div>
-        <div className="button">
-          <input type="submit" value="Sign Up!" />
-        </div>
-      </form>
-    </div>
+        </form>
+    </main>
   )
 }
 
