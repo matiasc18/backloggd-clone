@@ -2,11 +2,23 @@ header {
   position: sticky;
   width: 100%;
   background-color: rgba(0,0,0, 0.3);
+  background-color: #6790ff;
   color: white;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 header h1 {
-  text-justify: center;
+  margin: 1em 0 1em 3em;
+}
+
+/* 30em == 480px */
+@media (max-width: 30em) {
+  header {
+    justify-content: center;
+  }
+
+  header h1 {
+    margin: 1em 0;
+  }
 }
