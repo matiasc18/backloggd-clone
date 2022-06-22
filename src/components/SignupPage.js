@@ -1,7 +1,7 @@
 import React from 'react';
-import '../styles/landingPage.css';
+import '../styles/signupPage.css';
 
-const LandingPage = () => {
+const SignupPage = () => {
   return (
     <main className="landing-page">
       <div id="signup-container">
@@ -40,4 +40,4 @@ const LandingPage = () => {
   )
 }
 
-export default LandingPage;
+export default SignupPage;
