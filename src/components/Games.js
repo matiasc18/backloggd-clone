@@ -3,14 +3,14 @@ import axios from 'axios';
 
 const Games = () => {  
   const [games, setGames] = useState([]);
-  // const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   // useEffect(() => {
   //   getGames();
   // });
 
   // const getGames = async () => {
-  //   const { games } = await axios.post(`http://localhost:3500/api/`)
+  //   const { games } = await axios.post(`http://localhost:3500/api/games/`)
   // }
 
   return (

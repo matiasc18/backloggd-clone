@@ -2,7 +2,6 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const axios = require('axios');
 
 // Environment variables
 require('dotenv').config();
@@ -25,27 +24,11 @@ connection.once('open', () => {
 // Import route files
 const usersRouter = require('./api/users.routes');
 app.use('/users', usersRouter);
+const gamesRouter = require('./api/igdb.routes');
+app.use('/games', gamesRouter);
 
 // Catch for request to nonexistant page
 app.use('*', (req, res) => res.status(404).json({ error: 'not found'}));
-
-app.post('/games', (req, res) => {
-  const config = {
-    method: 'POST',
-    url: 'https://api.igdb.com/v4/games',
-    headers: {
-      // 'Content-type': 'application/json',
-      'Client-ID': process.env.CLIENT_ID,
-      'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`
-    },
-    json: 'fields name; limit 20;'
-  };
-
-  axios(config)
-    .then(res => {
-      
-    });
-});
 
 // Starts server
 app.listen(port, () => {
