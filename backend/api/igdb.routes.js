@@ -1,31 +1,33 @@
-const axios = require('axios');
 // Import express router and mongoose model
 const router = require('express').Router();
+const axios = require('axios');
 
 // GET: Get all games
-router.route('/').post((req, res) => {
-  // Format: { 'fields': 'name', 'content': 'fields name; where platforms = 48; limit 20;}
+router.route('/').post(async (req, res) => {
   const body = `fields ${req.body.fields}; ${req.body.content}`;
-  
+
   const config = {
-    method: 'POST',
-    url: 'https://api.igdb.com/v4/games',
+    method: 'post',
+    url: '/games',
+    baseURL: process.env.IGDB_URI,
     headers: {
-      // 'Content-type': 'application/json',
+      'Content-Type': 'text/plain',
       'Client-ID': process.env.CLIENT_ID,
       'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`
     },
+    responseType: 'json',
+    timeout: 1000, // 1 second timeout
     data: body
   };
 
-  axios.request(config)
-    .then(response => {
-      res.json(response.data);
-    })
-    .catch(err => {
-      console.error(err);
-    });
+  try {
+    const response = await axios.request(config);
+
+    console.log(response.data);
+    res.json(response.data);
+  } catch(err) {
+    console.error(err);
+  }
 });
 
 module.exports = router;
-
