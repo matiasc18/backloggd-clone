@@ -21,14 +21,14 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
 
-// Import route files
+// API Routes
 const usersRouter = require('./api/users.routes');
 app.use('/users', usersRouter);
 const gamesRouter = require('./api/igdb.routes');
 app.use('/games', gamesRouter);
 
 // Catch for request to nonexistant page
-app.use('*', (req, res) => res.status(404).json({ error: 'not found'}));
+app.use('*', (req, res) => res.status(404).json({ error: 'page not found'}));
 
 // Starts server
 app.listen(port, () => {
