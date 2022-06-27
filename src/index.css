@@ -5,12 +5,15 @@ html {
   scroll-behavior: smooth;
   overflow-x: hidden;
   box-sizing: border-box;
+  --primary-color: rgb(21, 36, 84);
+  --secondary-color: rgb(48, 75, 164);
+  --tertiary-color: rgb(207, 207, 207);
 }
 
 body {
   min-height: 100vh;
   width: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   font-size: 1.6rem;
 }
 
@@ -20,4 +23,9 @@ body {
   grid-template-rows: auto 1fr;
   min-height: 100vh;
   max-width: 100%;
+}
+
+#notes {
+  width: clamp(200px, 50%, 50%);  /* MIN: 200px, PREFFERRED: 50%, MAX: 600px */
+  aspect-ratio: 16/9;
 }

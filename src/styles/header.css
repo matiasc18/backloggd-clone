@@ -1,8 +1,7 @@
 header {
   position: sticky;
   width: 100%;
-  background-color: rgba(0,0,0, 0.3);
-  background-color: #6790ff;
+  background-color: var(--secondary-color);
   display: flex;
   justify-content: flex-start;
   flex-direction: row;
@@ -10,12 +9,16 @@ header {
 }
 
 #header-title {
-  margin: 0.7em 0 0.7em 3em;
-  color: white;
+  margin: 0.5em 0 0.5em 3em;
+  color: var(--tertiary-color);
   text-decoration: none;
   font-size: 2em;
   font-weight: bold;
   letter-spacing: 1px;
+}
+
+#header-title:hover {
+  opacity: 0.7;
 }
 
 .nav-links {
@@ -29,14 +32,14 @@ header {
 
 .nav-links a {
   text-decoration: none;
-  color: white;
+  color: var(--tertiary-color);
   font-size: 1.2em;
   padding: 0.25em 0.5em;
 }
 
 .nav-links a:hover {
-  background-color: white;
-  color: #6790ff;
+  background-color: var(--tertiary-color);
+  color: var(--secondary-color);
   border-radius: 10px;
 }
 
