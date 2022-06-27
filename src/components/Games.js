@@ -1,20 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { flDefault, queryBuilder, defaultQuery } from '../services';
 import axios from 'axios';
 
-const Games = () => {  
+// TODO 1. Axios: request games from localhost/games
+// TODO 3. Display games from response
+// TODO 2. Add Search field
+const Games = () => { 
+  // IGDB images url
+  const imgPath = 'https://images.igdb.com/igdb/image/upload/t_1080p';
   const [games, setGames] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Axios request config
+  const config = {
+    ...flDefault,
+    method: 'post',
+    url: '/games',
+    data: queryBuilder(defaultQuery)
+  };
 
-  // useEffect(() => {
-  //   getGames();
-  // });
+  // Runs when component first loads
+  useEffect(() => {
 
-  // const getGames = async () => {
-  //   const { games } = await axios.post(`http://localhost:3500/api/games/`)
-  // }
+    // Gets games from localhost/games (IGDB/games)
+    const fetchGames = async () => {
+
+      try {
+        const response = await axios(config);
+        const json = response.data;
+
+        // If there is a response, update state
+        if (response.status == 200) {
+          setGames(json);
+        }
+      } catch(err) {
+        console.error(err);
+      }
+    }
+
+    fetchGames();
+  }, []);
 
   return (
-    <div>Games</div>
+    <>
+      {games && games.map((game) => (
+        <div key={game.id} className="game">
+          <img src={`${imgPath}/${game.cover.image_id}.jpg`}/>
+          <div className="game-info">
+            <h3 className="game-title">{game.name}</h3>
+            <span className="game-rating">{Math.floor(game.rating)}</span>
+          </div>
+        </div>
+      ))}
+    </>
   )
 }
 
