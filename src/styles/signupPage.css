@@ -1,16 +1,19 @@
-.landing-page {
+#signup-page {
   display: grid;
+  box-sizing: border-box;
   place-items: center;
+  background-color: var(--primary-color);
 }
 
 #signup-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   box-sizing: border-box;
   width: min(25em, 100%);
-  color: #333;
   padding: 1.5em;
+  color: var(--tertiary-color);
+  background-color: var(--secondary-color);
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -26,7 +29,7 @@
   margin: 0;
   margin-bottom: 2em;
   width: 11em;
-  border: 2px solid #6790ff;
+  border: 2px solid var(--primary-color);
   border-radius: 25px;
 }
 
@@ -39,7 +42,7 @@
 
 .double-input {
   display: flex;
-  gap: 1em;
+  gap: 3em;
 }
 
 .form-label {
@@ -49,43 +52,44 @@
   margin-left: 0.5em;
 }
 
-.form-label:after {
-  position: absolute;
-  content: "";
-  width: 50%;
-  bottom: 0;
-  left: 0;
-  background-color: #6790ff;
-  border: 1.5px solid #6790ff;
-  border-radius: 25px;
-}
-
 .signup-input {
   box-sizing: border-box;
+  margin-top: 0.4em;
+  padding: 0.5em 0.7em 0.5em 0.7em;
+  width: 100%;
+  color: inherit;
+  border: none;
+  border-bottom: 3.5px solid var(--primary-color);
+  color: var(--tertiary-color);
+  background: none;
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  /* box-sizing: border-box;
   margin-top: 0.4em;
   padding: 0.5em 0 0.5em 0.7em;
   width: 100%;
   color: inherit;
   border: none;
   border-radius: 15px;
-  background-color: rgba(103, 144, 255, 0.3);
+  color: #333;
+  background-color: var(--tertiary-color);
   transition: 0.5s;
-  -webkit-transition: 0.5s;
+  -webkit-transition: 0.5s; */
 }
 
 .signup-input:focus {
   caret-color: transparent;
-  background-color: rgba(103, 144, 255, 0.5);
+  border-color: rgba(103, 144, 255, 0.5);
   outline: none;
 }
 
 .form-button {
-  padding: 0.5em 2em;
-  background-color: #6790ff;
-  color: white;
+  padding: 0.5em 1em;
+  background: none;
+  color: var(--tertiary-color);
   letter-spacing: 1px;
   border-radius: 15px;
-  border: none;
+  border: 2px var(--primary-color) solid;
 }
 
 .form-button:hover {
