@@ -1,3 +1,16 @@
+// SHORTCUTS
+CTRL + TAB = scroll thru open files
+CTRL + SHIFT + TAB = scroll backwards thru open files
+CMD + P = search
+CMD + SHIFT + P = command palette
+CMD + W = close file
+CMD + SHIFT + W = close window
+CMD + P = open file
+@ (in the command palette) = brings up all symbols in the current file (similar to CMD + F)
+  ^^ same as CMD + SHIFT + .
+'#' (in the command palette) + symbol name = brings up all symbols with that name in all files
+
+
 POST https://api.igdb/v4/games/
 HEADER: 
   Client-ID: Client ID
