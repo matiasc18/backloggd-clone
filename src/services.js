@@ -2,7 +2,7 @@ export const defaultQuery = {
   fields: 'name, cover.image_id, rating',
   filter: 'where rating > 83 & rating != null & cover != null & hypes != null',
   sort: 'sort hypes desc;',
-  limit: 100,
+  limit: 30,
   page: 1,
   search: '',
 }
