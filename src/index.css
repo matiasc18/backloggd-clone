@@ -4,28 +4,26 @@ html {
   font-family: helvetica, montserrat;
   scroll-behavior: smooth;
   overflow-x: hidden;
+  max-width: 100vw;
   box-sizing: border-box;
   --primary-color: rgb(21, 36, 84);
   --secondary-color: rgb(48, 75, 164);
   --tertiary-color: rgb(207, 207, 207);
+  --secondary-comp: rgb(37, 59, 131);
+  background-color: var(--primary-color);
 }
 
 body {
   min-height: 100vh;
   width: 100%;
-  overflow: hidden;
   font-size: 1.6rem;
+  overflow-x: hidden;
 }
 
 /* holds header and main */
 .App {
   display: grid;
   grid-template-rows: auto 1fr;
-  min-height: 100vh;
   max-width: 100%;
-}
-
-#notes {
-  width: clamp(200px, 50%, 50%);  /* MIN: 200px, PREFFERRED: 50%, MAX: 600px */
-  aspect-ratio: 16/9;
+  background-color: var(--primary-color);
 }
