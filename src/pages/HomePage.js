@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Games from '../components/Games';
 import '../styles/homePage.css';
 
@@ -7,9 +7,7 @@ const HomePage = () => {
     <main id="home-page">
       <h2>Trending Games</h2>
       <hr />
-      <div className="games-container">
-        <Games />
-      </div>
+      <Games />
     </main>
   )
 }
