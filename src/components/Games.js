@@ -1,10 +1,7 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { flDefault, queryBuilder, defaultQuery } from '../services';
 import axios from 'axios';
 
-// TODO 1. Axios: request games from localhost/games
-// TODO 3. Display games from response
-// TODO 2. Add Search field
 const Games = () => { 
   // IGDB images url
   const imgPath = 'https://images.igdb.com/igdb/image/upload/t_1080p';
@@ -22,13 +19,13 @@ const Games = () => {
 
     // Gets games from localhost/games (IGDB/games)
     const fetchGames = async () => {
-
+    
       try {
         const response = await axios(config);
         const json = response.data;
 
         // If there is a response, update state
-        if (response.status == 200) {
+        if (response.status === 200) {
           setGames(json);
         }
       } catch(err) {
@@ -39,18 +36,33 @@ const Games = () => {
     fetchGames();
   }, []);
 
+  const getRatingColor = (rating) => {
+    if (rating >= 95)
+      return { color: 'gold' };
+    else if (rating >= 90)
+      return { color: 'lime' };
+    else if (rating >= 80)
+      return { color: 'limegreen' };
+    else if (rating >= 70)
+      return { color: 'yellow' };
+    else if (rating >= 60)
+      return { color: 'orange' };
+    else
+      return { color: 'crimson' };
+  }
+
   return (
-    <>
+    <div className="games-container">
       {games && games.map((game) => (
         <div key={game.id} className="game">
-          <img src={`${imgPath}/${game.cover.image_id}.jpg`}/>
+          <img src={`${imgPath}/${game.cover.image_id}.jpg`} alt={`Cover art for ${game.name}`}/>
           <div className="game-info">
-            <h3 className="game-title">{game.name}</h3>
-            <span className="game-rating">{Math.floor(game.rating)}</span>
+            <span className="game-title">{game.name}</span>
+            <span className="game-rating" style={getRatingColor(Math.floor(game.rating))}>{Math.floor(game.rating)}</span>
           </div>
         </div>
       ))}
-    </>
+    </div>
   )
 }
 
