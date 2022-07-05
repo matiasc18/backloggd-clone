@@ -1,13 +1,10 @@
-// Import express router and mongoose model
 const router = require('express').Router();
 const axios = require('axios');
 
 // * GET: Get all games
 router.route('/').post(async (req, res) => {
 
-  console.log(req.body);
-
-  // Default config for reguesting to IGDB
+  //? Default config for reguesting to IGDB
   const config = {
     method: 'post',
     url: '/games',
@@ -18,16 +15,18 @@ router.route('/').post(async (req, res) => {
       'Authorization': `Bearer ${process.env.ACCESS_TOKEN}`
     },
     responseType: 'json',
-    timeout: 1000, // 1 second timeout
-    data: req.body.query
+    timeout: 10000, // 10 second timeout (1 second = too short)
+    data: req.body.queryString
   };
 
+  // Return list of all games + total game count
   try {
-    const response = await axios.request(config);
+    const gamesResponse = await axios.request(config);
+    const countResponse = await axios.request({...config, url: '/games/count', data: `${req.body.query.filter};`});
 
-    res.json(response.data);
+    res.json({totalCount: countResponse.data.count, results: gamesResponse.data});
   } catch(err) {
-    console.error(err);
+    res.json(err);
   }
 });
 
