@@ -1,44 +1,65 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import { flDefault, queryBuilder, defaultQuery } from '../services';
+import Pagination from '../components/Pagination';
 import axios from 'axios';
 
+//* Render game cards
 const Games = () => { 
-  // IGDB images url
+  const [games, setGames] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  //? IGDB images url
   const imgPath = 'https://images.igdb.com/igdb/image/upload/t_1080p';
-  const [games, setGames] = useState([]);
-  // Axios request config
+
+  //? Axios request config
   const config = {
-    ...flDefault,
-    method: 'post',
-    url: '/games',
-    data: queryBuilder(defaultQuery)
+    ...flDefault,           // default axios config
+    query: defaultQuery,    // query object
+    data: ''                // request body (stringified query)
   };
 
-  // Runs when component first loads
-  useEffect(() => {
+  //? Fetch games from IGDB
+  const fetchGames = async () => {
+    // Games loading...
+    setLoading(true);
 
-    // Gets games from localhost/games (IGDB/games)
-    const fetchGames = async () => {
-    
-      try {
-        const response = await axios(config);
-        const json = response.data;
+    // Build IGDB query string
+    config.data = queryBuilder(config.query);
 
-        // If there is a response, update state
-        if (response.status === 200) {
-          setGames(json);
-        }
-      } catch(err) {
-        console.error(err);
+    try {
+      // Axios request
+      const response = await axios(config);
+      
+      // Games done loading...
+      setLoading(false);
+
+      // If there is a response, update games state
+      if (response.status === 200) {
+        setGames(response.data);
+        window.scrollTo(0, 0);
       }
+    } catch(err) {
+      console.error(err);
     }
+  }
+
+  //* Initial render + update when page change
+  useEffect(() => {
+    config.query.page = currentPage;
 
     fetchGames();
-  }, []);
+  }, [currentPage]);
 
+  //* Runs whenever games updates
+  useEffect(() => {
+    console.log(games);
+  }, [games]);
+
+  //? Apply correct color based on game rating
   const getRatingColor = (rating) => {
     if (rating >= 95)
-      return { color: 'gold' };
+      return { backgroundColor: 'gold' , color: 'black' };
     else if (rating >= 90)
       return { color: 'lime' };
     else if (rating >= 80)
@@ -51,18 +72,28 @@ const Games = () => {
       return { color: 'crimson' };
   }
 
+  //? Updates current page of results
+  const updatePage = async (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  // Display game cards + page selector (bottom)
   return (
-    <div className="games-container">
-      {games && games.map((game) => (
-        <div key={game.id} className="game">
-          <img src={`${imgPath}/${game.cover.image_id}.jpg`} alt={`Cover art for ${game.name}`}/>
-          <div className="game-info">
-            <span className="game-title">{game.name}</span>
-            <span className="game-rating" style={getRatingColor(Math.floor(game.rating))}>{Math.floor(game.rating)}</span>
+    <>
+      {games.results && <Pagination gamesPerPage={config.query.limit} totalGames={games.totalCount} currentPage={config.query.page} updatePage={updatePage}/>}
+      <div className="games-container">
+        {games.results && games.results.map((game) => (
+          <div key={game.id} className="game-card">
+            <img className="game-cover" src={`${imgPath}/${game.cover.image_id}.jpg`} alt={`Cover art for ${game.name}`}/>
+            <div className="game-info">
+              <span className="game-title">{game.name}</span>
+              <span className="game-rating" style={getRatingColor(Math.floor(game.rating))}>{Math.floor(game.rating)}</span>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
+      {games.results && <Pagination gamesPerPage={config.query.limit} totalGames={games.totalCount} currentPage={config.query.page} updatePage={updatePage}/>}
+    </>
   )
 }
 
