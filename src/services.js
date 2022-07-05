@@ -1,13 +1,15 @@
 export const defaultQuery = {
   fields: 'name, cover.image_id, rating',
   filter: 'where rating > 83 & rating != null & cover != null & hypes != null',
-  sort: 'sort hypes desc;',
+  sort: 'sort hypes desc',
   limit: 30,
   page: 1,
   search: '',
 }
   
 export const flDefault = {
+  method: 'post',
+  url: '/games',
   baseURL: 'http://localhost:3500',
   headers: {
     'Content-Type': 'application/json',
@@ -27,6 +29,7 @@ export const queryBuilder = (query) => {
   qs += `${(query.page !== 1) ? 'offset ' + (query.page * query.limit) + '; ' : ''}`;
   qs += `${(query.search.trim() !== '') ? 'search "' + query.search.trim() + '";' : ''}`;
   
-  const finalQuery = {query: qs.trim()};
+  console.log(qs);
+  const finalQuery = {query: query, queryString: qs.trim()};
   return finalQuery;
 };
