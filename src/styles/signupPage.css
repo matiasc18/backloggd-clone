@@ -3,6 +3,7 @@
   box-sizing: border-box;
   place-items: center;
   background-color: var(--primary-color);
+  height: 100%;
 }
 
 #signup-container {
@@ -12,8 +13,8 @@
   box-sizing: border-box;
   width: min(25em, 100%);
   padding: 1.5em;
-  color: var(--tertiary-color);
-  background-color: var(--secondary-color);
+  color: var(--secondary-comp);
+  background-color: var(--tertiary-color);
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -29,7 +30,7 @@
   margin: 0;
   margin-bottom: 2em;
   width: 11em;
-  border: 2px solid var(--primary-color);
+  border: 2px solid var(--secondary-comp);
   border-radius: 25px;
 }
 
@@ -57,24 +58,12 @@
   margin-top: 0.4em;
   padding: 0.5em 0.7em 0.5em 0.7em;
   width: 100%;
-  color: inherit;
   border: none;
-  border-bottom: 3.5px solid var(--primary-color);
-  color: var(--tertiary-color);
+  border-bottom: 3.5px solid var(--secondary-comp);
+  color: #222;
   background: none;
   transition: 0.5s;
   -webkit-transition: 0.5s;
-  /* box-sizing: border-box;
-  margin-top: 0.4em;
-  padding: 0.5em 0 0.5em 0.7em;
-  width: 100%;
-  color: inherit;
-  border: none;
-  border-radius: 15px;
-  color: #333;
-  background-color: var(--tertiary-color);
-  transition: 0.5s;
-  -webkit-transition: 0.5s; */
 }
 
 .signup-input:focus {
