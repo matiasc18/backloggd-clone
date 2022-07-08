@@ -82,13 +82,3 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
 }
 
 export default Pagination;
-
-// * Potential icons
-// * FaAngleDown (Down, Left, Up, Right)
-// * FaAngleDoubleUp (Down, Left, Up, Right)
-// * FaBars
-// * FaChevronRight (Down, Left, Up, Right)
-// * FaEllipsisH (H, V)
-// * FaPowerOff
-// * FaSlidersH
-// * FaSortDown (Down, Up)
