@@ -1,16 +1,15 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { flDefault, queryBuilder, defaultQuery } from '../services';
-import Pagination from '../components/Pagination';
+import { flDefault, queryBuilder, defaultQuery, imgPath } from './gamesHelper';
+import Pagination from './Pagination';
+import LoadingBar from './LoadingBar';
+import '../styles/games.css';
 import axios from 'axios';
 
-//* Render game cards
+//* Render grid of game cards
 const Games = () => { 
   const [games, setGames] = useState({});
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-
-  //? IGDB images url
-  const imgPath = 'https://images.igdb.com/igdb/image/upload/t_1080p';
 
   //? Axios request config
   const config = {
@@ -34,7 +33,7 @@ const Games = () => {
       // Games done loading...
       setLoading(false);
 
-      // If there is a response, update games state
+      // If there is a response, update games state + scroll to top
       if (response.status === 200) {
         setGames(response.data);
         window.scrollTo(0, 0);
@@ -44,10 +43,9 @@ const Games = () => {
     }
   }
 
-  //* Initial render + update when page change
+  //* Initial render + on page change
   useEffect(() => {
     config.query.page = currentPage;
-
     fetchGames();
   }, [currentPage]);
 
@@ -80,9 +78,16 @@ const Games = () => {
   // Display game cards + page selector (bottom)
   return (
     <>
-      {games.results && <Pagination gamesPerPage={config.query.limit} totalGames={games.totalCount} currentPage={config.query.page} updatePage={updatePage}/>}
+      { loading && <LoadingBar />}
+      { games.results && 
+        <Pagination 
+          gamesPerPage={config.query.limit} 
+          totalGames={games.totalCount} 
+          currentPage={config.query.page} 
+          updatePage={updatePage}
+        /> }
       <div className="games-container">
-        {games.results && games.results.map((game) => (
+        { games.results && games.results.map((game) => (
           <div key={game.id} className="game-card">
             <img className="game-cover" src={`${imgPath}/${game.cover.image_id}.jpg`} alt={`Cover art for ${game.name}`}/>
             <div className="game-info">
@@ -92,7 +97,13 @@ const Games = () => {
           </div>
         ))}
       </div>
-      {games.results && <Pagination gamesPerPage={config.query.limit} totalGames={games.totalCount} currentPage={config.query.page} updatePage={updatePage}/>}
+      { games.results && 
+        <Pagination 
+          gamesPerPage={config.query.limit} 
+          totalGames={games.totalCount} 
+          currentPage={config.query.page} 
+          updatePage={updatePage}
+        /> }
     </>
   )
 }
