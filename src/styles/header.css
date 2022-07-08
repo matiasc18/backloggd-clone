@@ -71,15 +71,4 @@
     color: var(--secondary-color);
     border-radius: 10px;
   }
-
-  /** Vertical line between Games and Log In */
-  .header-link:first-child::after {
-    content: ""; 
-    border: 1px solid #e2e2e2;
-    border-width: 2px 2px 0 0;
-    position:absolute; 
-    right: 0;
-    top:0; 
-    height:100%;
-  }
 }
