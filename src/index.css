@@ -25,4 +25,5 @@ body {
   grid-template-rows: auto 1fr;
   max-width: 100%;
   background-color: var(--primary-color);
+  min-height: 100vh;
 }
