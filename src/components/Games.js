@@ -5,6 +5,9 @@ import LoadingBar from './LoadingBar';
 import '../styles/games.css';
 import axios from 'axios';
 
+//TODO Optimize game loading
+  //TODO - Fetch all games at once + iterate through locally, rather than fetch every 30 games
+
 //* Render grid of game cards
 const Games = () => { 
   const [games, setGames] = useState({});
@@ -86,7 +89,7 @@ const Games = () => {
           currentPage={config.query.page} 
           updatePage={updatePage}
         /> }
-      <div className="games-container">
+      <div id="games-container">
         { games.results && games.results.map((game) => (
           <div key={game.id} className="game-card">
             <img className="game-cover" src={`${imgPath}/${game.cover.image_id}.jpg`} alt={`Cover art for ${game.name}`}/>
