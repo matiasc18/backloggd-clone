@@ -11,7 +11,7 @@ const Header = () => {
         <FaPowerOff size="1.5em" className="menu-button" />
         <nav className="nav-links">
           <Link className="header-link" to="/games">Games</Link>
-          <Link className="header-link" to="/">Log In</Link>
+          <Link className="header-link" to="/login">Log In</Link>
           <Link className="header-link" to="/signup">Sign Up</Link>
         </nav>
       </header>
