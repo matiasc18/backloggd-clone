@@ -14,9 +14,9 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
   if (currentPage <= 3) {
     for (let i = 1; i <= 4; i++) {
       if (i === currentPage)
-        insertion.push(<li className="page-selector active-page">{i}</li>);
+        insertion.push(<li key={i} className="page-selector active-page">{i}</li>);
       else 
-        insertion.push(<li className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
+        insertion.push(<li key={i} className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
     }
 
     return (
@@ -37,9 +37,9 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
   else if (currentPage >= 4 && currentPage <= totalPages - 3) {
     for (let i = currentPage - 1; i <= currentPage + 1; i++) {
       if (i === currentPage)
-        insertion.push(<li className="page-selector active-page">{i}</li>);
+        insertion.push(<li key={i} className="page-selector active-page">{i}</li>);
       else 
-        insertion.push(<li className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
+        insertion.push(<li key={i} className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
     }
 
     return (
@@ -62,9 +62,9 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
   else {
     for (let i = totalPages - 3; i <= totalPages; i++) {
       if (i === currentPage)
-        insertion.push(<li className="page-selector active-page">{i}</li>);
+        insertion.push(<li key={i} className="page-selector active-page">{i}</li>);
       else 
-        insertion.push(<li className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
+        insertion.push(<li key={i} className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
     }
 
     return (
