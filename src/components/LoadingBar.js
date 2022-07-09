@@ -4,8 +4,8 @@ import '../styles/loadingBar.css';
 const LoadingBar = () => {
   return (
     <div className="loader-container">
-      <div class="loader">
-        <div class="loaderBar"></div>
+      <div className="loader">
+        <div className="loaderBar"></div>
       </div>
     </div>
   )
