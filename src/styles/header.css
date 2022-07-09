@@ -41,7 +41,7 @@
     align-items: center;
     justify-content: flex-start;
     width: 92%;
-    font-size: min(1.5em, 3.331vw);
+    font-size: min(1.3em, 3.331vw);
   }
 
   /** Hide menu button */
@@ -63,12 +63,19 @@
     text-decoration: none;
     color: var(--tertiary-color);
     padding: 0.35em 0.7em;
-    position: relative;
   }
   
   .header-link:hover {
     background-color: var(--tertiary-color);
     color: var(--secondary-color);
     border-radius: 10px;
+  }
+}
+
+/** Tablets and up */
+/*? MINIMUM WIDTH: 30em == 480px */
+@media (min-width: 60em) {
+  .nav-links {
+    font-size: 1em;
   }
 }
