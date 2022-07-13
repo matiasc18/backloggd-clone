@@ -1,21 +1,106 @@
-import React from 'react';
-import '../styles/loginPage.css';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import AuthContext from '../context/AuthProvider';
+import '../styles/signupPage.css';
+import axios from '../api/axios';
 
 const Login = () => {
+  const { setAuth } = useContext(AuthContext);
+  // For setting focus on first input field
+  const userRef = useRef();
+  // For screen reader error messages
+  const errRef = useRef();
+
+  // Form input states
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  // Error message
+  const [message, setMessage] = useState('');
+
+  //? Axios request config
+  const config = {
+    method: 'post',
+    url: '/users/login',
+    data: '',                // request body
+    // withCredentials: true
+  };
+
+  // Sets focus on the username field at page startup
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  // Clear error message when user edits username/password
+  useEffect(() => {
+    setMessage('');
+  }, [username, password]);
+
+  // Submit form when submit button hit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const user = { username, password };
+    
+    try {
+      // Assign user info to request body
+      config.data = user;
+
+      // Axios request + set message to successful login message
+      const response = await axios.request(config);
+      setMessage(response?.data?.message);
+      console.log(response);
+
+      // Get accessToken from response
+      const accessToken = response?.data?.accessToken;
+
+      // Store information in global context
+      setAuth({ username, password, accessToken });
+
+    } catch(err) {
+      console.log(err);
+      if (!err?.response?.data)
+        setMessage('No server response');
+      // Username / Password incorrect
+      else if (err?.response?.data?.message)
+        setMessage(err.response.data.message);
+      else
+        setMessage('Login failed');
+      // errRef.current.focus();
+    }
+  };
+
   return (
-    <div id="login-page">
+    <div id="auth-page">
       <div id="form-container">
-        <h1 id="login-title">Login</h1>
-        <form id="login-form" autoComplete="off">
+        <h1 id="auth-title">Login</h1>
+        <form id="auth-form" autoComplete="off" onSubmit={ handleSubmit }>
           <div className="input-group">
-            <input id="username" className="login-input" type="" placeholder="Username" required/>
-            <label htmlFor="username" className="login-label">Username</label>
+            <input 
+              type="text" 
+              id="username" 
+              ref={ userRef }
+              className="auth-input" 
+              placeholder="Username" 
+              required
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <label htmlFor="username" className="auth-label">Username</label>
           </div>
           <div className="input-group">
-            <input id="password" className="login-input" type="password" placeholder="Password" required/>
-            <label htmlFor="password" className="login-label">Password</label>
+            <input 
+              type="password" 
+              id="password"
+              className="auth-input" 
+              placeholder="Password" 
+              required 
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <label htmlFor="password" className="auth-label">Password</label>
           </div>
-          <button id="login-submit" type="submit" form="login-form">Submit</button>
+          {/* If theres an error message, display it */}
+          { message && <span ref={ errRef } id="error-message" aria-live="assertive">{ message }</span> }
+          <button id="auth-submit" form="auth-form" disabled={(username && password) ? false : true}>Submit</button>
+          {/* <span>Don't have an account? <a href="/signup">Sign Up</a></span> */}
         </form>
       </div>
     </div>
