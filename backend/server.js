@@ -22,13 +22,13 @@ connection.once('open', () => {
 });
 
 // API Routes
-const usersRouter = require('./api/users.routes');
+const usersRouter = require('./routes/users.routes');
 app.use('/users', usersRouter);
-const gamesRouter = require('./api/igdb.routes');
+const gamesRouter = require('./routes/igdb.routes');
 app.use('/games', gamesRouter);
 
 // Catch for request to nonexistant page
-app.use('*', (req, res) => res.status(404).json({ error: 'page not found'}));
+app.use('*', (req, res) => res.status(404).json({ error: 'Page not found'}));
 
 // Starts server
 app.listen(port, () => {
