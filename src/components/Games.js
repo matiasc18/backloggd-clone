@@ -1,9 +1,9 @@
 import React, { useState, useEffect, Fragment } from 'react';
-import { flDefault, queryBuilder, defaultQuery, imgPath } from './gamesHelper';
+import { queryBuilder, defaultQuery, imgPath } from '../api/utils';
 import Pagination from './Pagination';
 import LoadingBar from './LoadingBar';
 import '../styles/games.css';
-import axios from 'axios';
+import axios from '../api/axios';
 
 //TODO Optimize game loading
   //TODO - Fetch all games at once + iterate through locally, rather than fetch every 30 games
@@ -16,7 +16,8 @@ const Games = () => {
 
   //? Axios request config
   const config = {
-    ...flDefault,           // default axios config
+    method: 'post',
+    url: '/games',
     query: defaultQuery,    // query object
     data: ''                // request body (stringified query)
   };
@@ -31,7 +32,7 @@ const Games = () => {
 
     try {
       // Axios request
-      const response = await axios(config);
+      const response = await axios.request(config);
       
       // Games done loading...
       setLoading(false);
