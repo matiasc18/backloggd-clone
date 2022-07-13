@@ -1,4 +1,4 @@
-#signup-page {
+#auth-page {
   display: flex;
   justify-content: center;
   color: var(--tertiary-color);
@@ -7,33 +7,32 @@
 
   #form-container {
     box-sizing: border-box;
-    margin-top: 3em;
+    margin-top: 2em;
     padding: 1em;
     width: 95%;
     max-width: 30em;
     border-radius: 10px;
   }
 
-    #signup-title {
+    #auth-title {
       margin: 0;
-      margin-bottom: 0.5em;
+      /* margin-bottom: 0.5em; */
       text-align: center;
     }
   
-    #signup-form {
+    #auth-form {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 1em 0;
     }
 
       .input-group {
-        margin-top: 0.5em;
+        margin-top: 1.5em;
         width: 100%;
       }
 
-        .signup-input {
+        .auth-input {
           box-sizing: border-box;
           width: 100%;
           padding: 0.5em;
@@ -45,49 +44,62 @@
           transition: all .3s;
         }
 
-          .signup-input:-webkit-autofill,
-          .signup-input:-webkit-autofill:hover, 
-          .signup-input:-webkit-autofill:focus {
+          .auth-input:-webkit-autofill,
+          .auth-input:-webkit-autofill:hover, 
+          .auth-input:-webkit-autofill:focus {
             -webkit-text-fill-color: var(--tertiary-color);
             -webkit-box-shadow: 0 0 0px 1000px var(--primary-comp) inset;
             box-shadow: 0 0 0px 1000px var(--primary-comp) inset;
             transition: background-color 5000s ease-in-out 0s;
           }
 
-          .signup-input::placeholder {
+          .auth-input::placeholder {
             color: transparent;
           }
 
-          .signup-input:focus {
+          .auth-input:focus {
             box-shadow: none;
             outline: none;
           }
 
-        .signup-label {
+        .auth-label {
           display: block;
           width: fit-content;
+          position: absolute;
           padding: 0 0.4em;
           background-color: var(--primary-color);
           transform: translate(0.3em, -1.75em);
           transition: all .3s;
         }
 
-          .signup-input:focus + .signup-label,
-          .signup-input:not(:placeholder-shown) + .signup-label {
+          .auth-input:focus + .auth-label,
+          .auth-input:not(:placeholder-shown) + .auth-label {
             transform: translateY(-3em) scale(0.8);
           }
+    
+        .input-instructions {
+          background-color: var(--secondary-comp);
+          border-radius: 10px;
+          font-size: 0.8em;
+          margin: 0.8rem 1rem 0 1rem;
+          padding: 0.5em 1em 0.5em 1.5em;
+          width: fit-content;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
 
-    #signup-submit {
+    #auth-submit {
       width: 100%;
-      margin-top: 0.5em;
+      margin-top: 1.5em;
+      margin-bottom: 1em;
       padding: 0.35em 0.7em;
       border-radius: 10px;
       border: none;
       color: var(--tertiary-color);
       background-color: var(--secondary-color);
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
     
-      #signup-submit:hover {
+      #auth-submit:hover {
         background-color: var(--tertiary-color);
         color: var(--secondary-color);
         transform: scale(1.05);
@@ -96,17 +108,34 @@
         cursor: pointer;
       }
 
-    #signup-form span {
-      margin-top: 1em;
-    }
+      #auth-submit:disabled,
+      #auth-submit:disabled:hover {
+        opacity: 0.4;
+        transform: none;
+        transition: none;
+        cursor: default;
+        background-color: var(--secondary-color);
+        color: var(--tertiary-color);
+      }
 
-    #signup-form span a {
+    #auth-form span a {
       text-decoration: none;
       color: var(--tertiary-color);
     }
 
-    #signup-form span a:hover {
+    #auth-form span a:hover {
       color: var(--secondary-color);
+    }
+
+    #error-message {
+      margin-top: 1em;
+      font-size: 0.8em;
+      padding: 0.7em 1.4em;
+      border-radius: 10px;
+      font-weight: bold;
+      background-color: crimson;
+      color: white;
+      text-align: center;
     }
 
 
@@ -114,14 +143,14 @@
 /*? MINIMUM WIDTH: 30em == 480px */      
 @media (min-width: 30em) {
   #form-container {
-    margin-top: 4em;
+    margin-top: 3em;
   }
   
-  #signup-title {
+  #auth-title {
     font-size: 2.5em;
   }
   
-  #signup-form {
+  #auth-form {
     font-size: 1.2em;
   }
 }
@@ -132,6 +161,6 @@
 /*? ALT: 64em == 1024px */
 @media (min-width: 60em) {
   #form-container {
-    margin-top: 3em;
+    margin-top: 2em;
   }
 }
