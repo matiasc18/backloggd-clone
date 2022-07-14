@@ -17,14 +17,6 @@ const Login = () => {
   // Error message
   const [message, setMessage] = useState('');
 
-  //? Axios request config
-  const config = {
-    method: 'post',
-    url: '/users/login',
-    data: '',                // request body
-    // withCredentials: true
-  };
-
   // Sets focus on the username field at page startup
   useEffect(() => {
     userRef.current.focus();
@@ -40,13 +32,16 @@ const Login = () => {
     e.preventDefault();
 
     const user = { username, password };
-    
-    try {
-      // Assign user info to request body
-      config.data = user;
 
+    try {
       // Axios request + set message to successful login message
-      const response = await axios.request(config);
+      const response = await axios.request({
+        method: 'post',
+        url: '/users/login',
+        data: user
+        // withCredentials: true
+      });
+
       setMessage(response?.data?.message);
       console.log(response);
 
@@ -57,16 +52,15 @@ const Login = () => {
       setAuth({ username, password, accessToken });
 
     } catch(err) {
-      console.log(err);
-      if (!err?.response?.data)
-        setMessage('No server response');
-      // Username / Password incorrect
-      else if (err?.response?.data?.message)
-        setMessage(err.response.data.message);
-      else
-        setMessage('Login failed');
-      // errRef.current.focus();
-    }
+        if (!err?.response?.data)
+          setMessage('No server response');
+        // Username / Password incorrect
+        else if (err?.response?.data?.message)
+          setMessage(err.response.data.message);
+        else
+          setMessage('Login failed');
+        // errRef.current.focus();
+      }
   };
 
   return (

@@ -27,13 +27,6 @@ const SignupPage = () => {
   // Error message
   const [message, setMessage] = useState('');
 
-  //? Axios config
-  const config = {
-    method: 'post',
-    url: '/users/register',
-    data: ''
-  }
-
   // Sets focus on the username field at page startup
   useEffect(() => {
     userRef.current.focus();
@@ -90,8 +83,12 @@ const SignupPage = () => {
     const user = { username, email, password };
 
     try {
-      config.data = user;
-      const response = await axios.request(config);
+      const response = await axios.request({
+        method: 'post',
+        url: '/users/register',
+        data: user
+      });
+
       setMessage('User successfully registered');
       console.log(response.data);
 
