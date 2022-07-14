@@ -50,7 +50,33 @@ const loginUser = async (req, res) => {
   }
 };
 
+//? @desc       Get user info
+//? @route      Get /users/:id
+//? @access     Private
+const getUserInfo = async (req, res) => {
+  const userId = req.params.id;
+
+  // Find user by id and return their information
+  const user = await User.findById(userId);
+  res.status(200).json(user);
+};
+
+//? @desc       Delete user
+//? @route      DELETE /users/:id
+//? @access     Private
+const deleteUser = async (req, res) => {
+  const userId = req.params.id;
+
+  // Find user by id and delete
+  const user = await User.findById(userId);
+  await user.remove();
+
+  res.status(200).json({ id: req.params.id, message: 'User successfully deleted'});
+};
+
 module.exports = {
   registerUser,
-  loginUser
+  loginUser,
+  getUserInfo,
+  deleteUser
 }
