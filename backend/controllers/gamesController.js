@@ -26,9 +26,9 @@ const getGames = async (req, res) => {
     const gamesResponse = await axios.request(config);
     const countResponse = await axios.request({...config, url: '/games/count', data: `${req.body.query.filter};`});
 
-    res.json({totalCount: countResponse.data.count, results: gamesResponse.data});
+    return res.json({totalCount: countResponse.data.count, results: gamesResponse.data});
   } catch(err) {
-    res.json(err);
+    return res.status(400).json(err);
   }
 };
 
