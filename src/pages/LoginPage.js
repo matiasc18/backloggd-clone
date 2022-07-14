@@ -1,10 +1,8 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import AuthContext from '../context/AuthProvider';
+import React, { useState, useEffect, useRef } from 'react';
 import '../styles/signupPage.css';
 import axios from '../api/axios';
 
 const Login = () => {
-  const { setAuth } = useContext(AuthContext);
   // For setting focus on first input field
   const userRef = useRef();
   // For screen reader error messages
@@ -47,9 +45,6 @@ const Login = () => {
 
       // Get accessToken from response
       const accessToken = response?.data?.accessToken;
-
-      // Store information in global context
-      setAuth({ username, password, accessToken });
 
     } catch(err) {
         if (!err?.response?.data)
