@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import '../styles/signupPage.css';
 import axios from '../api/axios';
 
@@ -89,7 +90,7 @@ const Login = () => {
           {/* If theres an error message, display it */}
           { message && <span ref={ errRef } id="error-message" aria-live="assertive">{ message }</span> }
           <button id="auth-submit" form="auth-form" disabled={(username && password) ? false : true}>Submit</button>
-          {/* <span>Don't have an account? <a href="/signup">Sign Up</a></span> */}
+          <span>Don't have an account? <Link to="/signup">Sign Up</Link></span>
         </form>
       </div>
     </div>

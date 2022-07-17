@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { USER_REGEX, PASS_REGEX, EMAIL_REGEX } from '../api/utils';
+import { Link } from 'react-router-dom';
 import '../styles/signupPage.css';
 import axios from '../api/axios';
 
@@ -178,7 +179,7 @@ const SignupPage = () => {
           { message && <span ref={ errRef } id="error-message" aria-live="assertive">{ message }</span> }
           {/* Disable submit button until all fields are filled */}
           <button id="auth-submit" form="auth-form" disabled={(username && email && password && confirmPassword) ? false : true}>Submit</button>
-          {/* <span>Already have an account? <a href="/login">Log In</a></span> */}
+          <span>Already have an account? <Link to="/login">Log In</Link></span>
         </form>
       </div>
     </section>
