@@ -1,0 +1,50 @@
+/*? HomePage container  */
+#home-page {
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  width: 95%;
+  justify-self: center;
+  max-width: 75em;
+  margin-bottom: 1.5em;
+}
+
+  #home-page hr {
+    background-color: var(--tertiary-color);
+    margin: 0.5em 0 1em 0;
+    border-radius: 25px;
+    border: 0;
+    height: 0.5rem;
+    max-width: 100%;
+  }
+
+  #home-page h2 {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    margin-top: 0.7em;
+    font-size: 2em;
+    max-width: 100%;
+  }
+
+/** Tablets and up */
+/*? MINIMUM WIDTH: 30em == 480px */
+@media (min-width: 30em) {
+  #home-page {
+    width: 90%;
+  }
+}
+
+
+/** Laptops and up */
+/*? MINIMUM WIDTH: 60em == 960px */
+/*? ALT: 64em == 1024px */
+@media (min-width: 60em) {
+  #home-page h2 {
+    justify-content: flex-start;
+    margin-left: 0.5em;
+  }
+
+  #home-page hr {
+    margin: 1em 0 1.5em 0;
+  }
+}

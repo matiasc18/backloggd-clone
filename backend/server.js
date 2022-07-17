@@ -2,17 +2,13 @@
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-// import express from 'express';
-// import cors from 'cors';
-// import mongoose from 'mongoose';
 
 // Environment variables
 require('dotenv').config();
 
 // Create express server
 const app = express();
-const port = process.env.PORT || 5000;
-
+const port = process.env.PORT || 3500;
 // Cors middleware / parse json
 app.use(cors());
 app.use(express.json());
@@ -25,11 +21,12 @@ connection.once('open', () => {
   console.log('MongoDB database connection established successfully');
 });
 
-// Import route files
-const usersRouter = require('./api/users');
-app.use('/users', usersRouter);
+// API Routes
+app.use('/users', require('./routes/users.routes'));
+app.use('/games', require('./routes/igdb.routes'));
 
-app.use('*', (req, res) => res.status(404).json({ error: 'not found'}));
+// Catch for request to nonexistant page
+app.use('*', (req, res) => res.status(404).json({ error: 'Page not found'}));
 
 // Starts server
 app.listen(port, () => {
