@@ -60,7 +60,7 @@ const loginUser = async (req, res) => {
 };
 
 //? @desc       Get user data
-//? @route      Get /users/
+//? @route      GET /users/
 //? @access     Private
 // id gotten from accessToken in header auth (Bearer token)
 const getUserInfo = async (req, res) => {
@@ -79,11 +79,12 @@ const getUserInfo = async (req, res) => {
 //? @route      DELETE /users/:id
 //? @access     Private
 const deleteUser = async (req, res) => {
-  const userId = req.params.id;
+  // const userId = req.params.id;
 
   try {
     // Find user by id and delete
-    const user = await User.findById(userId);
+    // const user = await User.findById(userId);
+    const user = await User.findById(req.user._id);
 
     await user.remove();
     return res.status(200).json({ id: req.params.id, message: 'User successfully deleted'});
