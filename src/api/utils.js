@@ -34,5 +34,22 @@ export const PASS_REGEX = /^(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%])[a-zA-
 // Email regex of form: (yourname) @ (domain) . (extension)(.again)
 export const EMAIL_REGEX = /^([a-zA-Z\d\.-]+)@([a-zA-Z\d-]+)\.([a-z]{2,8})(\.[a-z]{2,8})?$/;
 
-// Old password regex
-// export const PASS_REGEX = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+// Check validity of input forms
+export const validCheck = (validUsername, validEmail, validPassword, validConfirm) => {
+  // Invalid username
+  if (!validUsername) {
+    return 'Invalid username';
+  }
+  // Invalid email
+  if (!validEmail) {
+    return 'Invalid email';
+  }
+  // Invalid password
+  if (!validPassword) {
+    return 'Invalid password';
+  }
+  // Passwords do not match
+  if (!validConfirm) {
+    return 'Passwords do not match';
+  }
+}
