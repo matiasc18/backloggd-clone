@@ -1,20 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { login, reset } from '../features/auth/authSlice';
 import { Link } from 'react-router-dom';
+import LoadingBar from '../components/LoadingBar';
 import '../styles/signupPage.css';
-import axios from '../api/axios';
 
 const Login = () => {
-  // For setting focus on first input field
-  const userRef = useRef();
-  // For screen reader error messages
-  const errRef = useRef();
-
   // Form input states
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-
   // Error message
-  const [message, setMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+
+  // For setting focus on first input field
+  const userRef = useRef();
+
+  // For handling auth / re-routing
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // Sets focus on the username field at page startup
   useEffect(() => {
@@ -23,44 +27,38 @@ const Login = () => {
 
   // Clear error message when user edits username/password
   useEffect(() => {
-    setMessage('');
+    setErrorMessage('');
   }, [username, password]);
+
+  // Redux auth state (with user from server response)
+  const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+
+  // Runs whenever redux auth state changes
+  useEffect(() => {
+    // Sets error message equal to error message from server response
+    if (isError) {
+      setErrorMessage(message);
+    }
+
+    // Redirect the user to the dashboard once registered
+    if (isSuccess || user) {
+      navigate('/dashboard');
+    }
+
+    // Reset auth state
+    dispatch(reset);
+  }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   // Submit form when submit button hit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const user = { username, password };
-
-    try {
-      // Axios request + set message to successful login message
-      const response = await axios.request({
-        method: 'post',
-        url: '/users/login',
-        data: user
-        // withCredentials: true
-      });
-
-      setMessage(response?.data?.message);
-      console.log(response);
-
-      // Get accessToken from response
-      const accessToken = response?.data?.accessToken;
-
-    } catch(err) {
-        if (!err?.response?.data)
-          setMessage('No server response');
-        // Username / Password incorrect
-        else if (err?.response?.data?.message)
-          setMessage(err.response.data.message);
-        else
-          setMessage('Login failed');
-        // errRef.current.focus();
-      }
+    const userData = { username, password };
+    dispatch(login(userData));
   };
 
   return (
-    <div id="auth-page">
+    <section id="auth-page">
       <div id="form-container">
         <h1 id="auth-title">Login</h1>
         <form id="auth-form" autoComplete="off" onSubmit={ handleSubmit }>
@@ -88,12 +86,13 @@ const Login = () => {
             <label htmlFor="password" className="auth-label">Password</label>
           </div>
           {/* If theres an error message, display it */}
-          { message && <span ref={ errRef } id="error-message" aria-live="assertive">{ message }</span> }
+          { errorMessage && <span id="error-message">{ errorMessage }</span> }
           <button id="auth-submit" form="auth-form" disabled={(username && password) ? false : true}>Submit</button>
           <span>Don't have an account? <Link to="/signup">Sign Up</Link></span>
         </form>
+        { isLoading && <LoadingBar /> }
       </div>
-    </div>
+    </section>
   )
 }
 

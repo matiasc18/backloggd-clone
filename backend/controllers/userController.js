@@ -55,7 +55,7 @@ const loginUser = async (req, res) => {
     return res.status(200).json({message: 'Logged in', accessToken: genToken(user._id)});
   } catch(err) {  
       // Otherwise, the user doesn't exist or username is wrong
-      return res.status(404).json({message: 'Username/Password Incorrect'});
+      return res.status(404).json({error: 'Username/Password Incorrect'});
   }
 };
 
