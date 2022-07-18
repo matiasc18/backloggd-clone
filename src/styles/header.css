@@ -45,36 +45,52 @@
     font-size: min(1.3em, 3.331vw);
   }
 
-  /** Hide menu button */
-  .menu-button {
-    visibility: hidden;
-    display: none;
-  }
+    /** Hide menu button */
+    .menu-button {
+      visibility: hidden;
+      display: none;
+    }
 
-  .nav-links {
-    width: 100%;
-    visibility: visible;
-    display: flex;
-    justify-content: flex-end;
-    font-size: 0.7em;
-    gap: 1em;
-  }
+    .nav-links {
+      width: 100%;
+      visibility: visible;
+      display: flex;
+      justify-content: flex-end;
+      font-size: 0.7em;
+      gap: 1em;
+      color: var(--tertiary-color);
+    }
 
-  .header-link {
-    text-decoration: none;
-    color: var(--tertiary-color);
-    padding: 0.35em 0.7em;
-  }
+      .header-link {
+        text-decoration: none;
+        color: inherit;
+        padding: 0.35em 0.7em;
+      }
   
-  .header-link:hover {
-    background-color: var(--tertiary-color);
-    color: var(--secondary-color);
-    border-radius: 10px;
-  }
+        .header-link:hover {
+          background-color: var(--tertiary-color);
+          color: var(--secondary-color);
+          border-radius: 10px;
+        }
+
+    .logout-button {
+      font-weight: bold;
+      color: inherit;
+      background: none;
+      border: none;
+      padding: 0.35em 0.7em;
+    }
+
+      .logout-button:hover {
+        background-color: var(--tertiary-color);
+        color: var(--secondary-color);
+        border-radius: 10px;
+        cursor: pointer;
+      }
 }
 
-/** Tablets and up */
-/*? MINIMUM WIDTH: 30em == 480px */
+/** Laptops and up */
+/*? MINIMUM WIDTH: 60em == 960px */
 @media (min-width: 60em) {
   .nav-links {
     font-size: 0.8em;
