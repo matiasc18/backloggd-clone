@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <div id="header-container">
       <header>
-        <Link to="/" id="header-title"><code>{`<frontloggd>`}</code></Link>
+        <Link to="/" id="header-title">frontloggd</Link>
         <FaPowerOff size="1.5em" className="menu-button" />
         <nav className="nav-links">
           {user ? (

@@ -1,7 +1,12 @@
+/* @font-face {
+  font-family: 'Helvetica';
+  src: local('Helvetica'), url('./styles//fonts//Helvetica.ttf') format('truetype');
+} */
+
 /* override browser default */
 html {
   font-size: 62.5%;
-  font-family: helvetica, montserrat;
+  font-family: helvetica;
   overflow-x: hidden;
   max-width: 100vw;
   box-sizing: border-box;
