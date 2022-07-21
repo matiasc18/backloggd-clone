@@ -87,7 +87,7 @@ const SignupPage = () => {
 
     // Redirect the user to the dashboard once registered
     if (isSuccess || user) {
-      navigate('/dashboard');
+      navigate('/');
     }
 
     // Reset auth state
