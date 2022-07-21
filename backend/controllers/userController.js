@@ -21,7 +21,7 @@ const registerUser = async (req, res) => {
     });
 
     // If user successfully created and saved, create a JWT and return it in response
-    return res.status(201).json({message: 'User sucessfully registered', accessToken: genToken(newUser._id)});
+    return res.status(201).json({ username: username, accessToken: genToken(newUser._id, newUser.gamesCount)});
   } catch(err) {
       // Duplicate key (username or email)
       if (err.code === 11000) {
@@ -46,16 +46,16 @@ const loginUser = async (req, res) => {
     // Find user by username
     const user = await User.findOne({ username: username }).select('+password');
 
-    // If wrong password, return error
+    // If username correct but wrong password, return error
     if (!await bcrypt.compare(password, user.password)) {
-      return res.status(404).json({message: 'Username/Password Incorrect'});
+      return res.status(404).json({error: 'Invalid username / password'});
     }
 
     // If the user exists and password is correct, create a JWT and return it in response
-    return res.status(200).json({message: 'Logged in', accessToken: genToken(user._id)});
+    return res.status(200).json({ username: username, accessToken: genToken(user._id, user.gamesCount)});
   } catch(err) {  
       // Otherwise, the user doesn't exist or username is wrong
-      return res.status(404).json({error: 'Username/Password Incorrect'});
+      return res.status(404).json({error: 'Invalid username / password'});
   }
 };
 
@@ -65,10 +65,11 @@ const loginUser = async (req, res) => {
 // id gotten from accessToken in header auth (Bearer token)
 const getUserInfo = async (req, res) => {
   try {
-    // Find user by id and return their data
-    const user = await User.findById(req.user._id);
+    // Find user by id and return their data (username and favorite games)
+    const user = await User.findById(req.user._id, { username: 1, favorites: 1 });
+    console.log(user);
 
-    return res.status(200).json({user});
+    return res.status(200).json({ user });
   } catch(err) {
     // If the user doesn't exist, return error
     return res.status(404).json({message: 'User not found'});
@@ -79,8 +80,6 @@ const getUserInfo = async (req, res) => {
 //? @route      DELETE /users/:id
 //? @access     Private
 const deleteUser = async (req, res) => {
-  // const userId = req.params.id;
-
   try {
     // Find user by id and delete
     // const user = await User.findById(userId);
@@ -95,9 +94,12 @@ const deleteUser = async (req, res) => {
 };
 
 // Generate JWT with userId as payload
-const genToken = (id) => {
+const genToken = (id, gamesCount) => {
   return jwt.sign(
-    { userId: id }, 
+    { 
+      userId: id,
+      gamesCount: gamesCount
+    }, 
     process.env.JWT_SECRET, 
     { expiresIn: '30d'}
   );

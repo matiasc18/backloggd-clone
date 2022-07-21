@@ -11,10 +11,10 @@ const register = async (userData) => {
 
   // Save and return JWT from response if it exists
   if (response.data.accessToken) {
-    localStorage.setItem('user', JSON.stringify(response.data.accessToken));
+    localStorage.setItem('user', JSON.stringify(response.data));
   }
 
-  return response.data.accessToken;
+  return response.data;
 };
 
 //? Login user
@@ -28,10 +28,10 @@ const login = async (userData) => {
 
   // Save and return JWT from response if it exists
   if (response.data.accessToken) {
-    localStorage.setItem('user', JSON.stringify(response.data.accessToken));
+    localStorage.setItem('user', JSON.stringify(response.data));
   }
 
-  return response.data.accessToken;
+  return response.data;
 };
 
 //? Logout user
