@@ -18,6 +18,15 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
     select: false
+  },
+  bio: {
+    type: String,
+    required: false,
+    trim: true
+  },
+  gamesCount: {
+    type: Number,
+    default: 0
   }
 }, 
 { timestamps: true });
