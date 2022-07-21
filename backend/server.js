@@ -23,7 +23,7 @@ connection.once('open', () => {
 
 // API Routes
 app.use('/users', require('./routes/users.routes'));
-app.use('/games', require('./routes/igdb.routes'));
+app.use('/games', require('./routes/games.routes'));
 
 // Catch for request to nonexistant page
 app.use('*', (req, res) => res.status(404).json({ error: 'Page not found'}));
