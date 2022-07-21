@@ -38,6 +38,7 @@ const getGames = async (req, res) => {
 //? @route      POST /games/add
 //? @access     Private
 const addUserGame = async (req, res) => {
+  
   // invalid (default): ''
   // valid: [{ id, title, genre, releaseDate, cover, rating }]
   const { games } = req.body;
