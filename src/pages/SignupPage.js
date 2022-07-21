@@ -37,22 +37,37 @@ const SignupPage = () => {
     userRef.current.focus();
   }, []);
 
+  // //* Input validation
+  // // Validate username
+  // useEffect(() => {
+  //   setvalidUsername(USER_REGEX.test(username));
+  // }, [username]);
+
+  // // Validate password + confirmPassword
+  // useEffect(() => {
+  //   setvalidPassword(PASS_REGEX.test(password));
+  //   setValidConfirm(password === confirmPassword);
+  // }, [password, confirmPassword]);
+
+  // // Validate email
+  // useEffect(() => {
+  //   setValidEmail(EMAIL_REGEX.test(email));
+  // }, [email]);
+
+  // // Clear error message when user edits input
+  // useEffect(() => {
+  //   setErrorMessage('');
+  // }, [username, email, password, confirmPassword]);
+  // //* Input validation end
+
   //* Input validation
   // Validate username
   useEffect(() => {
     setvalidUsername(USER_REGEX.test(username));
-  }, [username]);
-
-  // Validate password + confirmPassword
-  useEffect(() => {
+    setValidEmail(EMAIL_REGEX.test(email));
     setvalidPassword(PASS_REGEX.test(password));
     setValidConfirm(password === confirmPassword);
-  }, [password, confirmPassword]);
-
-  // Validate email
-  useEffect(() => {
-    setValidEmail(EMAIL_REGEX.test(email));
-  }, [email]);
+  }, [username, email, password, confirmPassword]);
 
   // Clear error message when user edits input
   useEffect(() => {
