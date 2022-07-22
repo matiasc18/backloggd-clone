@@ -33,7 +33,7 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => res.sendFile(path.resolve(__dirname, '../', 'build', 'index.html')));
 } else {
   // Catch for request to nonexistant page
-  app.use('*', (req, res) => res.status(404).json({ error: 'Please switch to production'}));
+  app.use('*', (req, res) => res.status(404).json({ error: 'Please switch to production.'}));
 }
 
 // Starts server
