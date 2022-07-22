@@ -14,8 +14,8 @@ const protect = asyncHandler(async (req, res, next) => {
 
       // If there is no accessToken provided, return error in response
       if (!accessToken)
-        return res.status(401).json({message: 'Not authorized, no access token'});
-
+      return res.status(401).json({message: 'Not authorized, no access token'});
+      
       // Verify token
       const decoded = jwt.verify(accessToken, process.env.JWT_SECRET);
 

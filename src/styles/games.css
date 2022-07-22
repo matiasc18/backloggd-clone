@@ -8,7 +8,7 @@
 }
 
   /*? Game card */
-  .game-card {
+  .game-card {  
     border-radius: 10px;
     flex: 1 1 30%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -20,6 +20,7 @@
     }
 
     .game-cover {
+      width: 100%;
       max-width: 100%;
       aspect-ratio: 3 / 4;
       border-radius: 10px;
@@ -64,6 +65,7 @@
     }
 
     .game-cover {
+      height: auto;
       border-bottom-left-radius: 0;
       border-bottom-right-radius: 0;
     }

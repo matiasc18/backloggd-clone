@@ -27,7 +27,3 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-#info
-/reference.txt
-/README.md
