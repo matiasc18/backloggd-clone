@@ -2,7 +2,7 @@
   "name": "backloggd-clone",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/build",
+  "homepage": "https://frontloggd.herokuap.com/",
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
     "@testing-library/jest-dom": "^5.16.4",
