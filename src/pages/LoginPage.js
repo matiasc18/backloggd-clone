@@ -60,7 +60,7 @@ const Login = () => {
   return (
     <section id="auth-page">
       <div id="form-container">
-        <h1 id="auth-title">Login Man</h1>
+        <h1 id="auth-title">Login</h1>
         <form id="auth-form" autoComplete="off" onSubmit={ handleSubmit }>
           <div className="input-group">
             <input 

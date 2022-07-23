@@ -5,7 +5,7 @@ const register = async (userData) => {
   // Make axios request
   const response = await axios.request({
     method: 'post',
-    url: '/users/register',
+    url: 'users/register',
     data: userData
   });
 
@@ -22,7 +22,7 @@ const login = async (userData) => {
   // Make axios request
   const response = await axios.request({
     method: 'post',
-    url: '/users/login',
+    url: 'users/login',
     data: userData
   });
 

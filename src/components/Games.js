@@ -17,7 +17,7 @@ const Games = () => {
   //? Axios request config
   const config = {
     method: 'post',
-    url: '/games',
+    url: 'games',
     query: defaultQuery,    // query object
     data: ''                // request body (stringified query)
   };
