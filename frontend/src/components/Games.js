@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import { queryBuilder, defaultQuery, imgPath } from '../api/utils';
 import Pagination from './Pagination';
 import LoadingBar from './LoadingBar';
@@ -52,7 +52,7 @@ const Games = () => {
     config.query.page = currentPage;
     fetchGames();
   }, [currentPage]);
-
+  
   //* Runs whenever games updates
   useEffect(() => {
     console.log(games);
