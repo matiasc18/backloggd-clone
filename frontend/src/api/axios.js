@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'https://frontloggd.herokuapp.com',
+  baseURL: (process.env.NODE_ENV === 'production') 
+    ? 'https://frontloggd.herokuapp.com/' 
+    : 'http://localhost:3500/',
   headers: {
     'Content-Type': 'application/json',
   },

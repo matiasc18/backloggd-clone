@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!user) {
-      navigate('/login');
+      navigate('/games');
     }
   }, [user, navigate]);
   if (user) return (

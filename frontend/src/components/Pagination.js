@@ -24,7 +24,7 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
         <ul className="page-list">
           {currentPage !== 1 ? <li className="page-arrow" onClick={() => updatePage(currentPage - 1)}><FaChevronLeft /></li> : <></>}
           {insertion}
-          <li>...</li>
+          <li className="page-dots"></li>
           <li className="page-selector" onClick={() => updatePage(totalPages)}>{totalPages}</li>
           <li className="page-arrow" onClick={() => updatePage(currentPage + 1)}><FaChevronRight /></li>
         </ul>
@@ -47,9 +47,9 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
         <ul className="page-list">
           <li className="page-arrow" onClick={() => updatePage(currentPage - 1)}><FaChevronLeft /></li>
           <li className="page-selector" onClick={() => updatePage(1)}>1</li>
-          <li className="page-dots">...</li>
+          <li className="page-dots"></li>
           { insertion }
-          <li className="page-dots">...</li>
+          <li className="page-dots"></li>
           <li className="page-selector" onClick={() => updatePage(totalPages)}>{totalPages}</li>
           <li className="page-arrow" onClick={() => updatePage(currentPage + 1)}><FaChevronRight /></li>
         </ul>
@@ -72,7 +72,7 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
         <ul className="page-list">
           <li className="page-arrow" onClick={() => updatePage(currentPage - 1)}><FaChevronLeft /></li>
           <li onClick={() => updatePage(1)} className="page-selector">1</li>
-          <li className="page-dots">...</li>
+          <li className="page-dots"></li>
           { insertion }
           {currentPage !== totalPages ? <li onClick={() => updatePage(currentPage + 1)} className="page-arrow"><FaChevronRight /></li> : <></>}
         </ul>
