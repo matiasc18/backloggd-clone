@@ -2,7 +2,7 @@
 .pagination {
   display: flex;
   justify-content: center;
-  font-size: min(1.5em, (1.5vw + 0.6em));
+  font-size: min(1.5em, (1.5vw + 0.65em));
   font-weight: bold;
 }
 
@@ -54,7 +54,12 @@
         transition: none;
         -webkit-transition: none;
       }
-
+  
+  .page-dots {
+    border-left: 4px solid var(--tertiary-color);
+    border-radius: 10px;
+    height: 100%;
+  }
 
 /** Tablets and up */
 /*? MINIMUM WIDTH: 30em == 480px */
@@ -64,7 +69,7 @@
   }
 
   .page-arrow {
-    padding: 0.25em 0.5em;
+    padding: 0.25em 0.25em;
   }
 }
 
