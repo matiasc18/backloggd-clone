@@ -5,12 +5,13 @@
   width: 100%;
   background-color: var(--secondary-color);
   border-bottom: 0.5px solid black;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
   header {
     display: flex;
     align-items: center;
+    position: relative;
     justify-content: space-between;
     width: 90%;
     color: var(--tertiary-color);
@@ -33,29 +34,34 @@
 
     /* For popout menu on */
     .nav-links {
-      position: fixed;
-      top: 0;
-      left: 100%;
-      width: 100%;
-      min-height: 100vh;
-      z-index: 98;
+      position: absolute;
+      width: 80vw;
+      min-height: calc(100vh - 3.25em);
       background-color: var(--secondary-color);
-      display: block;
+      display: flex;
+      flex-direction: column;
       transition: 0.4s;
-      margin-top: 3.25em;
+      z-index: 100;
+      top: 3.25em;
+      right: -90vw;
+      gap: 1em;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .header-link {
+      background-color: white;
     }
 
     .nav-links.isActive {
-      visibility: visible;
-      display: block;
-      left: 50%;
+      right: -5vw;
     }
 
     .menu-mask {
       background-color: black;
-      position: fixed;
+      position: absolute;
       top: 0;
-      left: 0;
+      left: -5vw;
       width: 100%;
       min-height: 100vh;
       margin-top: 3.25em;
@@ -80,13 +86,19 @@
     }
 
     .nav-links {
+      left: 0;
+      min-height: initial;
+      margin-top: 0;
       width: 100%;
-      visibility: visible;
       display: flex;
       justify-content: flex-end;
+      flex-direction: row;
       font-size: 0.7em;
       gap: 1em;
       color: var(--tertiary-color);
+      transition: none;
+      visibility: visible;
+      position: static;
     }
 
       .header-link {

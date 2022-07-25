@@ -18,13 +18,18 @@ const Header = () => {
     navigate('/');
   };
 
+  const toggleMenu = () => {
+    setShowMenu(!showMenu);
+    document.body.style.overflow = "hidden";
+  };
+
   return (
     <div id="header-container">
       <header>
         <Link to="/" id="header-title">frontloggd</Link>
-        <FaPowerOff size="1.5em" className="menu-button" onClick={() => setShowMenu(!showMenu)}/>
+        <FaPowerOff size="1.5em" className="menu-button" onClick={toggleMenu}/>
         {/* If the menu is active, display mobile menu nav */}
-        { showMenu && <div className="menu-mask" onClick={() => setShowMenu(!showMenu)}></div>}
+        { showMenu && <div className="menu-mask" onClick={toggleMenu}></div>}
         <nav className={showMenu ? "nav-links isActive" : "nav-links"}>
           {user ? (
             <>
