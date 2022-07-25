@@ -15,6 +15,7 @@ html {
   --tertiary-color: rgb(207, 207, 207);
   --secondary-comp: rgb(37, 59, 131);
   background-color: var(--primary-color);
+  padding: env(safe-area-inset); /* for iphone notch / home bar */
 }
 
 body {
