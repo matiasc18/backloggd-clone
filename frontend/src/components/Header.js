@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
@@ -10,6 +10,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const [showMenu, setShowMenu] = useState(false);
 
   const onLogout = () => {
     dispatch(logout());
@@ -21,10 +22,15 @@ const Header = () => {
     <div id="header-container">
       <header>
         <Link to="/" id="header-title">frontloggd</Link>
-        <FaPowerOff size="1.5em" className="menu-button" />
-        <nav className="nav-links">
+        <FaPowerOff size="1.5em" className="menu-button" onClick={() => setShowMenu(!showMenu)}/>
+        {/* If the menu is active, display mobile menu nav */}
+        { showMenu && <div className="menu-mask" onClick={() => setShowMenu(!showMenu)}></div>}
+        <nav className={showMenu ? "nav-links isActive" : "nav-links"}>
           {user ? (
-            <button className="logout-button" onClick={onLogout}>Logout</button>
+            <>
+              <Link className="header-link" to="/games">Games</Link>
+              <button className="logout-button" onClick={onLogout}>Logout</button>
+            </>
           ) : (
             <>
               <Link className="header-link" to="/games">Games</Link>
