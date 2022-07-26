@@ -11,6 +11,7 @@ html {
   --secondary-comp: rgb(37, 59, 131);
   background-color: var(--primary-color);
   padding: env(safe-area-inset);
+  overflow-x: hidden;
 }
 
 body {

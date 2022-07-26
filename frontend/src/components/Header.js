@@ -10,7 +10,7 @@ const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-  const [showMenu, setShowMenu] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const onLogout = () => {
     dispatch(logout());
@@ -18,29 +18,24 @@ const Header = () => {
     navigate('/');
   };
 
-  const toggleMenu = () => {
-    setShowMenu(!showMenu);
-    document.body.style.overflow = "hidden";
-  };
-
   return (
     <div id="header-container">
       <header>
         <Link to="/" id="header-title">frontloggd</Link>
-        <FaPowerOff size="1.5em" className="menu-button" onClick={toggleMenu}/>
+        <FaPowerOff size="1.5em" className="menu-button" onClick={() => setShowMobileMenu(!showMobileMenu)}/>
         {/* If the menu is active, display mobile menu nav */}
-        { showMenu && <div className="menu-mask" onClick={toggleMenu}></div>}
-        <nav className={showMenu ? "nav-links isActive" : "nav-links"}>
+        { showMobileMenu && <div className="menu-mask" onClick={() => setShowMobileMenu(!showMobileMenu)}></div>}
+        <nav className={showMobileMenu ? "nav-links isActive" : "nav-links"}>
           {user ? (
             <>
-              <Link className="header-link" to="/games">Games</Link>
+              <Link className="nav-link" to="/games">Games</Link>
               <button className="logout-button" onClick={onLogout}>Logout</button>
             </>
           ) : (
             <>
-              <Link className="header-link" to="/games">Games</Link>
-              <Link className="header-link" to="/login">Log In</Link>
-              <Link className="header-link" to="/signup">Sign Up</Link>
+              <Link className="nav-link" to="/games">Games</Link>
+              <Link className="nav-link" to="/login">Log In</Link>
+              <Link className="nav-link" to="/signup">Sign Up</Link>
             </>)}
         </nav>
       </header>
@@ -59,3 +54,19 @@ export default Header;
 // * FaPowerOff
 // * FaSlidersH
 // * FaSortDown (Down, Up)
+
+// {/* If the menu is active, display mobile menu nav */}
+// { showMobileMenu && <div className="menu-mask" onClick={() => setShowMobileMenu(!showMobileMenu)}></div>}
+// <nav className={showMobileMenu ? "nav-links isActive" : "nav-links"}>
+//   {user ? (
+//     <>
+//       <Link className="header-link" to="/games">Games</Link>
+//       <button className="logout-button" onClick={onLogout}>Logout</button>
+//     </>
+//   ) : (
+//     <>
+//       <Link className="header-link" to="/games">Games</Link>
+//       <Link className="header-link" to="/login">Log In</Link>
+//       <Link className="header-link" to="/signup">Sign Up</Link>
+//     </>)}
+// </nav>
