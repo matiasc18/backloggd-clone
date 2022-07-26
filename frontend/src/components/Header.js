@@ -33,8 +33,9 @@ const Header = () => {
     }
   }, []);
 
+  // Close hamburger menu if its open while rotating phone device
   useEffect(() => {
-    if (windowSize >= 480 && showMobileMenu)
+    if (windowSize.innerWidth >= 480 && showMobileMenu)
     {
       toggleMenu();
     }
