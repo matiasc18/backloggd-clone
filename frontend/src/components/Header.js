@@ -23,12 +23,12 @@ const Header = () => {
     if (showMobileMenu) {
       setShowMobileMenu(false);
       document.body.style.position = 'static';
-      document.getElementById('home-page').style.marginRight = 0;
+      document.getElementById('home-page').style.transform = 'translateX(0)';
     } else {
         setShowMobileMenu(true);
         document.body.style.position = 'fixed';
         document.getElementById('home-page').style.transition = '0.4s';
-        document.getElementById('home-page').style.marginRight = '100%';
+        document.getElementById('home-page').style.transform = 'translateX(-53%)';
     }
   };
 
