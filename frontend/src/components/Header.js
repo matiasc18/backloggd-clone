@@ -1,16 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
 import { FaPowerOff } from 'react-icons/fa';
+import { getWindowSize } from '../api/utils';
 import '../styles/header.css';
 
 //TODO Change links to a ul with li of Link
 const Header = () => {
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
+
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  
+  // Keeps track of the device's current window size
+  const [windowSize, setWindowSize] = useState(getWindowSize());
+
+  // Add event listener (on initial render) for screen size change 
+  // To remove hamburger menu if phone is rotated
+  useEffect(() => {
+    const handleWindowResize = () => {
+      setWindowSize(getWindowSize());
+    }
+
+    // resize is fired whenever the window has been resized
+    window.addEventListener('resize', handleWindowResize);
+
+    // Remove event listener when component dismounts
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (windowSize >= 480 && showMobileMenu)
+    {
+      toggleMenu();
+    }
+  }, [windowSize])
 
   // Logout, reset user state, close the menu (if on mobile), and go to homepage
   const onLogout = () => {
