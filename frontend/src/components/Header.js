@@ -15,7 +15,12 @@ const Header = () => {
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
+    setShowMobileMenu(false);
     navigate('/');
+  };
+
+  const hideMenu = () => {
+    setShowMobileMenu(false);
   };
 
   return (
@@ -28,14 +33,14 @@ const Header = () => {
         <nav className={showMobileMenu ? "nav-links isActive" : "nav-links"}>
           {user ? (
             <>
-              <Link className="nav-link" to="/games">Games</Link>
+              <Link className="nav-link" to="/games" onClick={hideMenu}>Games</Link>
               <button className="logout-button" onClick={onLogout}>Logout</button>
             </>
           ) : (
             <>
-              <Link className="nav-link" to="/games">Games</Link>
-              <Link className="nav-link" to="/login">Log In</Link>
-              <Link className="nav-link" to="/signup">Sign Up</Link>
+              <Link className="nav-link" to="/games" onClick={hideMenu}>Games</Link>
+              <Link className="nav-link" to="/login" onClick={hideMenu}>Log In</Link>
+              <Link className="nav-link" to="/signup" onClick={hideMenu}>Sign Up</Link>
             </>)}
         </nav>
       </header>

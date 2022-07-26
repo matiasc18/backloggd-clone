@@ -5,10 +5,11 @@
   width: 100%;
   background-color: var(--secondary-color);
   border-bottom: 0.5px solid black;
+  z-index: 99999;
   /* overflow: hidden; */
 }
 
-  header {
+header {
     display: flex;
     align-items: center;
     position: relative;
@@ -16,7 +17,6 @@
     width: 90%;
     color: var(--tertiary-color);
     max-width: 1440px;
-    z-index: 99999;
   }
     
     #header-title {
@@ -46,7 +46,6 @@
       background-color: var(--secondary-color);
       color: var(--tertiary-color);
       transition: 0.4s;
-      z-index: 100;
       right: -400px;
       z-index: 99998;
       margin-top: 3.25em;
