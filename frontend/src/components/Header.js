@@ -12,6 +12,7 @@ const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
+  // Logout, reset user state, close the menu (if on mobile), and go to homepage
   const onLogout = () => {
     dispatch(logout());
     dispatch(reset());
@@ -19,16 +20,24 @@ const Header = () => {
     navigate('/');
   };
 
+  // Opens/closes mobile hamburger menu
   const toggleMenu = () => {
-    if (showMobileMenu) {
-      setShowMobileMenu(false);
-      document.body.style.position = 'static';
-      document.getElementById('home-page').style.transform = 'translateX(0)';
+    // Current page to be translated left when menu opens
+    const currentPage = document.getElementById('header-container').nextSibling;
+    if (!showMobileMenu) {
+      setShowMobileMenu(true);
+
+      // Removes page scrolling capability
+      document.body.style.position = 'fixed';
+
+      // Translates the current page left
+      currentPage.style.transition = '0.3s';
+      currentPage.style.transform = 'translateX(-53%)';
+    // Returns the page back to normal after closing menu
     } else {
-        setShowMobileMenu(true);
-        document.body.style.position = 'fixed';
-        document.getElementById('home-page').style.transition = '0.4s';
-        document.getElementById('home-page').style.transform = 'translateX(-53%)';
+        setShowMobileMenu(false);
+        document.body.style.position = 'static';
+        currentPage.style.transform = 'translateX(0)';
     }
   };
 
@@ -36,20 +45,22 @@ const Header = () => {
     <div id="header-container">
       <header>
         <Link to="/" id="header-title">frontloggd</Link>
-        <FaPowerOff size="1.5em" className="menu-button" onClick={toggleMenu}/>
-        {/* If the menu is active, display mobile menu nav */}
-        { showMobileMenu && <div className="menu-mask" onClick={toggleMenu}></div>}
-        <nav className={showMobileMenu ? "nav-links isActive" : "nav-links"}>
-          {user ? (
+        <FaPowerOff size="1.5em" className="menu-button" onClick={ toggleMenu }/>
+        {/* If the menu is active, display mobile menu version of nav */}
+        { showMobileMenu && <div className="menu-mask" onClick={ toggleMenu }></div>}
+        <nav className={ showMobileMenu ? "nav-links isActive" : "nav-links"}>
+          { user ? (
+            // If the user exists, show the logout button
             <>
-              <Link className="nav-link" to="/games" onClick={toggleMenu}>Games</Link>
-              <button className="logout-button" onClick={onLogout}>Logout</button>
+              <Link className="nav-link" to="/games" onClick={ toggleMenu }>Games</Link>
+              <button className="logout-button" onClick={ onLogout }>Logout</button>
             </>
           ) : (
+            // Otherwise, show normal nav
             <>
-              <Link className="nav-link" to="/games" onClick={toggleMenu}>Games</Link>
-              <Link className="nav-link" to="/login" onClick={toggleMenu}>Log In</Link>
-              <Link className="nav-link" to="/signup" onClick={toggleMenu}>Sign Up</Link>
+              <Link className="nav-link" to="/games" onClick={ toggleMenu }>Games</Link>
+              <Link className="nav-link" to="/login" onClick={ toggleMenu }>Log In</Link>
+              <Link className="nav-link" to="/signup" onClick={ toggleMenu }>Sign Up</Link>
             </>)}
         </nav>
       </header>

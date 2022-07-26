@@ -36,20 +36,20 @@
     /* For popout menu on mobile */
     .nav-links {
       position: fixed;
+      top: 0;
+      right: -16em;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 1em;
       height: 100%;
       width: 50%;
-      top: 0;
+      margin-top: 3.25em;
+      padding-top: 2em;
       background-color: var(--secondary-color);
       color: var(--tertiary-color);
       transition: 0.4s;
-      right: -400px;
       z-index: 99998;
-      margin-top: 3.25em;
-      padding-top: 2em;
     }
 
       .nav-links.isActive {
@@ -84,25 +84,25 @@
       }
 
     .menu-mask {
-      background-color: black;
       position: fixed;
       top: 0;
       left: -5vw;
       width: 100%;
+      opacity: 0.5;
       min-height: 100vh;
       margin-top: 3.25em;
+      background-color: black;
       z-index: 50;
-      opacity: 0.5;
     }
 
 /** Tablets and up */
 /*? MINIMUM WIDTH: 30em == 480px */
 @media (min-width: 30em) {
   header {
-    align-items: center;
-    justify-content: flex-start;
-    width: 92%;
     font-size: min(1.3em, 3.331vw);
+    justify-content: flex-start;
+    align-items: center;
+    width: 92%;
   }
 
     /** Hide menu button */
@@ -112,53 +112,26 @@
     }
 
     .nav-links {
-      left: 0;
-      min-height: initial;
-      margin-top: 0;
-      width: 100%;
-      display: flex;
+      position: static;
       justify-content: flex-end;
       flex-direction: row;
-      font-size: 0.7em;
       gap: 1em;
-      color: var(--tertiary-color);
+      width: 100%;
+      font-size: 0.8em;
+      padding-top: 0;
+      margin-top: 0;
       transition: none;
       visibility: visible;
-      position: static;
     }
-
-      .nav-link {
-        text-decoration: none;
-        color: inherit;
-        padding: 0.35em 0.7em;
-      }
-  
-        .nav-link:hover {
-          background-color: var(--tertiary-color);
-          color: var(--secondary-color);
-          border-radius: 10px;
-        }
-
-    .logout-button {
-      font-weight: bold;
-      color: inherit;
-      background: none;
-      border: none;
-      padding: 0.35em 0.7em;
+    
+    .menu-mask {
+      visibility: hidden;
+      display: none;
     }
-
-      .logout-button:hover {
-        background-color: var(--tertiary-color);
-        color: var(--secondary-color);
-        border-radius: 10px;
-        cursor: pointer;
-      }
 }
 
 /** Laptops and up */
 /*? MINIMUM WIDTH: 60em == 960px */
-@media (min-width: 60em) {
-  .nav-links {
-    font-size: 0.8em;
-  }
-}
+/* @media (min-width: 60em) {
+
+} */
