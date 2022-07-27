@@ -6,6 +6,7 @@
   background-color: var(--secondary-color);
   border-bottom: 0.5px solid black;
   z-index: 99999;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 1px 5px;
   /* overflow: hidden; */
 }
 
@@ -45,15 +46,15 @@
       height: 100%;
       width: 40%;
       margin-top: 5.2rem;
-      padding-top: 1em;
-      background-color: var(--secondary-color);
+      padding-top: 1.5rem;
+      background-color: var(--secondary-comp);
       color: var(--tertiary-color);
       transition: 0.5s;
       z-index: 99998;
       font-size: 2rem;
     }
 
-      .nav-links.isActive {
+      .isActive {
         right: 0;
       }
 
@@ -61,60 +62,48 @@
         position: relative;
         text-decoration: none;
         color: inherit;
-        padding: 0.35em 0.7em;
         margin-left: 1rem;
         font-weight: bold;
       }
 
-      .nav-link.isActive {
-        background-color: var(--tertiary-color);
-        color: var(--secondary-color);
-        border-radius: 10px;
+      .logout-button {
+        font-weight: bold;
+        color: inherit;
+        background: none;
+        border: none;
+        padding: 0.35em 0.7em;
       }
-  
-        .nav-link:hover {
-          background-color: var(--tertiary-color);
-          color: var(--secondary-color);
-          border-radius: 10px;
+
+        .nav-link:active, .logout-button:active {
+          opacity: 0.7;
+          transform: scale(95%);
         }
 
-    .logout-button {
-      font-weight: bold;
-      color: inherit;
-      background: none;
-      border: none;
-      padding: 0.35em 0.7em;
-    }
+        .nav-link:after, .logout-button:after {
+          content: "";
+          background-color: var(--tertiary-color);
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 3.5px;
+          border-radius: 10px;
+          height: 100%;
+        }
 
-    
-      .logout-button:hover {
-        background-color: var(--tertiary-color);
-        color: var(--secondary-color);
-        border-radius: 10px;
-        cursor: pointer;
+      .menu-mask {
+        position: fixed;
+        top: 0;
+        left: -5vw;
+        width: 100%;
+        opacity: 0.5;
+        min-height: 100vh;
+        margin-top: 3.25em;
+        background-color: black;
+        z-index: 50;
       }
 
-    .nav-link:after, .logout-button:after {
-      content: "";
-      background-color: var(--tertiary-color);
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 3.5px;
-      border-radius: 10px;
-      height: 100%;
-    }
-
-    .menu-mask {
-      position: fixed;
-      top: 0;
-      left: -5vw;
-      width: 100%;
-      opacity: 0.5;
-      min-height: 100vh;
-      margin-top: 3.25em;
-      background-color: black;
-      z-index: 50;
+    .menu-button:active {
+      font-size: 0.95em;
     }
 
 /** Tablets and up */
@@ -145,14 +134,31 @@
       margin: 0;
       transition: none;
       visibility: visible;
+      background-color: var(--secondary-color);
     }
 
     .nav-link {
-      font-weight: normal;
+      letter-spacing: 0.25px;
+      padding: 0.35em 0.7em;
     }
 
       .nav-link, .logout-button {
         margin: 0;
+      }
+
+      .nav-link:after, .logout-button:after {
+        content: none;
+      }
+
+      .nav-link:active, .logout-button:active {
+        opacity: 1;
+      }
+
+      .nav-link:hover, .logout-button:hover {
+        background-color: var(--tertiary-color);
+        color: var(--secondary-color);
+        border-radius: 10px;
+        cursor: pointer;
       }
     
     .menu-mask {
@@ -163,6 +169,5 @@
 
 /** Laptops and up */
 /*? MINIMUM WIDTH: 60em == 960px */
-/* @media (min-width: 60em) {
-
-} */
+@media (min-width: 60em) {
+}
