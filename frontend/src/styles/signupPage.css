@@ -16,7 +16,6 @@
 
     #auth-title {
       margin: 0;
-      /* margin-bottom: 0.5em; */
       text-align: center;
     }
   
@@ -116,6 +115,10 @@
         cursor: default;
         background-color: var(--secondary-color);
         color: var(--tertiary-color);
+      }
+
+      #auth-submit:active {
+        transform: scale(95%);
       }
 
     #auth-form span a {
