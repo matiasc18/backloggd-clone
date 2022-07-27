@@ -9,6 +9,7 @@ import '../styles/header.css';
 //TODO Change links to a ul with li of Link
 const Header = () => {
   const { user } = useSelector((state) => state.auth);
+  const maxMobileWidth = 480;
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -37,7 +38,7 @@ const Header = () => {
 
   // Close hamburger menu if its open while rotating phone device
   useEffect((showMobileMenu, toggleMenu) => {
-    if (windowSize.innerWidth >= 480 && showMobileMenu)
+    if (windowSize.innerWidth >= maxMobileWidth && showMobileMenu)
     {
       toggleMenu();
     }
@@ -53,22 +54,24 @@ const Header = () => {
 
   // Opens/closes mobile hamburger menu
   const toggleMenu = () => {
-    // Current page to be translated left when menu opens
-    const currentPage = document.getElementById('header-container').nextSibling;
-    if (!showMobileMenu) {
-      setShowMobileMenu(true);
+    if (window.innerWidth < maxMobileWidth) {
+      // Current page to be translated left when menu opens
+      const currentPage = document.getElementById('header-container').nextSibling;
+      if (!showMobileMenu) {
+        setShowMobileMenu(true);
 
-      // Removes page scrolling capability
-      document.body.style.position = 'fixed';
+        // Removes page scrolling capability
+        document.body.style.position = 'fixed';
 
-      // Translates the current page left
-      currentPage.style.transition = '0.56s';
-      currentPage.style.transform = 'translateX(-43%)';
-    // Returns the page back to normal after closing menu
-    } else {
-        setShowMobileMenu(false);
-        document.body.style.position = 'static';
-        currentPage.style.transform = 'translateX(0)';
+        // Translates the current page left
+        currentPage.style.transition = '0.56s';
+        currentPage.style.transform = 'translateX(-43%)';
+      // Returns the page back to normal after closing menu
+      } else {
+          setShowMobileMenu(false);
+          document.body.style.position = 'static';
+          currentPage.style.transform = 'translateX(0)';
+      }
     }
   };
 
@@ -84,7 +87,7 @@ const Header = () => {
             // If the user exists, show the logout button
             <>
               <Link className="nav-link" to="/games" onClick={ toggleMenu }>Games</Link>
-              <button className="logout-button" onClick={ onLogout }>Logout</button>
+              <span className="nav-link" onClick={ onLogout }>Logout</span>
             </>
           ) : (
             // Otherwise, show normal nav
