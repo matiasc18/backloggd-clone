@@ -40,16 +40,17 @@
       right: -16em;
       display: flex;
       flex-direction: column;
-      align-items: center;
+      align-items: flex-start;
       gap: 1em;
       height: 100%;
-      width: 50%;
-      margin-top: 3.25em;
-      padding-top: 2em;
+      width: 40%;
+      margin-top: 5.2rem;
+      padding-top: 1em;
       background-color: var(--secondary-color);
       color: var(--tertiary-color);
-      transition: 0.4s;
+      transition: 0.5s;
       z-index: 99998;
+      font-size: 2rem;
     }
 
       .nav-links.isActive {
@@ -57,9 +58,17 @@
       }
 
       .nav-link {
+        position: relative;
         text-decoration: none;
         color: inherit;
         padding: 0.35em 0.7em;
+        margin-left: 1rem;
+      }
+
+      .nav-link.isActive {
+        background-color: var(--tertiary-color);
+        color: var(--secondary-color);
+        border-radius: 10px;
       }
   
         .nav-link:hover {
@@ -76,12 +85,24 @@
       padding: 0.35em 0.7em;
     }
 
+    
       .logout-button:hover {
         background-color: var(--tertiary-color);
         color: var(--secondary-color);
         border-radius: 10px;
         cursor: pointer;
       }
+
+    .nav-link:after, .logout-button:after {
+      content: "";
+      background-color: var(--tertiary-color);
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 3.5px;
+      border-radius: 10px;
+      height: 100%;
+    }
 
     .menu-mask {
       position: fixed;
@@ -114,15 +135,20 @@
     .nav-links {
       position: static;
       justify-content: flex-end;
+      align-items: center;
       flex-direction: row;
       gap: 1em;
       width: 100%;
       font-size: 0.8em;
-      padding-top: 0;
-      margin-top: 0;
+      padding: 0;
+      margin: 0;
       transition: none;
       visibility: visible;
     }
+
+      .nav-link, .logout-button {
+        margin: 0;
+      }
     
     .menu-mask {
       visibility: hidden;

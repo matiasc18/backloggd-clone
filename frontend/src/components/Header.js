@@ -17,6 +17,8 @@ const Header = () => {
   // Keeps track of the device's current window size
   const [windowSize, setWindowSize] = useState(getWindowSize());
 
+  //TODO probably will change this later when i add more options to the hamburger menu
+  //TODO in which case, instead of removing it, make it come down from top instead of right
   // Add event listener (on initial render) for screen size change 
   // To remove hamburger menu if phone is rotated
   useEffect(() => {
@@ -60,8 +62,8 @@ const Header = () => {
       document.body.style.position = 'fixed';
 
       // Translates the current page left
-      currentPage.style.transition = '0.3s';
-      currentPage.style.transform = 'translateX(-53%)';
+      currentPage.style.transition = '0.5s';
+      currentPage.style.transform = 'translateX(-43%)';
     // Returns the page back to normal after closing menu
     } else {
         setShowMobileMenu(false);
