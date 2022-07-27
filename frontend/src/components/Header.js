@@ -66,7 +66,7 @@ const Header = () => {
       currentPage.style.transform = 'translateX(-43%)';
     // Returns the page back to normal after closing menu
     } else {
-        // setShowMobileMenu(false);
+        setShowMobileMenu(false);
         document.body.style.position = 'static';
         currentPage.style.transform = 'translateX(0)';
     }

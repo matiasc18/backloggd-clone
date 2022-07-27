@@ -51,12 +51,12 @@
       color: var(--tertiary-color);
       transition: 0.5s;
       z-index: 99998;
-      font-size: 2rem;
+      font-size: 2.5rem;
     }
 
-      .isActive {
-        right: 0;
-      }
+    .isActive {
+      right: 0;
+    }
 
       .nav-link {
         position: relative;
@@ -64,6 +64,7 @@
         color: inherit;
         margin-left: 1rem;
         font-weight: bold;
+        padding-left: 1rem;
       }
 
       .logout-button {
@@ -83,7 +84,6 @@
           content: "";
           background-color: var(--tertiary-color);
           position: absolute;
-          bottom: 0;
           left: 0;
           width: 3.5px;
           border-radius: 10px;
