@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
-import { FaPowerOff } from 'react-icons/fa';
+import { FaBars } from 'react-icons/fa';
 import { getWindowSize } from '../api/utils';
 import '../styles/header.css';
 
@@ -36,7 +36,7 @@ const Header = () => {
   }, []);
 
   // Close hamburger menu if its open while rotating phone device
-  useEffect(() => {
+  useEffect((showMobileMenu, toggleMenu) => {
     if (windowSize.innerWidth >= 480 && showMobileMenu)
     {
       toggleMenu();
@@ -66,7 +66,7 @@ const Header = () => {
       currentPage.style.transform = 'translateX(-43%)';
     // Returns the page back to normal after closing menu
     } else {
-        setShowMobileMenu(false);
+        // setShowMobileMenu(false);
         document.body.style.position = 'static';
         currentPage.style.transform = 'translateX(0)';
     }
@@ -76,7 +76,7 @@ const Header = () => {
     <div id="header-container">
       <header>
         <Link to="/" id="header-title">frontloggd</Link>
-        <FaPowerOff size="1.5em" className="menu-button" onClick={ toggleMenu }/>
+        <FaBars size="1.75em" className="menu-button" style={ showMobileMenu ? { opacity: 0.7 } : {}} onClick={ toggleMenu }/>
         {/* If the menu is active, display mobile menu version of nav */}
         { showMobileMenu && <div className="menu-mask" onClick={ toggleMenu }></div>}
         <nav className={ showMobileMenu ? "nav-links isActive" : "nav-links"}>
