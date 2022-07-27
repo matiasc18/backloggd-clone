@@ -62,7 +62,7 @@ const Header = () => {
       document.body.style.position = 'fixed';
 
       // Translates the current page left
-      currentPage.style.transition = '0.5s';
+      currentPage.style.transition = '0.56s';
       currentPage.style.transform = 'translateX(-43%)';
     // Returns the page back to normal after closing menu
     } else {

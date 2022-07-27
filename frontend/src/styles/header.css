@@ -63,6 +63,7 @@
         color: inherit;
         padding: 0.35em 0.7em;
         margin-left: 1rem;
+        font-weight: bold;
       }
 
       .nav-link.isActive {
@@ -144,6 +145,10 @@
       margin: 0;
       transition: none;
       visibility: visible;
+    }
+
+    .nav-link {
+      font-weight: normal;
     }
 
       .nav-link, .logout-button {
