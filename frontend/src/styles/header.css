@@ -18,6 +18,7 @@
     width: 90%;
     color: var(--tertiary-color);
     max-width: 1440px;
+    -webkit-tap-highlight-color: transparent;
   }
     
     #header-title {
@@ -30,7 +31,7 @@
       letter-spacing: 2px;
     }
 
-    #header-title:hover {
+    #header-title:active {
       opacity: 0.7;
     }
 
@@ -65,6 +66,9 @@
         margin-left: 1rem;
         font-weight: bold;
         padding-left: 1rem;
+        height: 4rem;
+        display: flex;
+        align-items: center;
       }
 
       .logout-button {
@@ -170,4 +174,11 @@
 /** Laptops and up */
 /*? MINIMUM WIDTH: 60em == 960px */
 @media (min-width: 60em) {
+  #header-title:active {
+    opacity: 1;
+  }
+
+  #header-title:hover {
+    opacity: 0.7;
+  }
 }
