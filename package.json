@@ -7,8 +7,10 @@
   "license": "ISC",
   "scripts": {
     "start": "node backend/server.js",
+    "devStart": "concurrently \"npm run server\" \"npm run frontend\"",
     "server": "nodemon backend/server.js",
     "frontend": "npm start --prefix frontend",
+    "devBuild": "npm run build --prefix frontend",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "dependencies": {

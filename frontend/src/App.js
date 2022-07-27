@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import SignupPage from './pages/SignupPage';
-import HomePage from './pages/HomePage';
+import GamesPage from './pages/GamesPage';
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 
@@ -14,7 +14,7 @@ function App() {
           <Header />
           <Routes>
             <Route path='/' element={<Dashboard />} />
-            <Route path='/games' element={<HomePage />} />
+            <Route path='/games' element={<GamesPage />} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/login' element={<LoginPage />} />
           </Routes>

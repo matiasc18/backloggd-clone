@@ -82,14 +82,14 @@ const Games = () => {
   // Display game cards + page selector (bottom)
   return (
     <>
-      { loading && <LoadingBar />}
       { games.results && 
         <Pagination 
-          gamesPerPage={config.query.limit} 
-          totalGames={games.totalCount} 
-          currentPage={config.query.page} 
-          updatePage={updatePage}
+        gamesPerPage={config.query.limit} 
+        totalGames={games.totalCount} 
+        currentPage={config.query.page} 
+        updatePage={updatePage}
         /> }
+      { loading && <LoadingBar />}
       <div id="games-container">
         { games.results && games.results.map((game) => (
           <div key={game.id} className="game-card">
