@@ -1,5 +1,5 @@
 /*? HomePage container  */
-#home-page {
+#games-page {
   background-color: var(--primary-color);
   color: var(--tertiary-color);
   width: 95%;
@@ -8,7 +8,7 @@
   margin-bottom: 1em;
 }
 
-  #home-page hr {
+  #games-page hr {
     background-color: var(--tertiary-color);
     margin: 0.5em 0 0.75em 0;
     border-radius: 25px;
@@ -17,7 +17,7 @@
     max-width: 100%;
   }
 
-  #home-page h2 {
+  #games-page h2 {
     display: flex;
     justify-content: center;
     margin: 0;
@@ -29,7 +29,7 @@
 /** Tablets and up */
 /*? MINIMUM WIDTH: 30em == 480px */
 @media (min-width: 30em) {
-  #home-page {
+  #games-page {
     width: 90%;
   }
 }
@@ -39,12 +39,12 @@
 /*? MINIMUM WIDTH: 60em == 960px */
 /*? ALT: 64em == 1024px */
 @media (min-width: 60em) {
-  #home-page h2 {
+  #games-page h2 {
     justify-content: flex-start;
     margin-left: 0.5em;
   }
 
-  #home-page hr {
+  #games-page hr {
     margin: 1em 0 1.5em 0;
   }
 }
