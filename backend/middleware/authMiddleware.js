@@ -21,7 +21,13 @@ const protect = asyncHandler(async (req, res, next) => {
 
       // Get user from token
       // Access user from any protected route
-      req.user = await User.findById(decoded.userId);
+      const user = await User.findById(decoded.id);
+      req.user = {
+        id: decoded.id,
+        username: decoded.username,
+        favCount: user.favorites,
+        gameCount: user.games
+      };
 
       next();
     } catch(err) {
