@@ -1,7 +1,7 @@
 // ? Default IGDB query (trending page)
 export const defaultQuery = {
-  fields: 'name, cover.image_id, rating',
-  filter: 'where rating > 78 & rating != null & cover != null & hypes != null',
+  fields: 'name, cover.image_id, rating, first_release_date, genres.name',
+  filter: 'where rating > 78 & rating != null & cover != null & hypes != null & first_release_date != null & genres.name != null & first_release_date != null',
   sort: 'sort hypes desc',
   limit: 30,
   page: 1,
