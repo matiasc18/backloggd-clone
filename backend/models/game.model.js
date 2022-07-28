@@ -4,31 +4,64 @@ const gameSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    required: true
   },
   games: [
     {
       id: {
         type: Number,
       },
-      title: {
+      name: {
         type: String,
       },
-      genre: {
-        type: String,
-      },
-      releaseDate: {
+      genres: [
+        {
+          name: {
+            type: String
+          }
+        }
+      ],
+      first_release_date: {
         type: Date,
       },
       cover: {
-        type: String,
+        image_id: {
+          type: String
+        }
       },
       rating: {
         type: Number,
       }
     },
+    { required: true }
+  ],
+  favorites: [
     {
-      required: true
-    }
+      id: {
+        type: Number,
+      },
+      name: {
+        type: String,
+      },
+      genres: [
+        {
+          name: {
+            type: String
+          }
+        }
+      ],
+      first_release_date: {
+        type: Date,
+      },
+      cover: {
+        image_id: {
+          type: String
+        }
+      },
+      rating: {
+        type: Number,
+      }
+    },
   ]
 });
 

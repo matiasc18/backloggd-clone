@@ -24,7 +24,11 @@ const userSchema = new mongoose.Schema({
     required: false,
     trim: true
   },
-  gamesCount: {
+  favorites: {
+    type: Number,
+    default: 0,
+  },
+  games: {
     type: Number,
     default: 0
   }
