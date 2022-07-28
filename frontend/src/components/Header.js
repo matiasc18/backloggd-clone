@@ -87,6 +87,7 @@ const Header = () => {
             // If the user exists, show the logout button
             <>
               <Link className="nav-link" to="/games" onClick={ toggleMenu }>Games</Link>
+              <Link className="nav-link" to="/" onClick={ toggleMenu }>Profile</Link>
               <span className="nav-link" onClick={ onLogout }>Logout</span>
             </>
           ) : (
