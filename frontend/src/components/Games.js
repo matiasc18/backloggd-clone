@@ -1,62 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { queryBuilder, defaultQuery, imgPath } from '../api/utils';
-import Pagination from './Pagination';
-import LoadingBar from './LoadingBar';
+import React from 'react';
+import { imgPath } from '../api/utils';
+import { useSelector, useDispatch } from 'react-redux';
+import { addGames } from '../features/games/gameSlice.js';
 import '../styles/games.css';
-import axios from '../api/axios';
 
 //TODO Optimize game loading
   //TODO - Fetch all games at once + iterate through locally, rather than fetch every 30 games
 
 //* Render grid of game cards
-const Games = () => { 
-  const [games, setGames] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  //? Axios request config
-  const config = {
-    method: 'post',
-    url: 'games',
-    query: defaultQuery,    // query object
-    data: ''                // request body (stringified query)
-  };
-
-  //? Fetch games from IGDB
-  const fetchGames = async () => {
-    // Games loading...
-    setLoading(true);
-
-    // Build IGDB query string
-    config.data = queryBuilder(config.query);
-
-    try {
-      // Axios request
-      const response = await axios.request(config);
-      
-      // Games done loading...
-      setLoading(false);
-
-      // If there is a response, update games state + scroll to top
-      if (response.status === 200) {
-        setGames(response.data);
-        window.scrollTo(0, 0);
-      }
-    } catch(err) {
-      console.error(err);
-    }
-  }
-
-  //* Initial render + on page change
-  useEffect(() => {
-    config.query.page = currentPage;
-    fetchGames();
-  }, [currentPage]);
-  
-  //* Runs whenever games updates
-  useEffect(() => {
-    console.log(games);
-  }, [games]);
+const Games = ({ games }) => { 
+  const dispatch = useDispatch();
 
   //? Apply correct color based on game rating
   const getRatingColor = (rating) => {
@@ -74,25 +27,15 @@ const Games = () => {
       return { color: 'crimson' };
   }
 
-  //? Updates current page of results
-  const updatePage = async (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const addGame = (game) => {
+    dispatch(addGames([game]));
   };
 
   // Display game cards + page selector (bottom)
   return (
-    <>
-      { games.results && 
-        <Pagination 
-        gamesPerPage={config.query.limit} 
-        totalGames={games.totalCount} 
-        currentPage={config.query.page} 
-        updatePage={updatePage}
-        /> }
-      { loading && <LoadingBar />}
       <div id="games-container">
-        { games.results && games.results.map((game) => (
-          <div key={game.id} className="game-card">
+        { games && games.map((game) => (
+          <div key={game.id} className="game-card" onClick={() => (window.location.pathname === '/games') ? addGame(game) : console.log('Cannot add game')}>
             <img className="game-cover" src={`${imgPath}/${game.cover.image_id}.jpg`} alt={`Cover art for ${game.name}`}/>
             <div className="game-info">
               <span className="game-title">{game.name}</span>
@@ -101,14 +44,6 @@ const Games = () => {
           </div>
         ))}
       </div>
-      { games.results && 
-        <Pagination 
-          gamesPerPage={config.query.limit} 
-          totalGames={games.totalCount} 
-          currentPage={config.query.page} 
-          updatePage={updatePage}
-        /> }
-    </>
   )
 }
 

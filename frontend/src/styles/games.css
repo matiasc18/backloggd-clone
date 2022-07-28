@@ -12,7 +12,12 @@
     border-radius: 10px;
     flex: 1 1 30%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    max-width: 21.76rem;
   }
+
+    .game-card:active {
+      transform: scale(95%);
+    }
 
     .game-info {
       visibility: hidden;
@@ -62,6 +67,11 @@
       transform: scale(1.05);
       transition: 0.3s ease;
       -webkit-transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .game-card:active {
+      transform: scale(1);
     }
 
     .game-cover {
