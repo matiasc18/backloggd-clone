@@ -22,7 +22,7 @@ body {
 }
 
 /* holds header and main */
-.App {
+#App {
   display: grid;
   grid-template-rows: auto 1fr;
   max-width: 100%;

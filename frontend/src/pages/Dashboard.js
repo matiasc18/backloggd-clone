@@ -16,6 +16,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (!user) {
       navigate('/games');
+      return;
     }
 
     dispatch(getFavorites());
@@ -26,7 +27,7 @@ const Dashboard = () => {
     }
   }, [user, navigate, isError, message, dispatch]);
 
-  if (user) return (
+  return (
     <div className="dashboard">
       { user && 
         <div id="bio">

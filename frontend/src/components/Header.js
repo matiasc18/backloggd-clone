@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
 import { FaBars } from 'react-icons/fa';
 import { getWindowSize } from '../api/utils';
-import '../styles/header.css';
+import styles from '../styles/header.module.css';
 
 //TODO Change links to a ul with li of Link
 const Header = () => {
@@ -56,7 +56,7 @@ const Header = () => {
   const toggleMenu = () => {
     if (window.innerWidth < maxMobileWidth) {
       // Current page to be translated left when menu opens
-      const currentPage = document.getElementById('header-container').nextSibling;
+      const currentPage = document.getElementById('App').children.item(1);
       if (!showMobileMenu) {
         setShowMobileMenu(true);
 
@@ -76,30 +76,30 @@ const Header = () => {
   };
 
   return (
-    <div id="header-container">
+    <div id={styles["header-container"]}>
       <header>
-        <Link to="/" id="header-title">frontloggd</Link>
-        <FaBars size="1.75em" className="menu-button" style={ showMobileMenu ? { opacity: 0.7 } : {}} onClick={ toggleMenu }/>
+        <Link to="/" id={styles["header-title"]}>frontloggd</Link>
+        <FaBars size="1.75em" className={styles["menu-button"]} style={ showMobileMenu ? { opacity: 0.7 } : {}} onClick={ toggleMenu }/>
         {/* If the menu is active, display mobile menu version of nav */}
-        { showMobileMenu && <div className="menu-mask" onClick={ toggleMenu }></div>}
-        <nav className={ showMobileMenu ? "nav-links isActive" : "nav-links"}>
+        { showMobileMenu && <div className={styles["menu-mask"]} onClick={ toggleMenu }></div> }
+        <nav className={ showMobileMenu ? `${styles["nav-links"]} ${styles["is-active"]}` : styles["nav-links"]}>
           { user ? (
             // If the user exists, show the logout button
             <>
-              <Link className="nav-link" to="/games" onClick={ toggleMenu }>Games</Link>
-              <Link className="nav-link" to="/" onClick={ toggleMenu }>Profile</Link>
-              <span className="nav-link" onClick={ onLogout }>Logout</span>
+              <Link className={styles["nav-link"]} to="/games" onClick={ toggleMenu }>Games</Link>
+              <Link className={styles["nav-link"]} to="/" onClick={ toggleMenu }>Profile</Link>
+              <span className={styles["nav-link"]} onClick={ onLogout }>Logout</span>
             </>
           ) : (
             // Otherwise, show normal nav
             <>
-              <Link className="nav-link" to="/games" onClick={ toggleMenu }>Games</Link>
-              <Link className="nav-link" to="/login" onClick={ toggleMenu }>Log In</Link>
-              <Link className="nav-link" to="/signup" onClick={ toggleMenu }>Sign Up</Link>
+              <Link className={styles["nav-link"]} to="/games" onClick={ toggleMenu }>Games</Link>
+              <Link className={styles["nav-link"]} to="/login" onClick={ toggleMenu }>Log In</Link>
+              <Link className={styles["nav-link"]} to="/signup" onClick={ toggleMenu }>Sign Up</Link>
             </>)}
         </nav>
       </header>
-    </div>
+    </div>  
   )
 }
 
@@ -114,19 +114,3 @@ export default Header;
 // * FaPowerOff
 // * FaSlidersH
 // * FaSortDown (Down, Up)
-
-// {/* If the menu is active, display mobile menu nav */}
-// { showMobileMenu && <div className="menu-mask" onClick={() => setShowMobileMenu(!showMobileMenu)}></div>}
-// <nav className={showMobileMenu ? "nav-links isActive" : "nav-links"}>
-//   {user ? (
-//     <>
-//       <Link className="header-link" to="/games">Games</Link>
-//       <button className="logout-button" onClick={onLogout}>Logout</button>
-//     </>
-//   ) : (
-//     <>
-//       <Link className="header-link" to="/games">Games</Link>
-//       <Link className="header-link" to="/login">Log In</Link>
-//       <Link className="header-link" to="/signup">Sign Up</Link>
-//     </>)}
-// </nav>

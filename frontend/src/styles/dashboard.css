@@ -1,4 +1,5 @@
 .dashboard {
+  display: grid;
   background-color: var(--primary-color);
   color: var(--tertiary-color);
   color: white;
@@ -6,20 +7,12 @@
   justify-self: center;
   max-width: 75em;
   margin: 1em auto;
+  grid-template-columns: auto 20%;
+  grid-template-rows: auto auto;
+  grid-template-areas: 
+    "bio bio favorites"
+    "games games games";
 }
-
-  #dashboard-greetings {
-    font-size: 2em;
-  }
-  
-  .dashboard hr, #bio hr {
-    background-color: var(--tertiary-color);
-    margin: 0.5em 0 0.75em 0;
-    border-radius: 25px;
-    border: 0;
-    height: 0.5rem;
-    max-width: 100%;
-  }
 
   .dashboard-title {
     display: flex;
@@ -30,8 +23,35 @@
     max-width: 100%;
   }
 
+  .dashboard hr, #bio hr {
+    background-color: var(--tertiary-color);
+    margin: 0.5em 0 0.75em 0;
+    border-radius: 25px;
+    border: 0;
+    height: 0.5rem;
+    max-width: 100%;
+  }
+
+  #bio {
+    display: flex;
+    flex-direction: column;
+    grid-area: bio;
+  }
+
+  #favorites-container {
+    grid-area: favorites;
+  }
+
+  #dashboard-games-container {
+    grid-area: games;
+  }
+
+  #favorites-container #games-container {
+    flex-direction: column;
+  }
+
   #favorites-container > #games-container > .game-card {
-    flex: 1 1 10%;
+    flex: 1 1 5%;
   }
 
 /** Tablets and up */
@@ -62,22 +82,26 @@
       grid-area: bio;
     }
 
-  .dashboard-title {
+    .dashboard-title {
       justify-content: flex-start;
       margin-left: 0.5em;
     }
 
-  .dashboard hr, #bio hr {
-    margin: 1em 0 1.5em 0;
-  }
+    .dashboard hr, #bio hr {
+      margin: 1em 0 1.5em 0;
+    }
 
-  #favorites-container {
-    grid-area: favorites;
-  }
+    #favorites-container {
+      grid-area: favorites;
+    }
 
-    #favorites-container > #games-container > .game-card > .game-info {
+    #favorites-container .game-card > .game-info {
       visibility: hidden;
       display: none;
+    }
+
+    #favorites-container .game-cover {
+      border-radius: 10px;
     }
 
   #dashboard-games-container {
