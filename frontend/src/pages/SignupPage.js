@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { register, reset } from '../features/auth/authSlice';
 import { Link } from 'react-router-dom';
 import LoadingBar from '../components/LoadingBar';
-import signupStyles from '../styles/authPage.module.css';
+// import signupStyles from '../styles/authPage.module.css';
 
 const SignupPage = () => {
   // Form input states + validation states + input focus status states
@@ -124,59 +124,59 @@ const SignupPage = () => {
   };
 
   return (
-    <section id={signupStyles["auth-page"]}>
-      <div id={signupStyles["form-container"]}>
-        <h1 id={signupStyles["auth-title"]}>Register</h1>
-        <form id="signup-form" className={signupStyles["auth-form"]} autoComplete="off" onSubmit={ handleSubmit }>
-          <div className={signupStyles["input-group"]}>
+    <section id="auth-page">
+      <div id="form-container">
+        <h1 id="auth-title">Register</h1>
+        <form id="signup-form" className="auth-form" autoComplete="off" onSubmit={ handleSubmit }>
+          <div className="input-group">
             <input 
               type="text" 
               id="username"
               ref={ userRef }
-              className={signupStyles["auth-input"]} 
+              className="auth-input" 
               placeholder="Username" 
               required
               onChange={(e) => setUsername(e.target.value)}
               onFocus={() => setusernameFocus(true)}
               onBlur={() => setusernameFocus(false)}
             />
-            <label htmlFor="username" className={signupStyles["auth-label"]}>Username</label>
+            <label htmlFor="username" className="auth-label">Username</label>
             {/* Display username requirements until valid username typed */}
             { usernameFocus && !validUsername && 
-              <ul className={signupStyles["input-instructions"]}>
+              <ul className="input-instructions">
                 <li>Must begin with a letter</li>
                 <li>4 to 24 characters</li>
                 <li>Letters, numbers, dashes, underscores</li>
               </ul> 
             }
           </div>
-          <div className={signupStyles["input-group"]}>
+          <div className="input-group">
             <input 
               type="email" 
               id="email" 
-              className={signupStyles["auth-input"]} 
+              className="auth-input" 
               placeholder="Email" 
               autoComplete="on" 
               required 
               onChange={(e) => setEmail(e.target.value)}
             />
-            <label htmlFor="email" className={signupStyles["auth-label"]}>Email</label>
+            <label htmlFor="email" className="auth-label">Email</label>
           </div>
-          <div className={signupStyles["input-group"]}>
+          <div className="input-group">
             <input 
               type="password" 
               id="password"
-              className={signupStyles["auth-input"]} 
+              className="auth-input" 
               placeholder="Password" 
               required 
               onChange={(e) => setPassword(e.target.value)}
               onFocus={() => setPasswordFocus(true)}
               onBlur={() => setPasswordFocus(false)}
             />
-            <label htmlFor="password" className={signupStyles["auth-label"]}>Password</label>
+            <label htmlFor="password" className="auth-label">Password</label>
             {/* Display password requirements until valid password typed */}
             { passwordFocus && !validPassword && 
-              <ul className={signupStyles["input-instructions"]}>
+              <ul className="input-instructions">
                 <li>8 to 24 characters</li>
                 <li>Must contain upper and lowercase letters</li>
                 <li>Must contain at least one number</li>
@@ -184,21 +184,21 @@ const SignupPage = () => {
               </ul> 
             }
           </div>
-          <div className={signupStyles["input-group"]}>
+          <div className="input-group">
             <input 
               type="password" 
               id="confirmPassword" 
-              className={signupStyles["auth-input"]}
+              className="auth-input"
               placeholder="Confirm Password" 
               required 
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <label htmlFor="confirmPassword" className={signupStyles["auth-label"]}>Confirm Password</label>
+            <label htmlFor="confirmPassword" className="auth-label">Confirm Password</label>
           </div>
           {/* If theres an error message, display it */}
-          { errorMessage && <span id={signupStyles["error-message"]}>{ errorMessage }</span> }
+          { errorMessage && <span id="error-message">{ errorMessage }</span> }
           {/* Disable submit button until all fields are filled */}
-          <button id={signupStyles["auth-submit"]} form="signup-form" disabled={(username && email && password && confirmPassword) ? false : true}>Submit</button>
+          <button id="auth-submit" form="signup-form" disabled={(username && email && password && confirmPassword) ? false : true}>Submit</button>
           <span>Already have an account? <Link to="/login">Log In</Link></span>
         </form>
         { isLoading && <LoadingBar /> }

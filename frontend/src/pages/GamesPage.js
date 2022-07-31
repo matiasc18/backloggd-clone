@@ -4,7 +4,7 @@ import Pagination from '../components/Pagination';
 import LoadingBar from '../components/LoadingBar';
 import Games from '../components/Games';
 import axios from '../api/axios';
-import gamesStyles from '../styles/gamesPage.module.css';
+// import gamesStyles from '../styles/gamesPage.module.css';
 
 //TODO Have games fetched in like usser goals instead (from tut)
 const GamesPage = () => {
@@ -53,7 +53,7 @@ const GamesPage = () => {
   
   //* Runs whenever games updates
   useEffect(() => {
-    console.log(games);
+    // console.log(games);
   }, [games]);
 
   //? Updates current page of results
@@ -62,7 +62,7 @@ const GamesPage = () => {
   };
 
   return (
-    <main id={gamesStyles["games-page"]}>
+    <main id="games-page">
       <h2>Trending Games</h2>
       <hr />
       { games.results &&  
@@ -73,8 +73,8 @@ const GamesPage = () => {
         updatePage={updatePage}
         /> }
       { loading && <LoadingBar />}
-      <div id={gamesStyles["games-container"]}>
-        <Games games={games.results}/>
+      <div id="games-container">
+        <Games games={games.results} list={1}/>
       </div>
       { games.results && 
         <Pagination 

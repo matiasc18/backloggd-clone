@@ -1,0 +1,196 @@
+@use 'config' as *;
+
+#dashboard {
+  display: flex;
+  flex-direction: column;
+  background-color: $primary-color;
+  color: $tertiary-color;
+  width: 95%;
+  justify-self: center;
+  max-width: 75em;
+  margin: 1em auto;
+
+  section {
+    h1, h2, h3, h4, h5, h6 {
+      display: flex;
+      justify-content: center;
+      margin: 0;
+      margin-top: 0.7em;
+      max-width: 100%;
+    }
+
+    hr {
+      background-color: $tertiary-color;
+      margin: 0.5em 0 0.75em 0;
+      border-radius: 25px;
+      border: 0;
+      height: 0.5rem;
+      max-width: 100%;
+    }
+  }
+
+  #bio {
+    display: flex;
+    flex-direction: column;
+    grid-area: bio;
+  }
+
+  #dashboard-favorites {
+    grid-area: favorites;
+
+    #user-favorites {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 100%;
+      margin: 0.75em 0;
+      gap: 1rem;
+
+      /*? Game card */
+      .game-card {
+        border-radius: 10px;
+        flex: 1 1 15%;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        max-width: 12rem;
+      }
+
+      .game-card:active {
+        transform: scale(95%);
+      }
+
+      .game-info {
+        visibility: hidden;
+        display: none;
+      }
+
+      .game-cover {
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 3 / 4;
+        border-radius: 10px;
+        object-fit: cover;
+        height: 100%;
+      }
+    }
+  }
+
+  #dashboard-games {
+    grid-area: games;
+
+    .dashboard-title {
+      margin-top: 0.5em;
+    }
+
+    #user-games {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 100%;
+      margin: 0.75em 0;
+      gap: 1rem;
+    }
+  }
+}
+
+//* Tablets and up
+@media (min-width: $tablet) {
+  #dashboard {
+    display: grid;
+    grid-template-columns: 25% auto;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "bio favorites"
+      "games games";
+    width: 90%;
+    column-gap: 3rem;
+
+    section {
+
+      #user-favorites,
+      #user-games {
+        margin: 1em 0.5em;
+      }
+    }
+
+    #bio {
+      grid-area: bio;
+    }
+
+    #dashboard-favorites {
+      grid-area: favorites;
+
+      #user-favorites {
+        .game-card {
+          flex: 1 1 17%;
+        }
+      }
+    }
+
+    #dashboard-games {
+      grid-area: games;
+    }
+  }
+}
+
+//* Laptops and up
+@media (min-width: $desktop) {
+  #dashboard {
+    column-gap: 5rem;
+
+    section {
+      h1, h2, h3, h4, h5, h6 {
+        justify-content: flex-start;
+        margin-left: 0.5em;
+      }
+
+      hr {
+        margin: 1em 0 1.5em 0;
+      }
+    }
+
+    #bio {
+      display: flex;
+      flex-direction: column;
+      grid-area: bio;
+    }
+
+    #dashboard-favorites {
+      #user-favorites {
+        grid-area: favorites;
+        justify-content: center;
+        gap: 2rem;
+        margin: 1.5em 1em;
+
+        .game-card {
+          flex: 1 1 17%;
+          display: grid;
+          grid-template-rows: auto 1fr;
+          border-radius: 10px;
+        }
+
+        .game-card:hover {
+          opacity: 0.6;
+          transform: scale(1.05);
+          transition: 0.3s ease;
+          -webkit-transition: 0.3s ease;
+          cursor: pointer;
+        }
+
+        .game-card:active {
+          transform: scale(1);
+        }
+
+        .game-cover {
+          height: auto;
+        }
+      }
+    }
+
+    #dashboard-games {
+      #user-games {
+        grid-area: games;
+        justify-content: center;
+        gap: 2rem;
+        margin: 1.5em 1em;
+      }
+    }
+  }
+}

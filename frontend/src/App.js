@@ -13,8 +13,8 @@ function App() {
       <div id="App">
           <Header />
           <Routes>
-            <Route path='/' element={<Dashboard />} />
-            <Route path='/games' element={<GamesPage />} />
+            <Route path='/' element={<GamesPage />} />
+            <Route path='/profile' element={<Dashboard />} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/login' element={<LoginPage />} />
           </Routes>

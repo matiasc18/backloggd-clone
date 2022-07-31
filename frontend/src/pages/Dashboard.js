@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Games from '../components/Games';
 import { getFavorites, getUserGames, reset } from '../features/games/gameSlice.js';
-import dashboardStyles from '../styles/dashboard.module.css';
+// import dashboardStyles from '../styles/dashboard.module.css';
 
 const Dashboard = () => {
   // For re-routing
@@ -15,7 +15,7 @@ const Dashboard = () => {
   
   useEffect(() => {
     if (!user) {
-      navigate('/games');
+      navigate('/');
       return;
     }
 
@@ -28,28 +28,27 @@ const Dashboard = () => {
   }, [user, navigate, isError, message, dispatch]);
 
   return (
-    <div className={dashboardStyles["dashboard"]}>
+    <div id="dashboard">
       { user && 
-        <div id={dashboardStyles["bio"]}>
-          <h2 className={dashboardStyles["dashboard-title"]}>Bio</h2>
+        <section id="bio">
+          <h1>{user.username}</h1>
           <hr />
-          <span>{user.username}</span>
-        </div> }
+        </section> }
       { favorites && 
-        <section id={dashboardStyles["dashboard-favorites"]}>
-          <h2 className={dashboardStyles["dashboard-title"]}>Favorites</h2>
+        <section id="dashboard-favorites">
+          <h1>Favorites</h1>
           <hr />
-          <div id={dashboardStyles["favorites-container"]}>
-            <Games games={favorites} favGamesStyles={dashboardStyles}/>
+          <div id="user-favorites">
+            <Games games={favorites} list={1}/>
           </div>
         </section>
       }
       { games && 
-        <section id={dashboardStyles["dashboard-games"]}>
-          <h2 style={{ marginTop: '0.5em' }}className={dashboardStyles["dashboard-title"]}>Games</h2>
+        <section id="dashboard-games">
+          <h1>Games</h1>
           <hr />
-          <div id={dashboardStyles["dashboard-games-container"]}>
-            <Games games={games} />
+          <div id="user-games">
+            <Games games={games} list={2}/>
           </div>
         </section>
       }

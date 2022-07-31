@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { logout, reset } from '../features/auth/authSlice';
 import { FaBars } from 'react-icons/fa';
 import { getWindowSize } from '../api/utils';
-import headerStyles from '../styles/header.module.css';
+// import headerStyles from '../styles/header.module.css';
 
 //TODO Change links to a ul with li of Link
 const Header = () => {
@@ -76,26 +76,26 @@ const Header = () => {
   };
 
   return (
-    <div id={headerStyles["header-container"]}>
+    <div id="header-container">
       <header>
-        <Link to="/" id={headerStyles["header-title"]}>frontloggd</Link>
-        <FaBars size="1.75em" className={headerStyles["menu-button"]} style={ showMobileMenu ? { opacity: 0.7 } : {}} onClick={ toggleMenu }/>
+        <Link to="/" id="header-title">frontloggd</Link>
+        <FaBars size="1.75em" className="menu-button" style={ showMobileMenu ? { opacity: 0.7 } : {}} onClick={ toggleMenu }/>
         {/* If the menu is active, display mobile menu version of nav */}
-        { showMobileMenu && <div className={headerStyles["menu-mask"]} onClick={ toggleMenu }></div> }
-        <nav className={ showMobileMenu ? `${headerStyles["nav-links"]} ${headerStyles["is-active"]}` : headerStyles["nav-links"]}>
+        { showMobileMenu && <div className="menu-mask" onClick={ toggleMenu }></div> }
+        <nav className={ showMobileMenu ? "nav-links is-active" : "nav-links"}>
           { user ? (
             // If the user exists, show the logout button
             <>
-              <Link className={headerStyles["nav-link"]} to="/games" onClick={ toggleMenu }>Games</Link>
-              <Link className={headerStyles["nav-link"]} to="/" onClick={ toggleMenu }>Profile</Link>
-              <span className={headerStyles["nav-link"]} onClick={ onLogout }>Logout</span>
+              <Link className="nav-link" to="/" onClick={ toggleMenu }>Games</Link>
+              <Link className="nav-link" to="/profile" onClick={ toggleMenu }>Profile</Link>
+              <span className="nav-link" onClick={ onLogout }>Logout</span>
             </>
           ) : (
             // Otherwise, show normal nav
             <>
-              <Link className={headerStyles["nav-link"]} to="/games" onClick={ toggleMenu }>Games</Link>
-              <Link className={headerStyles["nav-link"]} to="/login" onClick={ toggleMenu }>Log In</Link>
-              <Link className={headerStyles["nav-link"]} to="/signup" onClick={ toggleMenu }>Sign Up</Link>
+              <Link className="nav-link" to="/" onClick={ toggleMenu }>Games</Link>
+              <Link className="nav-link" to="/login" onClick={ toggleMenu }>Log In</Link>
+              <Link className="nav-link" to="/signup" onClick={ toggleMenu }>Sign Up</Link>
             </>)}
         </nav>
       </header>
