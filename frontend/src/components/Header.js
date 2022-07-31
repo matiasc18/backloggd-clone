@@ -53,6 +53,8 @@ const Header = () => {
     dispatch(logout());
     dispatch(reset());
     setShowMobileMenu(false);
+    const menu = document.getElementById('nav-links');
+    menu.classList.remove('is-active');
     navigate('/');
   };
 
