@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Games from '../components/Games';
 import { getFavorites, getUserGames, reset } from '../features/games/gameSlice.js';
-import '../styles/dashboard.css';
+import dashboardStyles from '../styles/dashboard.module.css';
 
 const Dashboard = () => {
   // For re-routing
@@ -28,26 +28,30 @@ const Dashboard = () => {
   }, [user, navigate, isError, message, dispatch]);
 
   return (
-    <div className="dashboard">
+    <div className={dashboardStyles["dashboard"]}>
       { user && 
-        <div id="bio">
-          <h2 className="dashboard-title">Bio</h2>
+        <div id={dashboardStyles["bio"]}>
+          <h2 className={dashboardStyles["dashboard-title"]}>Bio</h2>
           <hr />
           <span>{user.username}</span>
         </div> }
       { favorites && 
-        <div id="favorites-container">
-          <h2 className="dashboard-title">Favorites</h2>
+        <section id={dashboardStyles["dashboard-favorites"]}>
+          <h2 className={dashboardStyles["dashboard-title"]}>Favorites</h2>
           <hr />
-          <Games games={favorites} />
-        </div>
+          <div id={dashboardStyles["favorites-container"]}>
+            <Games games={favorites} favGamesStyles={dashboardStyles}/>
+          </div>
+        </section>
       }
       { games && 
-        <div id="dashboard-games-container">
-          <h2 className="dashboard-title">Games</h2>
+        <section id={dashboardStyles["dashboard-games"]}>
+          <h2 style={{ marginTop: '0.5em' }}className={dashboardStyles["dashboard-title"]}>Games</h2>
           <hr />
-          <Games games={games} />
-        </div>
+          <div id={dashboardStyles["dashboard-games-container"]}>
+            <Games games={games} />
+          </div>
+        </section>
       }
     </div>
   )

@@ -22,7 +22,7 @@
   bottom: -10px; 
   left: -10px;
 }
-.loader .loaderBar { 
+.loader .loader-bar { 
   position: absolute;
   border-radius: 10px;
   top: 0;
@@ -60,7 +60,7 @@
 /** Tablets and up */
 /*? MINIMUM WIDTH: 30em == 480px */
 @media (min-width: 30em) {
-  .loader .loaderBar {
+  .loader .loader-bar {
     animation: borealisBar 1.5s linear infinite;
   }
 }
@@ -70,7 +70,7 @@
 /*? MINIMUM WIDTH: 60em == 960px */
 /*? ALT: 64em == 1024px */
 @media (min-width: 60em) {
-  .loader .loaderBar {
+  .loader .loader-bar {
     animation: borealisBar 2s linear infinite;
   }
 }

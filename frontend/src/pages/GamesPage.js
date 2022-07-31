@@ -4,7 +4,7 @@ import Pagination from '../components/Pagination';
 import LoadingBar from '../components/LoadingBar';
 import Games from '../components/Games';
 import axios from '../api/axios';
-import '../styles/gamesPage.css';
+import gamesStyles from '../styles/gamesPage.module.css';
 
 //TODO Have games fetched in like usser goals instead (from tut)
 const GamesPage = () => {
@@ -48,6 +48,7 @@ const GamesPage = () => {
           console.error(err);
       }
     })();
+    // eslint-disable-next-line
   }, [currentPage]);
   
   //* Runs whenever games updates
@@ -61,10 +62,10 @@ const GamesPage = () => {
   };
 
   return (
-    <main id="games-page">
+    <main id={gamesStyles["games-page"]}>
       <h2>Trending Games</h2>
       <hr />
-      { games.results && 
+      { games.results &&  
         <Pagination 
         gamesPerPage={config.query.limit} 
         totalGames={games.totalCount} 
@@ -72,7 +73,9 @@ const GamesPage = () => {
         updatePage={updatePage}
         /> }
       { loading && <LoadingBar />}
-      <Games games={games.results}/>
+      <div id={gamesStyles["games-container"]}>
+        <Games games={games.results}/>
+      </div>
       { games.results && 
         <Pagination 
           gamesPerPage={config.query.limit} 

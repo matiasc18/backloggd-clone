@@ -1,11 +1,11 @@
 import React from 'react';
-import '../styles/loadingBar.css';
+import loadingStyles from '../styles/loadingBar.module.css';
 
 const LoadingBar = () => {
   return (
-    <div className="loader-container">
-      <div className="loader">
-        <div className="loaderBar"></div>
+    <div className={loadingStyles["loader-container"]}>
+      <div className={loadingStyles["loader"]}>
+        <div className={loadingStyles["loader-bar"]}></div>
       </div>
     </div>
   )
