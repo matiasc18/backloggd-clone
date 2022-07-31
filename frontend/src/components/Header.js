@@ -23,6 +23,10 @@ const Header = () => {
   // Add event listener (on initial render) for screen size change 
   // To remove hamburger menu if phone is rotated
   useEffect(() => {
+    const menu = document.getElementById('nav-links');
+    if (menu.classList.contains === 'is-active')
+      menu.classList.remove('is-active');
+
     const handleWindowResize = () => {
       setWindowSize(getWindowSize());
     }
@@ -82,7 +86,7 @@ const Header = () => {
         <FaBars size="1.75em" className="menu-button" style={ showMobileMenu ? { opacity: 0.7 } : {}} onClick={ toggleMenu }/>
         {/* If the menu is active, display mobile menu version of nav */}
         { showMobileMenu && <div className="menu-mask" onClick={ toggleMenu }></div> }
-        <nav className={ showMobileMenu ? "nav-links is-active" : "nav-links"}>
+        <nav id="nav-links" className={ showMobileMenu ? "is-active" : ""}>
           { user ? (
             // If the user exists, show the logout button
             <>
