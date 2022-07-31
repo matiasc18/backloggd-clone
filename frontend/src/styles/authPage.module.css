@@ -19,7 +19,7 @@
       text-align: center;
     }
   
-    #auth-form {
+    .auth-form {
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -121,12 +121,12 @@
         transform: scale(95%);
       }
 
-    #auth-form span a {
+    .auth-form span a {
       text-decoration: none;
       color: var(--tertiary-color);
     }
 
-    #auth-form span a:hover {
+    .auth-form span a:hover {
       color: var(--secondary-color);
     }
 
@@ -153,11 +153,10 @@
     font-size: 2.5em;
   }
   
-  #auth-form {
+  .auth-form {
     font-size: 1.2em;
   }
 }
-      
 
 /** Laptops and up */
 /*? MINIMUM WIDTH: 60em == 960px */

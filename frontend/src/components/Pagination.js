@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-import '../styles/pagination.css';
+import paginationStyles from '../styles/pagination.module.css';
 
 const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
 
@@ -14,19 +14,19 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
   if (currentPage <= 3) {
     for (let i = 1; i <= 4; i++) {
       if (i === currentPage)
-        insertion.push(<li key={i} className="page-selector active-page">{i}</li>);
+        insertion.push(<li key={i} className={`${paginationStyles["page-selector"]} ${paginationStyles["active-page"]}`}>{i}</li>);
       else 
-        insertion.push(<li key={i} className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
+        insertion.push(<li key={i} className={paginationStyles["page-selector"]} onClick={() => updatePage(i)}>{i}</li>);
     }
 
     return (
-      <div className="pagination">
-        <ul className="page-list">
-          {currentPage !== 1 ? <li className="page-arrow" onClick={() => updatePage(currentPage - 1)}><FaChevronLeft /></li> : <></>}
+      <div className={paginationStyles["pagination"]}>
+        <ul className={paginationStyles["page-list"]}>
+          {currentPage !== 1 ? <li className={paginationStyles["page-arrow"]} onClick={() => updatePage(currentPage - 1)}><FaChevronLeft /></li> : <></>}
           {insertion}
-          <li className="page-dots"></li>
-          <li className="page-selector" onClick={() => updatePage(totalPages)}>{totalPages}</li>
-          <li className="page-arrow" onClick={() => updatePage(currentPage + 1)}><FaChevronRight /></li>
+          <li className={paginationStyles["page-dots"]}></li>
+          <li className={paginationStyles["page-selector"]} onClick={() => updatePage(totalPages)}>{totalPages}</li>
+          <li className={paginationStyles["page-arrow"]} onClick={() => updatePage(currentPage + 1)}><FaChevronRight /></li>
         </ul>
       </div>
     )

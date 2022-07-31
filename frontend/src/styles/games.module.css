@@ -1,18 +1,14 @@
-/*? Container holding all game cards */
-#games-container {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 100%;
-  margin: 0.75em 0;
-  gap: 1rem;
-}
-
   /*? Game card */
   .game-card {  
     border-radius: 10px;
     flex: 1 1 30%;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    max-width: 14.502rem;
   }
+
+    .game-card:active {
+      transform: scale(95%);
+    }
 
     .game-info {
       visibility: hidden;
@@ -31,12 +27,9 @@
 /** Tablets and up */
 /*? MINIMUM WIDTH: 30em == 480px */
 @media (min-width: 30em) {
-  #games-container {
-    margin: 1em 0.5em;
-  }
-
     .game-card {
       flex: 1 1 18%;
+      max-width: 21.76rem;
     }
 }
 
@@ -45,12 +38,6 @@
 /*? MINIMUM WIDTH: 60em == 960px */
 /*? ALT: 64em == 1024px */
 @media (min-width: 60em) {
-  #games-container {
-    justify-content: center;
-    gap: 2rem;
-    margin: 1.5em 1em;
-  }
-
     .game-card {
       display: grid;
       grid-template-rows: auto 1fr;
@@ -62,6 +49,11 @@
       transform: scale(1.05);
       transition: 0.3s ease;
       -webkit-transition: 0.3s ease;
+      cursor: pointer;
+    }
+
+    .game-card:active {
+      transform: scale(1);
     }
 
     .game-cover {

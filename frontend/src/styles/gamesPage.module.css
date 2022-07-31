@@ -26,11 +26,24 @@
     max-width: 100%;
   }
 
+  /*? Container holding all game cards */
+  #games-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    margin: 0.75em 0;
+    gap: 1rem;
+  }
+
 /** Tablets and up */
 /*? MINIMUM WIDTH: 30em == 480px */
 @media (min-width: 30em) {
   #games-page {
     width: 90%;
+  }
+
+  #games-container {
+    margin: 1em 0.5em;
   }
 }
 
@@ -46,5 +59,11 @@
 
   #games-page hr {
     margin: 1em 0 1.5em 0;
+  }
+
+  #games-container {
+    justify-content: center;
+    gap: 2rem;
+    margin: 1.5em 1em;
   }
 }

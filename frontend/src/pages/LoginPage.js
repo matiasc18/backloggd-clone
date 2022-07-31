@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { login, reset } from '../features/auth/authSlice';
 import { Link } from 'react-router-dom';
 import LoadingBar from '../components/LoadingBar';
-import '../styles/signupPage.css';
+import loginStyles from '../styles/authPage.module.css';
 
 const Login = () => {
   // Form input states
@@ -58,36 +58,36 @@ const Login = () => {
   };
 
   return (
-    <section id="auth-page">
-      <div id="form-container">
-        <h1 id="auth-title">Login</h1>
-        <form id="auth-form" autoComplete="off" onSubmit={ handleSubmit }>
-          <div className="input-group">
+    <section id={loginStyles["auth-page"]}>
+      <div id={loginStyles["form-container"]}>
+        <h1 id={loginStyles["auth-title"]}>Login</h1>
+        <form id="login-form" className={loginStyles["auth-form"]} autoComplete="off" onSubmit={ handleSubmit }>
+          <div className={loginStyles["input-group"]}>
             <input 
               type="text" 
               id="username" 
               ref={ userRef }
-              className="auth-input" 
+              className={loginStyles["auth-input"]} 
               placeholder="Username" 
               required
               onChange={(e) => setUsername(e.target.value)}
             />
-            <label htmlFor="username" className="auth-label">Username</label>
+            <label htmlFor="username" className={loginStyles["auth-label"]}>Username</label>
           </div>
-          <div className="input-group">
+          <div className={loginStyles["input-group"]}>
             <input 
               type="password" 
               id="password"
-              className="auth-input" 
+              className={loginStyles["auth-input"]}
               placeholder="Password" 
               required 
               onChange={(e) => setPassword(e.target.value)}
             />
-            <label htmlFor="password" className="auth-label">Password</label>
+            <label htmlFor="password" className={loginStyles["auth-label"]}>Password</label>
           </div>
           {/* If theres an error message, display it */}
-          { errorMessage && <span id="error-message">{ errorMessage }</span> }
-          <button id="auth-submit" form="auth-form" disabled={(username && password) ? false : true}>Submit</button>
+          { errorMessage && <span id={loginStyles["error-message"]}>{ errorMessage }</span> }
+          <button id={loginStyles["auth-submit"]} form="login-form" disabled={(username && password) ? false : true}>Submit</button>
           <span>Don't have an account? <Link to="/signup">Sign Up</Link></span>
         </form>
         { isLoading && <LoadingBar /> }

@@ -1,6 +1,7 @@
 const Game = require('../models/game.model');
 const User = require('../models/user.model');
 const axios = require('axios');
+const jwt = require('jsonwebtoken');
 
 //? @desc       Get games list from IGDB
 //? @route      POST /games/
@@ -37,76 +38,110 @@ const getGames = async (req, res) => {
 //? @desc       Add game(s) to a user
 //? @route      POST /games/add
 //? @access     Private
-const addUserGame = async (req, res) => {
-  
-  // invalid (default): ''
-  // valid: [{ id, title, genre, releaseDate, cover, rating }]
-  const { games } = req.body;
-  const gamesCount = req.user.gamesCount;
+const addUserGames = async (req, res) => {
+  const games = req.body;
   
   if (games) {
     try {
-      // Create the user's game list
-      if (gamesCount === 0) {
-        await Game.create({
-          user: req.user._id ,
-          games: [
-            {
-              id: games[0].id,
-              title: games[0].title,
-              genre: games[0].genre,
-              releaseDate: games[0].releaseDate,
-              cover: games[0].cover,
-              rating: games[0].rating
-            }
-          ]
-        });
+      const userGames = await Game.findOne({ user: req.user.id});
 
-        // Add remaining games (if there are more games to add)
-        if (games.length > 1)
-          addGames(games, 1, req.user._id);
-      // Update the users game list
-      } else {
-        addGames(games, 0, req.user._id);
+      for (let i = 0; i < games.length; i++) {
+        await userGames.updateOne(
+          { $push: 
+            { games: {
+                id: games[i].id,
+                name: games[i].name,
+                genres: games[i].genres,
+                first_release_date: new Date(games[i].first_release_date * 1000),
+                cover: games[i].cover,
+                rating: Math.ceil(games[i].rating)
+            }
+          }
+        });
       }
 
       // Update the user's total game count
       await User.updateOne(
-        { _id: req.user._id },
-        { $inc: { gamesCount: games.length }}
+        { _id: req.user.id },
+        { $inc: { games: games.length }}
       );
 
       const message = (games.length === 1) ? 
         `1 game successfully added to ${req.user.username}'s backlog!` 
-          : `${games.length } games successfully added to ${req.user.username}'s backlog!`;
+          : `${games.length} games successfully added to ${req.user.username}'s backlog!`;
     
       return res.status(200).json({ message: message });
     } catch(err) {
-        return res.status(400).json({error: err});
+        return res.status(400).json({ error: err });
+    }
+  }
+  return res.status(400).json({ error: 'No body received' });
+};
+
+//? @desc       Get user's games
+//? @route      GET /games/backlog/all
+//? @access     Private
+const getUserGames = async (req, res) => {
+  try {
+    const user = await Game.findOne({ user: req.user.id });
+    return res.status(200).json(user.games);
+  } catch(err) {
+      return res.status(404).json({ err: err.message });
+  }
+};
+
+//? @desc       Get user's favorite games
+//? @route      GET /games/backlog/favorites
+//? @access     Private
+const getFavorites = async (req, res) => {
+  try {
+    const user = await Game.findOne({ user: req.user.id });
+    return res.status(200).json(user.favorites);
+  } catch(err) {
+      return res.status(404).json({err: err.message });
+  }
+};
+
+//? @desc       Add game(s) to a user
+//? @route      POST /games/add
+//? @access     Private
+const addFavorite = async (req, res) => {
+  const { game } = req.body;
+  
+  if (game) {
+    try {
+      const userFavorites = await Game.findOne({ user: req.user.id }).updateOne(
+        { $push: 
+          { favorites: {
+              id: game.id,
+              name: game.name,
+              genres: game.genres,
+              first_release_date: new Date(game.first_release_date * 1000),
+              cover: game.cover,
+              rating: Math.ceil(game.rating)
+            }
+          }
+        });
+
+      // Update the user's total game count
+      await User.updateOne(
+        { _id: req.user.id },
+        { $inc: { favorites: 1 }}
+      );
+    
+      return res.status(200).json({ message: `${req.user.username} added ${game.name} to their favorites!` });
+    } catch(err) {
+        return res.status(400).json({ error: err.message });
     }
   }
   return res.status(400).json({error: 'No body received'});
-};
 
-// Adds all selected games to user's collection
-const addGames = async (games, startIndex, userId) => {
-  for (let i = startIndex; i < games.length; i++) {
-    await Game.find({ user: userId }).update(
-      { $push: 
-        { games: {
-          id: games[i].id,
-          title: games[i].title,
-          genre: games[i].genre,
-          releaseDate: games[i].releaseDate,
-          cover: games[i].cover,
-          rating: games[i].rating
-        }
-      }
-    });
-  }
-}
+};
 
 module.exports = {
   getGames,
-  addUserGame
+  addUserGames,
+  getUserGames,
+  getFavorites,
+  addFavorite
 }

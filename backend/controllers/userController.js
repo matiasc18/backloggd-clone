@@ -1,4 +1,5 @@
 const User = require('../models/user.model.js');
+const Game = require('../models/game.model.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -17,11 +18,19 @@ const registerUser = async (req, res) => {
     const newUser = await User.create({ 
       username, 
       email, 
-      password: hashedPassword 
+      password: hashedPassword,
+      favorites: 0,
+      games: 0
+    });
+
+    await Game.create({
+      user: newUser._id,
+      games: [],
+      favorites: []
     });
 
     // If user successfully created and saved, create a JWT and return it in response
-    return res.status(201).json({ username: username, accessToken: genToken(newUser._id, newUser.gamesCount)});
+    return res.status(201).json({ username: username, accessToken: genToken(newUser._id, username) });
   } catch(err) {
       // Duplicate key (username or email)
       if (err.code === 11000) {
@@ -52,7 +61,7 @@ const loginUser = async (req, res) => {
     }
 
     // If the user exists and password is correct, create a JWT and return it in response
-    return res.status(200).json({ username: username, accessToken: genToken(user._id, user.gamesCount)});
+    return res.status(200).json({ username: username, accessToken: genToken(user._id, username) });
   } catch(err) {  
       // Otherwise, the user doesn't exist or username is wrong
       return res.status(404).json({error: 'Invalid username / password'});
@@ -67,7 +76,6 @@ const getUserInfo = async (req, res) => {
   try {
     // Find user by id and return their data (username and favorite games)
     const user = await User.findById(req.user._id, { username: 1, favorites: 1 });
-    console.log(user);
 
     return res.status(200).json({ user });
   } catch(err) {
@@ -94,11 +102,11 @@ const deleteUser = async (req, res) => {
 };
 
 // Generate JWT with userId as payload
-const genToken = (id, gamesCount) => {
+const genToken = (id, username) => {
   return jwt.sign(
     { 
-      userId: id,
-      gamesCount: gamesCount
+      id: id,
+      username: username
     }, 
     process.env.JWT_SECRET, 
     { expiresIn: '30d'}

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getGames, addUserGame } = require('../controllers/gamesController');
+const { getGames, addUserGames, getUserGames, getFavorites, addFavorite } = require('../controllers/gamesController');
 const { protect } = require('../middleware/authMiddleware');
 
 // * GET: Get all games
@@ -8,6 +8,13 @@ const { protect } = require('../middleware/authMiddleware');
 router.route('/').post(getGames);
 
 // * POST: Add games to a user
-router.route('/add').post(protect, addUserGame);
+router.route('/backlog/add').post(protect, addUserGames);
+
+// * GET: Get all of user's games
+router.route('/backlog/all').get(protect, getUserGames);
+
+// * GET / DELETE
+//? Get all of user's favorite games / Add favorite game to user's backlog
+router.route('/backlog/favorites').get(protect, getFavorites).post(protect, addFavorite);
 
 module.exports = router;

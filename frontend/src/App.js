@@ -10,7 +10,7 @@ import Dashboard from './pages/Dashboard';
 function App() {
   return (
     <BrowserRouter>
-      <div className="App">
+      <div id="App">
           <Header />
           <Routes>
             <Route path='/' element={<Dashboard />} />
