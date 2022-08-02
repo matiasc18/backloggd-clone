@@ -1,5 +1,6 @@
 @use 'authPage';
 @use 'dashboard';
+@use 'gameExpanded';
 @use 'gamesPage';
 @use 'header';
 @use 'pagination';
@@ -22,6 +23,7 @@ body {
   width: 100%;
   font-size: 1.6rem;
   overflow-x: hidden;
+  background-color: $primary-color;
 }
 
 /* holds header and main */
@@ -29,6 +31,5 @@ body {
   display: grid;
   grid-template-rows: auto 1fr;
   max-width: 100%;
-  background-color: $primary-color;
   min-height: 100vh;
 }

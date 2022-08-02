@@ -27,7 +27,7 @@ const Login = () => {
 
   // Clear error message when user edits username/password
   useEffect(() => {
-    setErrorMessage('');
+    // setErrorMessage('');
   }, [username, password]);
 
   // Redux auth state (with user from server response)
@@ -86,7 +86,7 @@ const Login = () => {
             <label htmlFor="password" className="auth-label">Password</label>
           </div>
           {/* If theres an error message, display it */}
-          { errorMessage && <span id="error-message">{ errorMessage }</span> }
+          { errorMessage !== '' && <span id="error-message">{ errorMessage }</span> }
           <button id="auth-submit" form="login-form" disabled={(username && password) ? false : true}>Submit</button>
           <span>Don't have an account? <Link to="/signup">Sign Up</Link></span>
         </form>

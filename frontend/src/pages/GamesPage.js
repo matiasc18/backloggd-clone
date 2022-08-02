@@ -4,7 +4,6 @@ import Pagination from '../components/Pagination';
 import LoadingBar from '../components/LoadingBar';
 import Games from '../components/Games';
 import axios from '../api/axios';
-// import gamesStyles from '../styles/gamesPage.module.css';
 
 //TODO Have games fetched in like usser goals instead (from tut)
 const GamesPage = () => {

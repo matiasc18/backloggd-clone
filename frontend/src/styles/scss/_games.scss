@@ -41,6 +41,7 @@
     display: grid;
     grid-template-rows: auto 1fr;
     border-radius: 10px;
+    max-width: 21.76rem;
 
     &:hover {
       opacity: 0.6;
