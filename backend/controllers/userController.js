@@ -75,9 +75,18 @@ const loginUser = async (req, res) => {
 const getUserInfo = async (req, res) => {
   try {
     // Find user by id and return their data (username and favorite games)
-    const user = await User.findById(req.user._id, { username: 1, favorites: 1 });
+    const user = await User.findById(req.user.id);
 
-    return res.status(200).json({ user });
+    return res.status(200).json({ 
+      gamesCount: user.games, 
+      favCount: user.favorites, 
+      joined: new Date(user.createdAt)
+        .toLocaleDateString('en-US', { 
+          day: 'numeric', 
+          year: 'numeric', 
+          month: 'short' 
+        })}
+    );
   } catch(err) {
     // If the user doesn't exist, return error
     return res.status(404).json({message: 'User not found'});
