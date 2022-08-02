@@ -1,13 +1,13 @@
 // ? Default IGDB query (trending page)
 export const defaultQuery = {
-  fields: 'name, cover.image_id, rating, first_release_date, genres.name',
-  filter: 'where rating > 78 & rating != null & cover != null & hypes != null & first_release_date != null & genres.name != null & first_release_date != null',
+  fields: 'name, cover.image_id, rating, first_release_date, genres.name, screenshots.image_id, summary',
+  filter: 'where rating > 78 & rating != null & cover != null & hypes != null & first_release_date != null & genres.name != null & first_release_date != null & summary != null',
   sort: 'sort hypes desc',
   limit: 30,
   page: 1,
   search: '',
 }
-  
+
 // ? IGDB query buiilder
 // ? Takes in query object and constructs IGDB query string
 export const queryBuilder = (query) => {
@@ -16,9 +16,9 @@ export const queryBuilder = (query) => {
   qs += `${(query.sort !== 'sort ') ? query.sort + '; ' : ''}`;
   qs += `${(query.page !== 1) ? 'offset ' + (query.page * query.limit) + '; ' : ''}`;
   qs += `${(query.search.trim() !== '') ? 'search "' + query.search.trim() + '";' : ''}`;
-  
+
   // console.log(qs);
-  const finalQuery = {query: query, queryString: qs.trim()};
+  const finalQuery = { query: query, queryString: qs.trim() };
   return finalQuery;
 };
 
@@ -37,4 +37,20 @@ export const EMAIL_REGEX = /^([a-zA-Z\d\.-]+)@([a-zA-Z\d-]+)\.([a-z]{2,8})(\.[a-
 export const getWindowSize = () => {
   const { innerWidth, innerHeight } = window;
   return { innerWidth, innerHeight };
+}
+
+//? Apply correct color based on game rating
+export const getRatingColor = (rating) => {
+  if (rating >= 95)
+    return { backgroundColor: 'gold', color: 'black' };
+  else if (rating >= 90)
+    return { color: 'lime' };
+  else if (rating >= 80)
+    return { color: 'limegreen' };
+  else if (rating >= 70)
+    return { color: 'yellow' };
+  else if (rating >= 60)
+    return { color: 'orange' };
+  else
+    return { color: 'crimson' };
 }
