@@ -92,7 +92,7 @@ const Header = () => {
         <Link to="/" id="header-title" onClick={resetHeader}>frontloggd</Link>
         <FaBars size="1.75em" className="menu-button" style={showMobileMenu ? { opacity: 0.7 } : {}} onClick={toggleMenu} />
         {/* If the menu is active, display mobile menu version of nav */}
-        {showMobileMenu && <div className="menu-mask" onClick={toggleMenu}></div>}
+        {showMobileMenu && <div id="menu-mask" onClick={toggleMenu}></div>}
         <nav id="nav-links" className={showMobileMenu ? "is-active" : ""}>
           {user ? (
             // If the user exists, show the logout button

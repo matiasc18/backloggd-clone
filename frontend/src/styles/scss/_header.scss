@@ -37,11 +37,11 @@ header {
   }
 }
 
-.menu-mask {
+#menu-mask {
   position: fixed;
   top: 0;
+  width: 60%;
   left: 0;
-  width: 100%;
   opacity: 0.5;
   min-height: 100vh;
   margin-top: 3.25em;
@@ -159,7 +159,7 @@ header {
     }
   }
 
-  .menu-mask {
+  #menu-mask {
     visibility: hidden;
     display: none;
   }
