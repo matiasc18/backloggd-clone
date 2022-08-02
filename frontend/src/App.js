@@ -5,19 +5,21 @@ import SignupPage from './pages/SignupPage';
 import GamesPage from './pages/GamesPage';
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
+import GameExpanded from './pages/GameExpanded';
 
 // If something breaks, try putting className="App" outside of BrowserRouter (like it was before)
 function App() {
   return (
     <BrowserRouter>
       <div id="App">
-          <Header />
-          <Routes>
-            <Route path='/' element={<GamesPage />} />
-            <Route path='/profile' element={<Dashboard />} />
-            <Route path='/signup' element={<SignupPage />} />
-            <Route path='/login' element={<LoginPage />} />
-          </Routes>
+        <Header />
+        <Routes>
+          <Route path='/' element={<GamesPage />} />
+          <Route path='/games/:id' element={<GameExpanded />} />
+          <Route path='/profile' element={<Dashboard />} />
+          <Route path='/signup' element={<SignupPage />} />
+          <Route path='/login' element={<LoginPage />} />
+        </Routes>
       </div>
     </BrowserRouter>
   );
