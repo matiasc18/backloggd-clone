@@ -444,6 +444,7 @@
   }
   #game-expanded #game .game-details {
     margin-top: auto;
+    text-align: initial;
     margin-bottom: 5rem;
   }
   #game-expanded #game .game-details h1 {
