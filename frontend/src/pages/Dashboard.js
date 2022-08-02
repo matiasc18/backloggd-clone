@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import Games from '../components/Games';
-import { getFavorites, getUserGames, reset } from '../features/games/gameSlice.js';
+import { getUser, getFavorites, getUserGames, reset } from '../features/user/userSlice.js';
 // import dashboardStyles from '../styles/dashboard.module.css';
 
 const Dashboard = () => {
@@ -11,47 +11,50 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
-  const { games, favorites, isError, message } = useSelector((state) => state.games);
-  
+  const { userInfo, games, favorites } = useSelector((state) => state.user);
+  // const { games, favorites, isError, message } = useSelector((state) => state.games);
+
   useEffect(() => {
     if (!user) {
       navigate('/');
       return;
     }
 
+    dispatch(getUser());
     dispatch(getFavorites());
     dispatch(getUserGames());
 
     return () => {
       dispatch(reset());
     }
-  }, [user, navigate, isError, message, dispatch]);
+  }, [user, navigate, dispatch]);
+
+  useEffect(() => {
+  }, [userInfo]);
 
   return (
     <div id="dashboard">
-      { user && 
-        <section id="bio">
-          <h1>{user.username}</h1>
-          <hr />
-        </section> }
-      { favorites && 
-        <section id="dashboard-favorites">
-          <h1>Favorites</h1>
-          <hr />
-          <div id="user-favorites">
-            <Games games={favorites} list={1}/>
-          </div>
-        </section>
-      }
-      { games && 
-        <section id="dashboard-games">
-          <h1>Games</h1>
-          <hr />
-          <div id="user-games">
-            <Games games={games} list={2}/>
-          </div>
-        </section>
-      }
+      <section id="bio">
+        <h2>{ user.username }</h2>
+        <hr />
+        <span>Joined on { userInfo.joined }</span>
+        {/* <span>Games: { userInfo.gamesCount }</span> */}
+        {/* <span>Favorites: { userInfo.favCount }</span> */}
+      </section>
+      <section id="dashboard-favorites">
+        <h2>Favorites</h2>
+        <hr />
+        <div id="user-favorites">
+          <Games games={ favorites } list={1} />
+        </div>
+      </section>
+      <section id="dashboard-games">
+        <h2>Games</h2>
+        <hr />
+        <div id="user-games">
+          <Games games={ games } list={2} />
+        </div>
+      </section>
     </div>
   )
 }
