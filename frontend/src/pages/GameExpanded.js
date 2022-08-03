@@ -9,20 +9,17 @@ import { getRatingColor } from '../api/utils';
 function GameExpanded() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { game, isLoading, isSuccess } = useSelector((state) => state.game);
+  const { game, isSuccess } = useSelector((state) => state.game);
 
   useEffect(() => {
     dispatch(getGame(id));
   }, []);
 
   useEffect(() => {
-    if (!isLoading) {
-      const header = document.getElementById('header-container');
-      header.style.background = 'transparent';
-      console.log(game.cover);
-      console.log(isLoading);
-    }
-  }, [game]);
+    const header = document.getElementById('header-container');
+    header.classList.add('is-active-game');
+    console.log(header);
+  }, [isSuccess]);
 
   const chooseScreenshot = () => {
     return Math.floor(Math.random() * game.screenshots.length);
@@ -34,27 +31,23 @@ function GameExpanded() {
 
   return (
     <>
-      {isSuccess && 
-        <div id="game-expanded">
+      {isSuccess && <>
+        <main id="game-expanded">
           <div id="game">
             <div className="game-card">
               <img className="game-cover" src={`${imgPath}/${game.cover.image_id}.jpg`} alt={`Cover art for ${game.name}`} />
-              <div className="game-info">
-                <span className="game-title">{game.name}</span>
-                <span className="game-rating" style={getRatingColor(Math.floor(game.rating))}>{Math.floor(game.rating)}</span>
-              </div>
             </div>
-          <div className="game-details">
-            <h1>{game.name}</h1>
-            <p className="game-date">released on <strong>{game.first_release_date}</strong></p>
-            <span id="add-game" onClick={addGame}>Add Game</span>
-            <p className="game-summary">{game.summary}</p>
+            <div className="game-details">
+              <h1>{game.name}</h1>
+              <p className="game-date">released on <strong>{game.first_release_date}</strong></p>
+              <span id="add-game" onClick={addGame}>Add Game</span>
+              <p className="game-summary">{game.summary}</p>
+            </div>
           </div>
-          </div>
-          <img className="game-background" src={`${imgPath}/${game.screenshots[chooseScreenshot()].image_id}.jpg`}></img>
-          <div className="gradient"></div>
-        </div>
-      }
+        </main>
+        <div className="gradient"></div>
+        <img className="game-background" src={`${imgPath}/${game.screenshots[chooseScreenshot()].image_id}.jpg`}></img>
+      </>}
     </>
   )
 }

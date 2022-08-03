@@ -33,7 +33,7 @@ const Dashboard = () => {
   }, [userInfo]);
 
   return (
-    <div id="dashboard">
+    <main id="dashboard">
       <section id="bio">
         <h2>{ user.username }</h2>
         <hr />
@@ -55,7 +55,7 @@ const Dashboard = () => {
           <Games games={ games } list={2} />
         </div>
       </section>
-    </div>
+    </main>
   )
 }
 

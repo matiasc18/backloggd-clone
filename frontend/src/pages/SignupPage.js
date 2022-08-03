@@ -124,7 +124,7 @@ const SignupPage = () => {
   };
 
   return (
-    <section id="auth-page">
+    <main id="auth-page">
       <div id="form-container">
         <h1 id="auth-title">Register</h1>
         <form id="signup-form" className="auth-form" autoComplete="off" onSubmit={ handleSubmit }>
@@ -203,7 +203,7 @@ const SignupPage = () => {
         </form>
         { isLoading && <LoadingBar /> }
       </div>
-    </section>
+    </main>
   )
 };
 

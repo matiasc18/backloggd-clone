@@ -58,7 +58,7 @@ const Login = () => {
   };
 
   return (
-    <section id="auth-page">
+    <main id="auth-page">
       <div id="form-container">
         <h1 id="auth-title">Login</h1>
         <form id="login-form" className="auth-form" autoComplete="off" onSubmit={ handleSubmit }>
@@ -92,7 +92,7 @@ const Login = () => {
         </form>
         { isLoading && <LoadingBar /> }
       </div>
-    </section>
+    </main>
   )
 }
 
