@@ -18,10 +18,10 @@ const getGames = async (req, res) => {
   // Return list of all games + total game count
   try {
     const gamesResponse = await igdb.request(config);
-    const countResponse = await igdb.request({...config, url: '/games/count', data: `${req.body.query.filter};`});
+    const countResponse = await igdb.request({ ...config, url: '/games/count', data: `${req.body.query.filter};` });
 
-    return res.json({totalCount: countResponse.data.count, results: gamesResponse.data});
-  } catch(err) {
+    return res.status(200).json({ totalCount: countResponse.data.count, results: gamesResponse.data });
+  } catch (err) {
     return res.status(400).json(err);
   }
 };
@@ -40,14 +40,14 @@ const getGameDetails = async (req, res) => {
     const response = await igdb.request(config);
 
     response.data[0].first_release_date = new Date(response.data[0].first_release_date * 1000)
-    .toLocaleDateString('en-US', { 
-      day: 'numeric', 
-      year: 'numeric', 
-      month: 'short' 
-    });
+      .toLocaleDateString('en-US', {
+        day: 'numeric',
+        year: 'numeric',
+        month: 'short'
+      });
 
-      return res.status(200).json(response.data[0]);
-  } catch(err) {
+    return res.status(200).json(response.data[0]);
+  } catch (err) {
     return res.status(400).json(err);
   }
 };
@@ -57,39 +57,41 @@ const getGameDetails = async (req, res) => {
 //? @access     Private
 const addUserGames = async (req, res) => {
   const games = req.body;
-  
+
   if (games) {
     try {
-      const userGames = await Game.findOne({ user: req.user.id});
+      const userGames = await Game.findOne({ user: req.user.id });
 
       for (let i = 0; i < games.length; i++) {
         await userGames.updateOne(
-          { $push: 
-            { games: {
+          {
+            $push:
+            {
+              games: {
                 id: games[i].id,
                 name: games[i].name,
                 genres: games[i].genres,
                 first_release_date: new Date(games[i].first_release_date * 1000),
                 cover: games[i].cover,
                 rating: Math.ceil(games[i].rating)
+              }
             }
-          }
-        });
+          });
       }
 
       // Update the user's total game count
       await User.updateOne(
         { _id: req.user.id },
-        { $inc: { games: games.length }}
+        { $inc: { games: games.length } }
       );
 
-      const message = (games.length === 1) ? 
-        `1 game successfully added to ${req.user.username}'s backlog!` 
-          : `${games.length} games successfully added to ${req.user.username}'s backlog!`;
-    
+      const message = (games.length === 1) ?
+        `1 game successfully added to ${req.user.username}'s backlog!`
+        : `${games.length} games successfully added to ${req.user.username}'s backlog!`;
+
       return res.status(200).json({ message: message });
-    } catch(err) {
-        return res.status(400).json({ error: err });
+    } catch (err) {
+      return res.status(400).json({ error: err });
     }
   }
   return res.status(400).json({ error: 'No body received' });
@@ -102,8 +104,8 @@ const getUserGames = async (req, res) => {
   try {
     const user = await Game.findOne({ user: req.user.id });
     return res.status(200).json(user.games);
-  } catch(err) {
-      return res.status(404).json({ err: err.message });
+  } catch (err) {
+    return res.status(404).json({ err: err.message });
   }
 };
 
@@ -114,8 +116,8 @@ const getFavorites = async (req, res) => {
   try {
     const user = await Game.findOne({ user: req.user.id });
     return res.status(200).json(user.favorites);
-  } catch(err) {
-      return res.status(404).json({err: err.message });
+  } catch (err) {
+    return res.status(404).json({ err: err.message });
   }
 };
 
@@ -124,12 +126,14 @@ const getFavorites = async (req, res) => {
 //? @access     Private
 const addFavorite = async (req, res) => {
   const { game } = req.body;
-  
+
   if (game) {
     try {
       const userFavorites = await Game.findOne({ user: req.user.id }).updateOne(
-        { $push: 
-          { favorites: {
+        {
+          $push:
+          {
+            favorites: {
               id: game.id,
               name: game.name,
               genres: game.genres,
@@ -143,15 +147,15 @@ const addFavorite = async (req, res) => {
       // Update the user's total game count
       await User.updateOne(
         { _id: req.user.id },
-        { $inc: { favorites: 1 }}
+        { $inc: { favorites: 1 } }
       );
-    
+
       return res.status(200).json({ message: `${req.user.username} added ${game.name} to their favorites!` });
-    } catch(err) {
-        return res.status(400).json({ error: err.message });
+    } catch (err) {
+      return res.status(400).json({ error: err.message });
     }
   }
-  return res.status(400).json({error: 'No body received'});
+  return res.status(400).json({ error: 'No body received' });
 
 };
 

@@ -13,7 +13,7 @@ const Games = ({ games, list }) => {
   const dispatch = useDispatch();
 
   const openGame = (game) => {
-    navigate(`/games/${game.id}`);
+    navigate(`/game-details/${game.id}`);
   };
 
   // Display game cards + page selector (bottom)
