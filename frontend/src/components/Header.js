@@ -5,37 +5,36 @@ import { logout, reset } from '../features/auth/authSlice';
 import { reset as resetGame } from '../features/games/gameSlice.js';
 import { FaBars } from 'react-icons/fa';
 import { getWindowSize } from '../api/utils';
-import e from 'cors';
 
 //TODO Change links to a ul with li of Link
 const Header = () => {
-  const { user } = useSelector((state) => state.auth);
-  const [isGamePage, setIsGamePage] = useState(false);
   const maxMobileWidth = 480;
+
+  const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
-
   // Keeps track of the device's current window size
   const [windowSize, setWindowSize] = useState(getWindowSize());
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  // Add event listener for screen size change 
-  // To remove hamburger menu if phone is rotated
+  // Initial render
   useEffect(() => {
     const menu = document.getElementById('nav-links');
     if (menu.classList.contains === 'is-active')
       menu.classList.remove('is-active');
 
-    const handleWindowResize = () => {
+    // Add event listener for screen size change (runs whenever window size changes)
+    window.addEventListener('resize', () => {
       setWindowSize(getWindowSize());
-    }
-
-    //? resize is fired whenever the window has been resized
-    window.addEventListener('resize', handleWindowResize);
+    });
 
     // Remove event listener when component dismounts
-    return () => { window.removeEventListener('resize', handleWindowResize); }
+    return () => {
+      window.removeEventListener('resize', () => {
+        setWindowSize(getWindowSize());
+      });
+    }
   }, []);
 
   // Close hamburger menu if its open while rotating phone device
@@ -45,16 +44,14 @@ const Header = () => {
     }
   }, [windowSize]);
 
+  // Runs whenever user clicks on hamburger menu button
   useEffect(() => {
     const menu = document.getElementById('nav-links');
-    if ((/^\/games\/[0-9]+$/).test(window.location.pathname))
-      menu.classList.add('is-active-game');
-
+    
     if (showMobileMenu)
       menu.classList.add('is-active');
     else
       menu.classList.remove('is-active');
-    setIsGamePage(true);
   }, [showMobileMenu]);
 
   // Logout, reset user state, close the menu (if on mobile), and go to homepage
@@ -62,16 +59,15 @@ const Header = () => {
     setShowMobileMenu(false);
     dispatch(logout());
     dispatch(reset());
+    resetHeader();
     navigate('/');
   };
 
   // Opens/closes mobile hamburger menu
   const toggleMenu = () => {
-    console.log(document.getElementById('nav-links'));
     if (window.innerWidth < maxMobileWidth) {
       // Current page to be translated left when menu opens
       const currentPage = document.getElementById('App').children.item(1);
-      console.log(currentPage);
       if (!showMobileMenu) {
         setShowMobileMenu(true);
 
@@ -82,7 +78,8 @@ const Header = () => {
         currentPage.style.transition = '0.56s';
         currentPage.style.transform = 'translateX(-43%)';
         // Returns the page back to normal after closing menu
-      } else {
+      } 
+      else {
         setShowMobileMenu(false);
         document.body.style.position = 'static';
         currentPage.style.transform = 'translateX(0)';
@@ -90,13 +87,11 @@ const Header = () => {
     }
   };
 
+  // Runs whenever user exits expanded game page (removes blur)
   const resetHeader = () => {
-    document.getElementById('header-container').classList.remove('is-active');
     document.getElementById('header-container').classList.remove('is-active-game');
     document.getElementById('nav-links').classList.remove('is-active-game');
-    document.getElementById('nav-links').classList.remove('is-active');
     dispatch(resetGame());
-    setIsGamePage(false);
   };
 
   return (
@@ -108,13 +103,13 @@ const Header = () => {
           {/* If the menu is active, display mobile menu version of nav */}
           <div id="menu-mask" className={showMobileMenu ? "is-active" : ""} onClick={toggleMenu}></div>
           <nav id="nav-links">
-            <div className="mask"></div>
+            <div className="blur"></div>
             {user ? (
               // If the user exists, show the logout button
               <>
                 <Link className="nav-link" to="/" onClick={() => { toggleMenu(); resetHeader(); }}>Games</Link>
                 <Link className="nav-link" to="/profile" onClick={() => { toggleMenu(); resetHeader(); }}>Profile</Link>
-                <span className="nav-link" onClick={() => { onLogout(); resetHeader(); }}>Logout</span>
+                <span className="nav-link" onClick={onLogout}>Logout</span>
               </>
             ) : (
               // Otherwise, show normal nav
@@ -125,7 +120,7 @@ const Header = () => {
               </>)}
           </nav>
         </header>
-        { isGamePage && <div className="mask"></div>}
+        <div className="blur"></div>
       </div>
     </>
   )
