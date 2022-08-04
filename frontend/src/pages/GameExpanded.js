@@ -10,6 +10,7 @@ function GameExpanded() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { game, isSuccess } = useSelector((state) => state.game);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     dispatch(getGame(id));
@@ -17,8 +18,11 @@ function GameExpanded() {
 
   // Once game is successfully loaded
   useEffect(() => {
-    document.getElementById('header-container').classList.add('is-active-game');
-    document.getElementById('nav-links').classList.add('is-active-game');
+    if (isSuccess) {
+      document.getElementById('header-container').classList.add('is-active-game');
+      document.getElementById('nav-links').classList.add('is-active-game');
+      setLoaded(true);
+    }
   }, [isSuccess]);
 
   const chooseScreenshot = () => {
@@ -31,7 +35,7 @@ function GameExpanded() {
 
   return (
     <>
-      {game != {} && isSuccess && <>
+      {loaded && <>
         <main id="game-expanded">
           <div id="game">
             <div className="game-card">
