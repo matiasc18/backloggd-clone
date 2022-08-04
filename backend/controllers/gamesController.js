@@ -46,7 +46,7 @@ const getGameDetails = async (req, res) => {
       month: 'short' 
     });
 
-    return res.json(response.data[0]);
+      return res.json({hello: 'hello'});
   } catch(err) {
     return res.status(400).json(err);
   }
