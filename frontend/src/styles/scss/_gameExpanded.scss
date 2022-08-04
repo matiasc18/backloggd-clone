@@ -27,7 +27,7 @@
   flex-direction: column;
   align-items: center;
   color: $tertiary-color;
-  min-height: 100%;
+  max-height: 100%;
   width: 100%;
   z-index: 100;
 
@@ -100,7 +100,6 @@
 @media (min-width: $tablet) {
   #game-expanded {
     color: $tertiary-color;
-    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -183,4 +182,8 @@
 }
 
 //* Laptops and up
-@media (min-width: $desktop) {}
+@media (min-width: $desktop) {
+  #game-expanded {
+    justify-content: flex-end;
+  }
+}

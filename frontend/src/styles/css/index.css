@@ -600,7 +600,7 @@ header #header-title:active {
   flex-direction: column;
   align-items: center;
   color: rgb(207, 207, 207);
-  min-height: 100%;
+  max-height: 100%;
   width: 100%;
   z-index: 100;
 }
@@ -662,7 +662,6 @@ header #header-title:active {
 @media (min-width: 30em) {
   #game-expanded {
     color: rgb(207, 207, 207);
-    min-height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -728,6 +727,11 @@ header #header-title:active {
   #game-expanded #game .game-details .game-summary {
     line-height: 2rem;
     margin-left: 0.5rem;
+  }
+}
+@media (min-width: 60em) {
+  #game-expanded {
+    justify-content: flex-end;
   }
 }
 /*? HomePage container  */
