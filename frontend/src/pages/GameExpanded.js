@@ -15,10 +15,10 @@ function GameExpanded() {
     dispatch(getGame(id));
   }, []);
 
+  // Once game is successfully loaded
   useEffect(() => {
-    const header = document.getElementById('header-container');
-    header.classList.add('is-active-game');
-    console.log(header);
+    document.getElementById('header-container').classList.add('is-active-game');
+    document.getElementById('nav-links').classList.add('is-active-game');
   }, [isSuccess]);
 
   const chooseScreenshot = () => {
@@ -26,7 +26,7 @@ function GameExpanded() {
   };
 
   const addGame = () => {
-    dispatch(addGames([game]));
+    dispatch(addGames([{game}]));
   };
 
   return (
