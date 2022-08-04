@@ -418,7 +418,6 @@
   box-shadow: none;
 }
 #header-container .blur {
-  background: transparent;
   position: absolute;
   width: 100%;
   height: 100%;
@@ -486,7 +485,6 @@ header #header-title:active {
   color: rgb(207, 207, 207);
   transition: 0.5s;
   font-size: 2.5rem;
-  z-index: 1001;
 }
 #nav-links.is-active {
   right: 0;
@@ -618,6 +616,9 @@ header #header-title:active {
 #game-expanded #game .game-card {
   max-width: 20rem;
 }
+#game-expanded #game .game-card:active {
+  transform: none;
+}
 #game-expanded #game .game-card .game-cover {
   border-radius: 10px;
 }
@@ -628,19 +629,37 @@ header #header-title:active {
 }
 #game-expanded #game .game-details h1 {
   margin-bottom: 0;
+  font-size: 3rem;
 }
 #game-expanded #game .game-details .game-date {
   margin: 0;
   margin-bottom: 0.5rem;
   margin-left: 0.5rem;
+  margin-top: 0.5rem;
   font-size: 0.75em;
+  font-style: italic;
 }
 #game-expanded #game .game-details .game-summary {
   line-height: 2rem;
   margin-left: 0.5rem;
 }
+#game-expanded #game .game-details #add-game {
+  background-color: rgb(48, 75, 164);
+  color: rgb(207, 207, 207);
+  margin: 0;
+  padding: 0.35em 0.7em;
+  border-radius: 10px;
+  letter-spacing: 0.25px;
+  border: none;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#game-expanded #game .game-details #add-game:active {
+  background-color: rgb(207, 207, 207);
+  color: rgb(48, 75, 164);
+  transform: scale(95%);
+}
 
-@media (min-width: 60em) {
+@media (min-width: 30em) {
   #game-expanded {
     color: rgb(207, 207, 207);
     min-height: 100%;

@@ -13,7 +13,8 @@
 }
 
 .gradient {
-  position: absolute;;
+  position: absolute;
+  ;
   height: 65%;
   width: 100%;
   top: 0;
@@ -32,7 +33,6 @@
 
   #game {
     box-sizing: border-box;
-    // border: 1px red solid;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -43,6 +43,10 @@
     .game-card {
       max-width: 20rem;
 
+      &:active {
+        transform: none;
+      }
+
       .game-cover {
         border-radius: 10px;
       }
@@ -50,34 +54,50 @@
 
     .game-details {
       margin-top: auto;
-      // margin-right: 20rem;
       text-align: center;
       margin-bottom: 5rem;
 
       h1 {
         margin-bottom: 0;
+        font-size: 3rem;
       }
 
       .game-date {
         margin: 0;
         margin-bottom: 0.5rem;
         margin-left: 0.5rem;
+        margin-top: 0.5rem;
         font-size: 0.75em;
+        font-style: italic;
       }
 
       .game-summary {
         line-height: 2rem;
         margin-left: 0.5rem;
       }
+
+      #add-game {
+        background-color: $secondary-color;
+        color: $tertiary-color;
+        margin: 0;
+        padding: 0.35em 0.7em;
+        border-radius: 10px;
+        letter-spacing: 0.25px;
+        border: none;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+        &:active {
+          background-color: $tertiary-color;
+          color: $secondary-color;
+          transform: scale(95%);
+        }
+      }
     }
   }
 }
 
 //* Tablets and up
-@media (min-width: $tablet) {}
-
-//* Laptops and up
-@media (min-width: $desktop) {
+@media (min-width: $tablet) {
   #game-expanded {
     color: $tertiary-color;
     min-height: 100%;
@@ -161,3 +181,6 @@
     }
   }
 }
+
+//* Laptops and up
+@media (min-width: $desktop) {}

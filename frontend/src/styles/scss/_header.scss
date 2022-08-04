@@ -13,11 +13,10 @@
 
   &.is-active-game, .is-active-game {
     background: transparent;
-    box-shadow: none;
+    box-shadow: none; 
   }
 
   .blur {
-    background: transparent;
     position: absolute;
     width: 100%;
     height: 100%;
@@ -89,7 +88,6 @@ header {
   color: $tertiary-color;
   transition: 0.5s;
   font-size: 2.5rem;
-  z-index: 1001;
 
   &.is-active {
     right: 0;

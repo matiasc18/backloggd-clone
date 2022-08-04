@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { imgPath } from '../api/utils';
+import { getWindowSize, imgPath } from '../api/utils';
 import { useSelector, useDispatch } from 'react-redux';
 import { getGame } from '../features/games/gameSlice.js';
 import { addGames } from '../features/user/userSlice';
@@ -26,7 +26,7 @@ function GameExpanded() {
   };
 
   const addGame = () => {
-    dispatch(addGames([{game}]));
+    // dispatch(addGames([{ game }]));
   };
 
   return (
@@ -40,8 +40,8 @@ function GameExpanded() {
             <div className="game-details">
               <h1>{game.name}</h1>
               <p className="game-date">released on <strong>{game.first_release_date}</strong></p>
-              <span id="add-game" onClick={addGame}>Add Game</span>
               <p className="game-summary">{game.summary}</p>
+              <button id="add-game" onClick={addGame}>Add Game</button>
             </div>
           </div>
         </main>

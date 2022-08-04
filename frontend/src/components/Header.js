@@ -91,6 +91,7 @@ const Header = () => {
   const resetHeader = () => {
     document.getElementById('header-container').classList.remove('is-active-game');
     document.getElementById('nav-links').classList.remove('is-active-game');
+    document.getElementById('nav-links').classList.remove('is-active');
     dispatch(resetGame());
   };
 
