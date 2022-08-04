@@ -690,7 +690,7 @@ header #header-title:active {
     box-sizing: border-box;
     display: grid;
     width: 80%;
-    grid-template-columns: auto 2fr 1fr;
+    grid-template-columns: auto 2fr;
     grid-template-rows: 100%;
     align-items: center;
     max-height: 100%;

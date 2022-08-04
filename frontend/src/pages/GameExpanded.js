@@ -26,12 +26,12 @@ function GameExpanded() {
   };
 
   const addGame = () => {
-    // dispatch(addGames([{ game }]));
+    // dispatch(addGames(game));
   };
 
   return (
     <>
-      {isSuccess && <>
+      {game != {} && isSuccess && <>
         <main id="game-expanded">
           <div id="game">
             <div className="game-card">
