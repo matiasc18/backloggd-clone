@@ -104,7 +104,7 @@ const Header = () => {
           {/* If the menu is active, display mobile menu version of nav */}
           <div id="menu-mask" className={showMobileMenu ? "is-active" : ""} onClick={toggleMenu}></div>
           <nav id="nav-links">
-            <div className="blur"></div>
+            {/* <div className="blur"></div> */}
             {user ? (
               // If the user exists, show the logout button
               <>
@@ -121,7 +121,7 @@ const Header = () => {
               </>)}
           </nav>
         </header>
-        <div className="blur"></div>
+        {/* <div className="blur"></div> */}
       </div>
     </>
   )
