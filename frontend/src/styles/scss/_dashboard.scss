@@ -31,6 +31,10 @@
 
   #bio {
     grid-area: bio;
+
+    .bio-details {
+      display: block;
+    }
   }
 
   #dashboard-favorites {
@@ -97,7 +101,7 @@
 @media (min-width: $tablet) {
   #dashboard {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 4fr;
     grid-template-rows: auto auto;
     grid-template-areas:
       "bio favorites"

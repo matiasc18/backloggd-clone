@@ -181,6 +181,9 @@
 #dashboard #bio {
   grid-area: bio;
 }
+#dashboard #bio .bio-details {
+  display: block;
+}
 #dashboard #dashboard-favorites {
   grid-area: favorites;
 }
@@ -235,7 +238,7 @@
 @media (min-width: 30em) {
   #dashboard {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr 4fr;
     grid-template-rows: auto auto;
     grid-template-areas: "bio favorites" "games games";
     width: 92.5%;
@@ -331,7 +334,7 @@
 }
 .game-card {
   border-radius: 10px;
-  flex: 1 1 30%;
+  flex: 0 0 31%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   max-width: 14.502rem;
 }
@@ -354,13 +357,14 @@
 
 @media (min-width: 30em) {
   .game-card {
-    flex: 1 1 18%;
+    flex: 0 0 18%;
     max-width: 21.76rem;
   }
 }
 @media (min-width: 60em) {
   .game-card {
     display: grid;
+    position: relative;
     grid-template-rows: auto 1fr;
     border-radius: 10px;
     max-width: 21.76rem;
@@ -376,7 +380,7 @@
     transform: scale(1);
   }
   .game-card .game-cover {
-    height: auto;
+    filter: brightness(80%);
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
@@ -386,13 +390,13 @@
     align-items: center;
     visibility: visible;
     font-weight: bold;
-    padding: 1rem 1.5rem;
+    padding: 1rem 1rem;
     background-color: rgb(48, 75, 164);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
   }
   .game-card .game-info .game-title {
-    max-width: 70%;
+    max-width: 75%;
     margin: 0;
   }
   .game-card .game-info .game-rating {
@@ -417,14 +421,15 @@
   background: transparent;
   box-shadow: none;
 }
-#header-container .blur {
+#header-container::before, #header-container #nav-links::before {
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
   z-index: -1;
   top: 0;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(3.5px);
+  -webkit-backdrop-filter: blur(3.5px);
 }
 
 header {
@@ -461,7 +466,7 @@ header #header-title:active {
   min-height: 100vh;
   margin-top: 3.25em;
   background-color: black;
-  z-index: 50;
+  z-index: 1001;
   transition: 0.5s;
 }
 #menu-mask.is-active {
@@ -762,6 +767,7 @@ header #header-title:active {
 #games-container {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   max-width: 100%;
   margin: 0.75em 0;
   gap: 1rem;
@@ -773,6 +779,7 @@ header #header-title:active {
   }
   #games-container {
     margin: 1em 0.5em;
+    row-gap: 1.5rem;
   }
 }
 @media (min-width: 60em) {
@@ -785,8 +792,10 @@ header #header-title:active {
   }
   #games-container {
     justify-content: center;
-    gap: 2rem;
-    margin: 1.5em 1em;
+    -moz-column-gap: 1.5rem;
+         column-gap: 1.5rem;
+    row-gap: 2.5rem;
+    margin: 1.5em 0;
   }
 }
 /*? Page selector container */
