@@ -5,7 +5,7 @@ import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
 const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
 
   // Get maximum page number
-  const totalPages = Math.floor(totalGames / gamesPerPage);
+  const totalPages = Math.ceil(totalGames / gamesPerPage);
   // JSX to be inserted (array of page selector items)
   const insertion = [];
 
