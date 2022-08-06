@@ -3,12 +3,12 @@ import Pagination from '../components/Pagination';
 import LoadingBar from '../components/LoadingBar';
 import Games from '../components/Games';
 import { useSelector, useDispatch } from 'react-redux';
-import { getTrendingGames } from '../features/games/gameSlice.js';
+import { getTrendingGames, reset } from '../features/games/gameSlice.js';
 
 //TODO Have games fetched in like usser goals instead (from tut)
 const GamesPage = () => {
   // Get total list of games
-  const { games, isSuccess, isLoading } = useSelector((state) => state.game);
+  const { games, isLoading } = useSelector((state) => state.game);
   
   // Holds list of 30 games at a time
   const [displayedGames, setDisplayedGames] = useState([]);
@@ -19,14 +19,20 @@ const GamesPage = () => {
   // On initial render, get trending games
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(getTrendingGames());
+    if (!games) {
+      dispatch(getTrendingGames());
+    }
   }, []);
-
-  // Set the displayed games once the total list is received
+  
   useEffect(() => {
-    if (isSuccess)
+
+    if (games)
       setDisplayedGames(games.results.slice((currentPage - 1) * 30, currentPage * 30));
-  }, [isSuccess, currentPage]);
+
+    return () => {
+      dispatch(reset());
+    };
+  }, [games, currentPage, dispatch]);
 
   //? Updates current page of results
   const updatePage = async (pageNumber) => {
@@ -37,7 +43,7 @@ const GamesPage = () => {
     <main id="games-page">
       <h2>Trending Games</h2>
       <hr />
-      { isSuccess &&  
+      { games &&  
         <Pagination 
         gamesPerPage={30} 
         totalGames={games.totalCount} 
@@ -48,7 +54,7 @@ const GamesPage = () => {
       <div id="games-container">
         <Games games={displayedGames} list={1}/>
       </div>
-      { isSuccess && 
+      { games && 
         <Pagination 
         gamesPerPage={30} 
         totalGames={games.totalCount} 

@@ -53,7 +53,7 @@ const getGameDetails = async (req, res) => {
   try {
     const response = await igdb.request(config);
 
-    response.data[0].first_release_date = new Date(response.data[0].first_release_date * 1000)
+    response.data[0].dateLocal = new Date(response.data[0].first_release_date * 1000)
       .toLocaleDateString('en-US', {
         day: 'numeric',
         year: 'numeric',
@@ -70,13 +70,17 @@ const getGameDetails = async (req, res) => {
 //? @route      POST /games/add
 //? @access     Private
 const addUserGames = async (req, res) => {
-  const games = req.body;
+  const { games } = req.body;
 
   if (games) {
     try {
       const userGames = await Game.findOne({ user: req.user.id });
 
       for (let i = 0; i < games.length; i++) {
+        if (userGames.games.some(game => game.id === games[i].id)) {
+          return res.json({message: 'Game already added'});
+        }
+
         await userGames.updateOne(
           {
             $push:
@@ -87,7 +91,7 @@ const addUserGames = async (req, res) => {
                 genres: games[i].genres,
                 first_release_date: new Date(games[i].first_release_date * 1000),
                 cover: games[i].cover,
-                rating: Math.ceil(games[i].rating)
+                rating: Math.ceil(games[i].rating),
               }
             }
           });
@@ -103,7 +107,7 @@ const addUserGames = async (req, res) => {
         `1 game successfully added to ${req.user.username}'s backlog!`
         : `${games.length} games successfully added to ${req.user.username}'s backlog!`;
 
-      return res.status(200).json({ message: message });
+      return res.status(200).json({ message: message, games: userGames });
     } catch (err) {
       return res.status(400).json({ error: err });
     }

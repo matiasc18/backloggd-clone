@@ -18,11 +18,15 @@ const addGames = async (gameData, accessToken) => {
   const response = await axios.request({
     method: 'post',
     url: 'games/backlog/add',
-    data: gameData,
+    data: {
+      games: gameData
+    },
     headers: {
       Authorization: `Bearer ${accessToken}`
     }
   });
+
+  console.log(response.data);
 
   return response.data;
 };

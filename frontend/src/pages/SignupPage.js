@@ -173,7 +173,7 @@ const SignupPage = () => {
             <label htmlFor="confirmPassword" className="auth-label">Confirm Password</label>
           </div>
           {/* If theres an error message, display it */}
-          { errorMessage && <span id="error-message">{ errorMessage }</span> }
+          { errorMessage && <span className="error-message">{ errorMessage }</span> }
           {/* Disable submit button until all fields are filled */}
           <button id="auth-submit" form="signup-form" disabled={(username && email && password && confirmPassword) ? false : true}>Submit</button>
           <span>Already have an account? <Link to="/login">Log In</Link></span>

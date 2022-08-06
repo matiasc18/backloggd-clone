@@ -2,8 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import gameService from './gameService';
 
 const initialState = {
-  games: {},
-  gameDetails: {},
+  games: null,
+  gameDetails: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -36,7 +36,12 @@ export const gameSlice = createSlice({
   name: 'game',
   initialState,
   reducers: {
-    reset: (state) => initialState
+    reset: (state) => {
+      state.isSuccess = false
+      state.isError = false
+      state.isLoading = false
+      state.message = ''
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -47,7 +52,7 @@ export const gameSlice = createSlice({
       .addCase(getGameDetails.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.gameDetails = action.payload
+        state.gameDetails.push(action.payload)
       })
       .addCase(getGameDetails.rejected, (state, action ) => {
         state.isLoading = false

@@ -9,7 +9,9 @@ const gameSchema = new mongoose.Schema({
   games: [
     {
       id: {
+        unique: true,
         type: Number,
+        required: true
       },
       name: {
         type: String,
@@ -17,7 +19,7 @@ const gameSchema = new mongoose.Schema({
       genres: [
         {
           name: {
-            type: String
+            type: String,
           }
         }
       ],
