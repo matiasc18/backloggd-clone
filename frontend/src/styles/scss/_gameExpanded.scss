@@ -79,6 +79,7 @@
         background-color: $secondary-color;
         color: $tertiary-color;
         margin: 0;
+        margin-bottom: 2rem;
         padding: 0.35em 0.7em;
         border-radius: 10px;
         letter-spacing: 0.25px;
@@ -88,7 +89,7 @@
         &:active {
           background-color: $tertiary-color;
           color: $secondary-color;
-          transform: scale(95%);
+          transform: scale(85%);
         }
       }
     }
@@ -160,13 +161,9 @@
         #add-game {
           cursor: pointer;
 
-          &:hover {
-            color: $secondary-color;
-          }
-
           &:active {
             color: $secondary-color;
-            transform: scale(95%);
+            transform: scale(85%);
           }
         }
 

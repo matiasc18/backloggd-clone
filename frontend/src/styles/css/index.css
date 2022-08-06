@@ -126,16 +126,6 @@
 .auth-form span a:hover {
   color: rgb(48, 75, 164);
 }
-.auth-form #error-message {
-  margin-top: 1em;
-  font-size: 0.8em;
-  padding: 0.7em 1.4em;
-  border-radius: 10px;
-  font-weight: bold;
-  background-color: crimson;
-  color: white;
-  text-align: center;
-}
 
 @media (min-width: 30em) {
   #form-container {
@@ -652,6 +642,7 @@ header #header-title:active {
   background-color: rgb(48, 75, 164);
   color: rgb(207, 207, 207);
   margin: 0;
+  margin-bottom: 2rem;
   padding: 0.35em 0.7em;
   border-radius: 10px;
   letter-spacing: 0.25px;
@@ -661,7 +652,7 @@ header #header-title:active {
 #game-expanded #game .game-details #add-game:active {
   background-color: rgb(207, 207, 207);
   color: rgb(48, 75, 164);
-  transform: scale(95%);
+  transform: scale(85%);
 }
 
 @media (min-width: 30em) {
@@ -721,12 +712,9 @@ header #header-title:active {
   #game-expanded #game .game-details #add-game {
     cursor: pointer;
   }
-  #game-expanded #game .game-details #add-game:hover {
-    color: rgb(48, 75, 164);
-  }
   #game-expanded #game .game-details #add-game:active {
     color: rgb(48, 75, 164);
-    transform: scale(95%);
+    transform: scale(85%);
   }
   #game-expanded #game .game-details .game-summary {
     line-height: 2rem;
@@ -898,4 +886,15 @@ body {
   max-width: 100%;
   min-height: 100vh;
   position: relative;
+}
+
+.error-message {
+  margin-top: 1em;
+  font-size: 0.8em;
+  padding: 0.35em 0.7em;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: crimson;
+  color: white;
+  text-align: center;
 }

@@ -34,3 +34,14 @@ body {
   min-height: 100vh;
   position: relative;
 }
+
+.error-message {
+  margin-top: 1em;
+  font-size: 0.8em;
+  padding: 0.35em 0.7em;
+  border-radius: 10px;
+  font-weight: bold;
+  background-color: crimson;
+  color: white;
+  text-align: center;
+}
