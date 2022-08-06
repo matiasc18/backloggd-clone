@@ -7,8 +7,9 @@ const jwt = require('jsonwebtoken');
 //? @route      POST /games/
 //? @access     Public
 const getGames = async (req, res) => {
+  const query = req.body.query;
+
   //* Default config for reguesting to IGDB
-  //? Default filter = trending games (via req.body.queryString)
   const config = {
     url: '/games',
     baseURL: process.env.IGDB_URI,
@@ -17,10 +18,23 @@ const getGames = async (req, res) => {
 
   // Return list of all games + total game count
   try {
-    const gamesResponse = await igdb.request(config);
-    const countResponse = await igdb.request({ ...config, url: '/games/count', data: `${req.body.query.filter};` });
+    // Get first 500 games + count of how many games
+    let games = (await igdb.request(config)).data;
+    const totalGames = (await igdb.request({ ...config, url: '/games/count', data: `${req.body.query.filter};` })).data.count;
+    let total = totalGames;
+    
+    // If there are more than 500 games with the current filter...
+    if (total > 500) {
+      // Make request for more games (index 501-1000, 1001-1500, etc.) and append to original games response
+      while (total > 500) {
+        query.page++;
+        config.data = queryBuilder(query).queryString;
+        games = games.concat((await igdb.request(config)).data);
+        total -= 500;
+      }
+    }
 
-    return res.status(200).json({ totalCount: countResponse.data.count, results: gamesResponse.data });
+    return res.status(200).json({ totalCount: totalGames, results: games });
   } catch (err) {
     return res.status(400).json(err);
   }
@@ -156,7 +170,20 @@ const addFavorite = async (req, res) => {
     }
   }
   return res.status(400).json({ error: 'No body received' });
+};
 
+// ? IGDB query buiilder
+// ? Takes in query object and constructs IGDB query string
+const queryBuilder = (query) => {
+  let qs = `fields ${query.fields}; limit ${query.limit}; `;
+  qs += `${(query.filter !== 'where ') ? query.filter + '; ' : ''}`;
+  qs += `${(query.sort !== 'sort ') ? query.sort + '; ' : ''}`;
+  qs += `${(query.page !== 1) ? 'offset ' + ((query.page - 1) * query.limit) + '; ' : ''}`;
+  qs += `${(query.search.trim() !== '') ? 'search "' + query.search.trim() + '";' : ''}`;
+
+  // console.log(qs);
+  const finalQuery = { query: query, queryString: qs.trim() };
+  return finalQuery;
 };
 
 module.exports = {

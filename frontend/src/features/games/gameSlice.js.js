@@ -2,7 +2,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import gameService from './gameService';
 
 const initialState = {
-  game: {},
+  games: {},
+  gameDetails: {},
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -10,9 +11,20 @@ const initialState = {
 };
 
 //? Get game information
-export const getGame = createAsyncThunk('game/details', async(id, thunkAPI) => {
+export const getGameDetails = createAsyncThunk('game/details', async(id, thunkAPI) => {
   try {
-    return await gameService.getGame(id);
+    return await gameService.getGameDetails(id);
+  } catch(err) {
+      // Or return server error message in payload
+      const message = err.response.data.error || err.message || err.toString();
+      return thunkAPI.rejectWithValue(message);
+  }
+});
+
+//? Get trending games
+export const getTrendingGames = createAsyncThunk('games/trending', async(thunkAPI) => {
+  try {
+    return await gameService.getTrendingGames();
   } catch(err) {
       // Or return server error message in payload
       const message = err.response.data.error || err.message || err.toString();
@@ -29,15 +41,29 @@ export const gameSlice = createSlice({
   extraReducers: (builder) => {
     builder
       //* Get game details
-      .addCase(getGame.pending, (state) => {
+      .addCase(getGameDetails.pending, (state) => {
         state.isLoading = true
       })
-      .addCase(getGame.fulfilled, (state, action) => {
+      .addCase(getGameDetails.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.game = action.payload
+        state.gameDetails = action.payload
       })
-      .addCase(getGame.rejected, (state, action ) => {
+      .addCase(getGameDetails.rejected, (state, action ) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      //* Get trending games
+      .addCase(getTrendingGames.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getTrendingGames.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.games = action.payload
+      })
+      .addCase(getTrendingGames.rejected, (state, action ) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload

@@ -1,59 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { queryBuilder, defaultQuery } from '../api/utils';
 import Pagination from '../components/Pagination';
 import LoadingBar from '../components/LoadingBar';
 import Games from '../components/Games';
-import axios from '../api/axios';
+import { useSelector, useDispatch } from 'react-redux';
+import { getTrendingGames } from '../features/games/gameSlice.js';
 
 //TODO Have games fetched in like usser goals instead (from tut)
 const GamesPage = () => {
-  const [games, setGames] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  //? Axios request config
-  const config = {
-    method: 'post',
-    url: 'games',
-    query: defaultQuery,    // query object
-    data: ''                // request body (stringified query)
-  };
-
-  //* Initial render + on page change
-  useEffect(() => {
-    config.query.page = currentPage;
-
-    //? Fetch games from IGDB
-    (async () => {
-      // Games loading...
-      setLoading(true);
-
-      // Build IGDB query string
-      config.data = queryBuilder(config.query);
-
-      try {
-        // Axios request
-        const response = await axios.request(config);
-        
-        // Games done loading...
-        setLoading(false);
-
-        // If there is a response, update games state + scroll to top
-        if (response.status === 200) {
-          setGames(response.data);
-          window.scrollTo(0, 0);
-        }
-      } catch(err) {
-          console.error(err);
-      }
-    })();
-    // eslint-disable-next-line
-  }, [currentPage]);
+  // Get total list of games
+  const { games, isSuccess, isLoading } = useSelector((state) => state.game);
   
-  //* Runs whenever games updates
+  // Holds list of 30 games at a time
+  const [displayedGames, setDisplayedGames] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  
+  const dispatch = useDispatch();
+  
+  // On initial render, get trending games
   useEffect(() => {
-    // console.log(games);
-  }, [games]);
+    window.scrollTo(0, 0);
+    dispatch(getTrendingGames());
+  }, []);
+
+  // Set the displayed games once the total list is received
+  useEffect(() => {
+    if (isSuccess)
+      setDisplayedGames(games.results.slice((currentPage - 1) * 30, currentPage * 30));
+  }, [isSuccess, currentPage]);
 
   //? Updates current page of results
   const updatePage = async (pageNumber) => {
@@ -64,26 +37,116 @@ const GamesPage = () => {
     <main id="games-page">
       <h2>Trending Games</h2>
       <hr />
-      { games.results &&  
+      { isSuccess &&  
         <Pagination 
-        gamesPerPage={config.query.limit} 
+        gamesPerPage={30} 
         totalGames={games.totalCount} 
-        currentPage={config.query.page} 
+        currentPage={currentPage} 
         updatePage={updatePage}
         /> }
-      { loading && <LoadingBar />}
+      { isLoading && <LoadingBar />}
       <div id="games-container">
-        <Games games={games.results} list={1}/>
+        <Games games={displayedGames} list={1}/>
       </div>
-      { games.results && 
+      { isSuccess && 
         <Pagination 
-          gamesPerPage={config.query.limit} 
-          totalGames={games.totalCount} 
-          currentPage={config.query.page} 
-          updatePage={updatePage}
+        gamesPerPage={30} 
+        totalGames={games.totalCount} 
+        currentPage={currentPage} 
+        updatePage={updatePage}
         /> }
     </main>
   )
 }
 
 export default GamesPage;
+
+// import React, { useState, useEffect } from 'react';
+// import { queryBuilder, defaultQuery } from '../api/utils';
+// import Pagination from '../components/Pagination';
+// import LoadingBar from '../components/LoadingBar';
+// import Games from '../components/Games';
+// import axios from '../api/axios';
+
+// //TODO Have games fetched in like usser goals instead (from tut)
+// const GamesPage = () => {
+//   const [games, setGames] = useState({});
+//   const [loading, setLoading] = useState(false);
+//   const [currentPage, setCurrentPage] = useState(1);
+
+//   //? Axios request config
+//   const config = {
+//     method: 'post',
+//     url: 'games',
+//     query: defaultQuery,    // query object
+//     data: ''                // request body (stringified query)
+//   };
+
+//   //* Initial render + on page change
+//   useEffect(() => {
+//     config.query.page = currentPage;
+
+//     //? Fetch games from IGDB
+//     (async () => {
+//       // Games loading...
+//       setLoading(true);
+
+//       // Build IGDB query string
+//       config.data = queryBuilder(config.query);
+
+//       try {
+//         // Axios request
+//         const response = await axios.request(config);
+        
+//         // Games done loading...
+//         setLoading(false);
+
+//         // If there is a response, update games state + scroll to top
+//         if (response.status === 200) {
+//           setGames(response.data);
+//           window.scrollTo(0, 0);
+//         }
+//       } catch(err) {
+//           console.error(err);
+//       }
+//     })();
+//     // eslint-disable-next-line
+//   }, [currentPage]);
+  
+//   //* Runs whenever games updates
+//   useEffect(() => {
+//     // console.log(games);
+//   }, [games]);
+
+//   //? Updates current page of results
+//   const updatePage = async (pageNumber) => {
+//     setCurrentPage(pageNumber);
+//   };
+
+//   return (
+//     <main id="games-page">
+//       <h2>Trending Games</h2>
+//       <hr />
+//       { games.results &&  
+//         <Pagination 
+//         gamesPerPage={config.query.limit} 
+//         totalGames={games.totalCount} 
+//         currentPage={config.query.page} 
+//         updatePage={updatePage}
+//         /> }
+//       { loading && <LoadingBar />}
+//       <div id="games-container">
+//         <Games games={games.results} list={1}/>
+//       </div>
+//       { games.results && 
+//         <Pagination 
+//           gamesPerPage={config.query.limit} 
+//           totalGames={games.totalCount} 
+//           currentPage={config.query.page} 
+//           updatePage={updatePage}
+//         /> }
+//     </main>
+//   )
+// }
+
+// export default GamesPage;

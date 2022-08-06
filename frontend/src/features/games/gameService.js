@@ -1,7 +1,8 @@
 import axios from '../../api/axios';
+import { queryBuilder, defaultQuery } from '../../api/utils';
 
 //? Get game details
-const getGame = async (id) => {
+const getGameDetails = async (id) => {
   const response = await axios.request({
     method: 'get',
     url: `games/${id}`
@@ -10,8 +11,19 @@ const getGame = async (id) => {
   return response.data;
 };
 
+const getTrendingGames = async () => {
+  const response = await axios.request({
+    method: 'post',
+    url: 'games/',
+    data: queryBuilder(defaultQuery)
+  });
+
+  return response.data;
+};
+
 const gameService = {
-  getGame
+  getGameDetails,
+  getTrendingGames
 };
 
 export default gameService;
