@@ -22,6 +22,7 @@ const Login = () => {
 
   // Sets focus on the username field at page startup
   useEffect(() => {
+    window.scrollTo(0, 0);
     userRef.current.focus();
   }, []);
 

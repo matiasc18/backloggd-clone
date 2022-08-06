@@ -5,7 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { register, reset } from '../features/auth/authSlice';
 import { Link } from 'react-router-dom';
 import LoadingBar from '../components/LoadingBar';
-// import signupStyles from '../styles/authPage.module.css';
 
 const SignupPage = () => {
   // Form input states + validation states + input focus status states
@@ -34,31 +33,9 @@ const SignupPage = () => {
 
   // Sets focus on the username field at page startup
   useEffect(() => {
+    window.scrollTo(0, 0);
     userRef.current.focus();
   }, []);
-
-  // //* Input validation
-  // // Validate username
-  // useEffect(() => {
-  //   setvalidUsername(USER_REGEX.test(username));
-  // }, [username]);
-
-  // // Validate password + confirmPassword
-  // useEffect(() => {
-  //   setvalidPassword(PASS_REGEX.test(password));
-  //   setValidConfirm(password === confirmPassword);
-  // }, [password, confirmPassword]);
-
-  // // Validate email
-  // useEffect(() => {
-  //   setValidEmail(EMAIL_REGEX.test(email));
-  // }, [email]);
-
-  // // Clear error message when user edits input
-  // useEffect(() => {
-  //   setErrorMessage('');
-  // }, [username, email, password, confirmPassword]);
-  // //* Input validation end
 
   //* Input validation
   // Validate username

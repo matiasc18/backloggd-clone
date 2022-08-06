@@ -12,7 +12,10 @@ const Dashboard = () => {
 
   const { user } = useSelector((state) => state.auth);
   const { userInfo, games, favorites } = useSelector((state) => state.user);
-  // const { games, favorites, isError, message } = useSelector((state) => state.games);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [])
 
   useEffect(() => {
     if (!user) {
@@ -37,9 +40,9 @@ const Dashboard = () => {
       <section id="bio">
         <h2>{ user.username }</h2>
         <hr />
-        <span>Joined on { userInfo.joined }</span>
-        {/* <span>Games: { userInfo.gamesCount }</span> */}
-        {/* <span>Favorites: { userInfo.favCount }</span> */}
+        <span className="bio-details"><strong>Joined</strong> { userInfo.joined }</span>
+        <span className="bio-details"><strong>Games:</strong> { userInfo.gamesCount }</span>
+        <span className="bio-details"><strong>Favorites:</strong> { userInfo.favCount }</span>
       </section>
       <section id="dashboard-favorites">
         <h2>Favorites</h2>
