@@ -1,7 +1,6 @@
 const Game = require('../models/game.model');
 const User = require('../models/user.model');
 const igdb = require('../axios');
-const jwt = require('jsonwebtoken');
 
 //? @desc       Get games list from IGDB
 //? @route      POST /games/
@@ -22,7 +21,7 @@ const getGames = async (req, res) => {
     let games = (await igdb.request(config)).data;
     const totalGames = (await igdb.request({ ...config, url: '/games/count', data: `${req.body.query.filter};` })).data.count;
     let total = totalGames;
-    
+
     // If there are more than 500 games with the current filter...
     if (total > 500) {
       // Make request for more games (index 501-1000, 1001-1500, etc.) and append to original games response
@@ -46,7 +45,7 @@ const getGames = async (req, res) => {
 const getGameDetails = async (req, res) => {
   const config = {
     url: '/games',
-    data: `fields name, cover.image_id, rating, first_release_date, genres.name, screenshots.image_id, summary; where id = ${req.params.id};`
+    data: `fields name, cover.image_id, rating, first_release_date, genres.name, screenshots.image_id, summary, involved_companies.company.name, involved_companies.company.developed; where id = ${req.params.id};`
   };
 
   // Return list of all games + total game count
@@ -59,6 +58,14 @@ const getGameDetails = async (req, res) => {
         year: 'numeric',
         month: 'short'
       });
+
+    const temp = response.data[0].involved_companies.map(company => { return company.company });
+    const temp2 = temp.filter(checkAdult);
+    console.log(temp2);
+
+    function checkAdult(company) {
+      return company.developed && company.developed.includes(119177);
+    }
 
     return res.status(200).json(response.data[0]);
   } catch (err) {
@@ -78,7 +85,7 @@ const addUserGames = async (req, res) => {
 
       for (let i = 0; i < games.length; i++) {
         if (userGames.games.some(game => game.id === games[i].id)) {
-          return res.json({message: 'Game already added'});
+          return res.json({ message: 'Game already added' });
         }
 
         await userGames.updateOne(
