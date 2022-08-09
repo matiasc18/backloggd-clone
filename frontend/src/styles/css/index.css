@@ -572,20 +572,20 @@ header #header-title:active {
 }
 .game-background {
   position: absolute;
+  top: 0;
   width: 100%;
   height: 65%;
-  top: 0;
   -o-object-fit: cover;
      object-fit: cover;
-  filter: brightness(70%);
   z-index: 98;
+  filter: brightness(70%);
 }
 
 .gradient {
   position: absolute;
+  top: 0;
   height: 65%;
   width: 100%;
-  top: 0;
   background: linear-gradient(180deg, rgba(125, 185, 232, 0) 0, rgb(21, 36, 84));
   z-index: 99;
 }
@@ -599,16 +599,19 @@ header #header-title:active {
   width: 100%;
   z-index: 100;
 }
+#game-expanded .error-message {
+  background-color: rgb(37, 59, 131);
+}
 #game-expanded #game {
-  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 95%;
   max-height: 100%;
+  width: 90%;
   margin-top: 5rem;
 }
 #game-expanded #game .game-card {
+  position: relative;
   max-width: 20rem;
 }
 #game-expanded #game .game-card:active {
@@ -617,36 +620,46 @@ header #header-title:active {
 #game-expanded #game .game-card .game-cover {
   border-radius: 10px;
 }
+#game-expanded #game .game-card .game-rating {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background-color: rgb(48, 75, 164);
+  border-radius: 5px;
+  padding: 0.25rem 0.5rem;
+  color: black;
+  font-size: 1.5em;
+  font-weight: bold;
+}
 #game-expanded #game .game-details {
-  margin-top: auto;
-  text-align: center;
-  margin-bottom: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 #game-expanded #game .game-details h1 {
-  margin-bottom: 0;
   font-size: 3rem;
+  margin: 0;
+  margin-top: 1.25rem;
 }
 #game-expanded #game .game-details .game-date {
-  margin: 0;
-  margin-bottom: 0.5rem;
-  margin-left: 0.5rem;
-  margin-top: 0.5rem;
-  font-size: 0.75em;
+  font-size: 0.8em;
   font-style: italic;
+  margin: 0.25rem 0;
+  max-width: 100%;
 }
 #game-expanded #game .game-details .game-summary {
+  text-align: center;
   line-height: 2rem;
-  margin-left: 0.5rem;
+  margin: 1.5rem 0;
 }
 #game-expanded #game .game-details #add-game {
+  letter-spacing: 0.25px;
   background-color: rgb(48, 75, 164);
   color: rgb(207, 207, 207);
-  margin: 0;
-  margin-bottom: 2rem;
-  padding: 0.35em 0.7em;
-  border-radius: 10px;
-  letter-spacing: 0.25px;
   border: none;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0.35em 0.7em;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 #game-expanded #game .game-details #add-game:active {
@@ -656,60 +669,31 @@ header #header-title:active {
 }
 
 @media (min-width: 30em) {
+  .game-background {
+    height: 75%;
+  }
+  .gradient {
+    height: 75%;
+  }
   #game-expanded {
-    color: rgb(207, 207, 207);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-  }
-  #game-expanded .game-background {
-    position: absolute;
-    width: 100%;
-    height: 75%;
-    top: 0;
-    -o-object-fit: cover;
-       object-fit: cover;
-    filter: brightness(65%);
-  }
-  #game-expanded .gradient {
-    position: absolute;
-    height: 75%;
-    width: 100%;
-    top: 0;
-    background: linear-gradient(180deg, rgba(125, 185, 232, 0) 0, rgb(21, 36, 84));
+    justify-content: center;
   }
   #game-expanded #game {
-    box-sizing: border-box;
     display: grid;
-    width: 80%;
     grid-template-columns: auto 2fr;
     grid-template-rows: 100%;
-    align-items: center;
-    max-height: 100%;
-    gap: 5rem;
-  }
-  #game-expanded #game .game-card {
-    width: 20rem;
-    max-width: 21.76rem;
-    margin-bottom: 10rem;
-  }
-  #game-expanded #game .game-card .game-cover {
-    border-radius: 10px;
+    align-items: initial;
+    margin: 0;
+    gap: 4rem;
   }
   #game-expanded #game .game-details {
-    margin-top: auto;
-    text-align: initial;
-    margin-bottom: 5rem;
-  }
-  #game-expanded #game .game-details h1 {
-    margin-bottom: 0;
-  }
-  #game-expanded #game .game-details .game-date {
-    margin-left: 0.5rem;
+    align-items: flex-start;
+    justify-content: flex-end;
   }
   #game-expanded #game .game-details #add-game {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
     cursor: pointer;
   }
   #game-expanded #game .game-details #add-game:active {
@@ -717,13 +701,16 @@ header #header-title:active {
     transform: scale(85%);
   }
   #game-expanded #game .game-details .game-summary {
-    line-height: 2rem;
-    margin-left: 0.5rem;
+    text-align: start;
   }
 }
 @media (min-width: 60em) {
   #game-expanded {
     justify-content: flex-end;
+  }
+  #game-expanded #game {
+    margin-bottom: 5rem;
+    gap: 5rem;
   }
 }
 /*? HomePage container  */

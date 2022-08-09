@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react';
-import { imgPath } from '../api/utils';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { reset } from '../features/games/gameSlice.js';
 import { useNavigate } from 'react-router-dom';
-import { getRatingColor } from '../api/utils';
+import { reset } from '../features/games/gameSlice.js';
+import { imgPath, getRatingColor } from '../api/utils';
 
 //* Render game cards
 const Games = ({ games, list }) => {
-  // For re-routing
+  
+  // For re-routing / redux dispatch
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -17,6 +17,7 @@ const Games = ({ games, list }) => {
     navigate(`/game-details/${game.id}`);
   };
 
+  // Shortens long game tittles
   const checkLength = (title) => {
     let modifiedTitle = '';
     if (title.length >= 30) {

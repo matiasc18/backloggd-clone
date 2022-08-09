@@ -1,22 +1,26 @@
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import Games from '../components/Games';
+import { useNavigate } from 'react-router-dom';
 import { getUser, getFavorites, getUserGames, reset } from '../features/user/userSlice.js';
+import Games from '../components/Games';
 
+// User profile screen
 const Dashboard = () => {
-  // For re-routing
+  // For re-routing / redux dispatch
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { user } = useSelector((state) => state.auth);
   const { userInfo, games, favorites } = useSelector((state) => state.user);
 
+  // Scroll to top on page load
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [])
 
+  // Runs whenever redux auth state changes
   useEffect(() => {
+    // If no logged in user, go home
     if (!user) {
       navigate('/');
       return;
@@ -30,13 +34,6 @@ const Dashboard = () => {
       dispatch(reset());
     };
   }, [user, navigate, dispatch]);
-  
-  useEffect(() => {
-    if (games)
-      console.log('hello');
-    else
-      console.log('goobye');
-  }, [games]);
 
   return (
     <main id="dashboard">

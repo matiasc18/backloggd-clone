@@ -17,7 +17,6 @@ export const queryBuilder = (query) => {
   qs += `${(query.page !== 1) ? 'offset ' + ((query.page - 1) * query.limit) + '; ' : ''}`;
   qs += `${(query.search.trim() !== '') ? 'search "' + query.search.trim() + '";' : ''}`;
 
-  // console.log(qs);
   const finalQuery = { query: query, queryString: qs.trim() };
   return finalQuery;
 };

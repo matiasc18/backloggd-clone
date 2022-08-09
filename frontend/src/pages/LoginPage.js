@@ -1,56 +1,49 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate, Link } from 'react-router-dom';
 import { login, reset } from '../features/auth/authSlice';
-import { Link } from 'react-router-dom';
 import LoadingBar from '../components/LoadingBar';
-// import loginStyles from '../styles/authPage.module.css';
 
 const Login = () => {
-  // Form input states
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  // Error message
-  const [errorMessage, setErrorMessage] = useState('');
-
   // For setting focus on first input field
   const userRef = useRef();
 
-  // For handling auth / re-routing
+  // For re-routing / redux dispatch
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  // Sets focus on the username field at page startup
+  // Scrolls to top and sets focus on username field
   useEffect(() => {
     window.scrollTo(0, 0);
     userRef.current.focus();
   }, []);
 
-  // Clear error message when user edits username/password
+  // Clear error message when input changes
   useEffect(() => {
-    // setErrorMessage('');
+    setErrorMessage('');
   }, [username, password]);
 
-  // Redux auth state (with user from server response)
+  // Redux auth state
   const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
   // Runs whenever redux auth state changes
   useEffect(() => {
-    // Sets error message equal to error message from server response
-    if (isError) {
+    if (isError)
       setErrorMessage(message);
-    }
 
-    // Redirect the user to the dashboard once registered
-    if (isSuccess || user) {
+    // Redirect the user to dashboard once registered
+    if (isSuccess || user)
       navigate('/');
-    }
 
     // Reset auth state
-    dispatch(reset);
+    dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-  // Submit form when submit button hit
+  // Attempt login
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -87,7 +80,7 @@ const Login = () => {
             <label htmlFor="password" className="auth-label">Password</label>
           </div>
           {/* If theres an error message, display it */}
-          { errorMessage !== '' && <span className="error-message">{ errorMessage }</span> }
+          { errorMessage && <span className="error-message">{ errorMessage }</span> }
           <button id="auth-submit" form="login-form" disabled={(username && password) ? false : true}>Submit</button>
           <span>Don't have an account? <Link to="/signup">Sign Up</Link></span>
         </form>

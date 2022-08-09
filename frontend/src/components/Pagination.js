@@ -1,9 +1,7 @@
 import React from 'react';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
-// import paginationStyles from '../styles/pagination.module.css';
 
 const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
-
   // Get maximum page number
   const totalPages = Math.ceil(totalGames / gamesPerPage);
   // JSX to be inserted (array of page selector items)
@@ -15,7 +13,7 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
     for (let i = 1; i <= 4; i++) {
       if (i === currentPage)
         insertion.push(<li key={i} className="page-selector is-active">{i}</li>);
-      else 
+      else
         insertion.push(<li key={i} className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
     }
 
@@ -38,7 +36,7 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
     for (let i = currentPage - 1; i <= currentPage + 1; i++) {
       if (i === currentPage)
         insertion.push(<li key={i} className="page-selector is-active">{i}</li>);
-      else 
+      else
         insertion.push(<li key={i} className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
     }
 
@@ -48,7 +46,7 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
           <li className="page-arrow" onClick={() => updatePage(currentPage - 1)}><FaChevronLeft /></li>
           <li className="page-selector" onClick={() => updatePage(1)}>1</li>
           <li className="page-dots"></li>
-          { insertion }
+          {insertion}
           <li className="page-dots"></li>
           <li className="page-selector" onClick={() => updatePage(totalPages)}>{totalPages}</li>
           <li className="page-arrow" onClick={() => updatePage(currentPage + 1)}><FaChevronRight /></li>
@@ -63,7 +61,7 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
     for (let i = totalPages - 3; i <= totalPages; i++) {
       if (i === currentPage)
         insertion.push(<li key={i} className="page-selector is-active">{i}</li>);
-      else 
+      else
         insertion.push(<li key={i} className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
     }
 
@@ -73,7 +71,7 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
           <li className="page-arrow" onClick={() => updatePage(currentPage - 1)}><FaChevronLeft /></li>
           <li onClick={() => updatePage(1)} className="page-selector">1</li>
           <li className="page-dots"></li>
-          { insertion }
+          {insertion}
           {currentPage !== totalPages ? <li onClick={() => updatePage(currentPage + 1)} className="page-arrow"><FaChevronRight /></li> : <></>}
         </ul>
       </div>
