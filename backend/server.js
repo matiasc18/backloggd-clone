@@ -26,6 +26,8 @@ connection.once('open', () => {
 // API Routes
 app.use('/users', require('./routes/users.routes'));
 app.use('/games', require('./routes/games.routes'));
+// app.use('/test/users', require('./routes/usersTest.routes'));
+// app.use('/test/games', require('./routes/gamesTest.routes'));
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {

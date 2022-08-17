@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const asyncHandler = require('express-async-handler');
-const User = require('../models/user.model');
+const Users = require('../models/user.model');
 
 // Protect private routes by verifying access token
 const protect = asyncHandler(async (req, res, next) => {
@@ -21,12 +21,12 @@ const protect = asyncHandler(async (req, res, next) => {
 
       // Get user from token
       // Access user from any protected route
-      const user = await User.findById(decoded.id);
+      const user = await Users.findById(decoded.id);
       req.user = {
         id: decoded.id,
         username: decoded.username,
-        favCount: user.favorites,
-        gameCount: user.games
+        totalFavorites: user.totalFavorites,
+        totalGames: user.totalGames
       };
 
       next();
