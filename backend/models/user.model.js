@@ -19,20 +19,35 @@ const userSchema = new mongoose.Schema({
     trim: true,
     select: false
   },
+  // Users bio info
   bio: {
     type: String,
+    default: '',
     required: false,
     trim: true
   },
+  // Users list of games (game_id)
+  games: {
+    type: [Number],
+    required: true,
+    default: []
+  },
+  // Users list of favorites (game_id)
   favorites: {
+    type: [Number],
+    required: true,
+    default: []
+  },
+  totalGames: {
     type: Number,
     default: 0,
+    required: false
   },
-  games: {
+  totalFavorites: {
     type: Number,
-    default: 0
+    default: 0,
+    required: false
   }
-}, 
-{ timestamps: true });
+}, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
