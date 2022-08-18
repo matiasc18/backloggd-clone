@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { getGames, getGameDetails, cloneIGDB } = require('../controllers/gamesController');
+const { getGames, getGameDetails, cloneIGDB, createIGDB, test } = require('../controllers/gamesController');
 
 //* GET
 //? Get all games
@@ -12,5 +12,10 @@ router.route('/').post(getGames);
 router.route('/:id').get(getGameDetails);
 
 router.route('/clone-igdb').post(cloneIGDB); 
+router.route('/create-igdb').post(createIGDB);
+router.route('/update-igdb').post(createIGDB);
+router.route('/delete-igdb').post(createIGDB);
+
+router.route('/test').post(test);
 
 module.exports = router;
