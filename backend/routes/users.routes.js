@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { registerUser, loginUser, getUserInfo, deleteUser, addUserGames, getUserGames, getFavorites, addFavorite } = require('../controllers/userController');
+const { registerUser, loginUser, getUserInfo, deleteUser, addUserGames, getUserGames, getFavorites, addFavorite, updateUser } = require('../controllers/userController');
 const { protect } = require('../middleware/authMiddleware');
 
 //* POST 
@@ -13,6 +13,8 @@ router.route('/login').post(loginUser);
 //* GET / DELETE
 //? Get user data / Delete user
 router.route('/').get(protect, getUserInfo).delete(protect, deleteUser);
+
+router.route('/update').post(protect, updateUser);
 
 //? User games and favorites (below)
 
@@ -31,7 +33,5 @@ router.route('/favorites/all').get(protect, getFavorites)
 //* POST
 //? Add favorite game to user's backlog
 router.route('/favorites/add').post(protect, addFavorite);
-
-//TODO Add update user function
 
 module.exports = router;

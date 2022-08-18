@@ -90,15 +90,29 @@ const getUserInfo = async (req, res) => {
   }
 };
 
+//? @desc       Update user data
+//? @route      POST /users/update
+//? @access     Private
+// id gotten from accessToken in header auth (Bearer token)
+const updateUser = async (req, res) => {
+  try {
+    // Find user by id and return their data (username and favorite games)
+    await Users.updateOne({ _id: req.user.id }, req.body);
+
+    return res.status(200).json({ message: 'User updated' });
+  } catch (err) {
+    // If the user doesn't exist, return error
+    return res.status(404).json({ message: 'User not found' });
+  }
+};
+
 //? @desc       Delete user
 //? @route      DELETE /users/:id
 //? @access     Private
 const deleteUser = async (req, res) => {
   try {
     // Find user by id and delete
-    const user = await Users.findById(req.user.id);
-
-    await user.remove();
+    await Users.deleteOne({ _id: req.user.id });
     return res.status(200).json({ id: req.user.id, message: 'User successfully deleted' });
   } catch (err) {
     // If the user doesn't exist, return error
@@ -224,5 +238,6 @@ module.exports = {
   addUserGames,
   getUserGames,
   addFavorite,
-  getFavorites
+  getFavorites,
+  updateUser
 }
