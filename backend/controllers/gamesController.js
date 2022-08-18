@@ -143,10 +143,10 @@ const cloneIGDB = async (req, res) => {
 };
 
 const test = async (req, res) => {
-  const createdGame = await Games.findOne().sort({createdAt: -1});
   // const updatedGame = await Games.findOne().sort({updatedAt: -1});
   await Games.create(req.body);
-  return res.status(200).json('created');
+  const createdGame = await Games.findOne().sort({createdAt: -1});
+  return res.status(200).json(createdGame);
 };
 
 //? @desc       Adds newly added IGDB games into Frontloggd MongoDB
