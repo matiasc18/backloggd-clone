@@ -18,7 +18,7 @@ const getGames = async (req, res) => {
   try {
     // Get first 500 games + count of how many games
     const games = await igdb.request(config);
-    const totalGames = (await igdb.request({ ...config, url: '/games/count', data: `${req.body.query.filter};` })).data.count;
+    const totalGames = (await igdb.request({ ...config, url: '/games/count', data: `${query.filter !== '' ? 'where ' + query.filter + ';': ''};` })).data.count;
 
     let total = totalGames;
     // If there are more than 500 games with the current filter...
@@ -27,7 +27,7 @@ const getGames = async (req, res) => {
       while (total > 500) {
         query.page++;
         config.data = queryBuilder(query).queryString;
-        games.data = data.concat((await igdb.request(config)).data);
+        games.data = games.data.concat((await igdb.request(config)).data);
         total -= 500;
       }
     }
@@ -143,9 +143,10 @@ const cloneIGDB = async (req, res) => {
 };
 
 const test = async (req, res) => {
-  console.log(req.body);
+  const createdGame = await Games.findOne().sort({createdAt: -1});
+  // const updatedGame = await Games.findOne().sort({updatedAt: -1});
   await Games.create(req.body);
-  return res.status(200).json(req.body);
+  return res.status(200).json('created');
 };
 
 //? @desc       Adds newly added IGDB games into Frontloggd MongoDB
