@@ -12,7 +12,7 @@ function App() {
   return (
     <BrowserRouter>
       <div id="App">
-        <Header />
+        {/* <Header /> */}
         <Routes>
           {/* <Route path='/' element={<GamesPage />} /> */}
           {/* <Route path='/game-details/:id' element={<GameExpanded />} /> */}
