@@ -14,10 +14,10 @@ function App() {
       <div id="App">
         <Header />
         <Routes>
-          <Route path='/' element={<GamesPage />} />
-          <Route path='/game-details/:id' element={<GameExpanded />} />
-          <Route path='/profile' element={<Dashboard />} />
-          <Route path='/signup' element={<SignupPage />} />
+          {/* <Route path='/' element={<GamesPage />} /> */}
+          {/* <Route path='/game-details/:id' element={<GameExpanded />} /> */}
+          {/* <Route path='/profile' element={<Dashboard />} /> */}
+          {/* <Route path='/signup' element={<SignupPage />} /> */}
           <Route path='/login' element={<LoginPage />} />
         </Routes>
       </div>
