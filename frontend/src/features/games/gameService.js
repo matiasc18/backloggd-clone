@@ -21,9 +21,19 @@ const getTrendingGames = async () => {
   return response.data;
 };
 
+const searchGames = async (name) => {
+  const response = await axios.request({
+    method: 'get',
+    url: `games/search/${name}`,
+  });
+
+  return response.data;
+};
+
 const gameService = {
   getGameDetails,
-  getTrendingGames
+  getTrendingGames,
+  searchGames
 };
 
 export default gameService;

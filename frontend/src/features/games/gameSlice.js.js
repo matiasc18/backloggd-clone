@@ -4,6 +4,7 @@ import gameService from './gameService';
 const initialState = {
   games: null,
   gameDetails: [],
+  searchedGames: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -32,6 +33,17 @@ export const getTrendingGames = createAsyncThunk('games/trending', async(thunkAP
   }
 });
 
+//? Search for games
+export const searchGames = createAsyncThunk('games/search', async(gameName, thunkAPI) => {
+  try {
+    return await gameService.searchGames(gameName);
+  } catch(err) {
+      // Or return server error message in payload
+      const message = err.response.data.error || err.message || err.toString();
+      return thunkAPI.rejectWithValue(message);
+  }
+});
+
 export const gameSlice = createSlice({
   name: 'game',
   initialState,
@@ -41,6 +53,7 @@ export const gameSlice = createSlice({
       state.isError = false
       state.isLoading = false
       state.message = ''
+      state.searchedGames = null
     }
   },
   extraReducers: (builder) => {
@@ -69,6 +82,20 @@ export const gameSlice = createSlice({
         state.games = action.payload
       })
       .addCase(getTrendingGames.rejected, (state, action ) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      //* Search games
+      .addCase(searchGames.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(searchGames.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.searchedGames = action.payload
+      })
+      .addCase(searchGames.rejected, (state, action ) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
