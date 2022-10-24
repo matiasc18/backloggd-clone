@@ -1,19 +1,29 @@
 // ? Default IGDB query (trending page)
 export const defaultQuery = {
   fields: 'name, cover.image_id, rating',
-  filter: 'where rating > 78 & rating != null & cover != null & hypes != null & first_release_date != null & genres.name != null & first_release_date != null & summary != null & category = (0,3,6,8,9,10,11)',
-  sort: 'sort hypes desc',
+  filter: 'rating > 78 & rating != null & cover != null & hypes != null & first_release_date != null & genres.name != null & first_release_date != null & summary != null & category = (0,3,6,8,9,10,11)',
+  sort: 'hypes desc',
   limit: 500,
   page: 1,
   search: '',
+}
+
+// ? Default IGDB query (trending page)
+export const detailsQuery = {
+  fields: 'name, cover.image_id, rating, first_release_date, genres.name, screenshots.image_id, summary, involved_companies.company.name, involved_companies.company.websites.url, involved_companies.company.developed, involved_companies.developer, category, aggregated_rating, aggregated_rating_count, expanded_games, dlcs, expansions, external_games.category, external_games.url, follows, franchise, hypes, parent_game, platforms.platform_logo.image_id, platforms.name, rating_count, slug, status, storyline, tags, total_rating, total_rating_count, websites.category, websites.url, version_parent, videos.video_id, age_ratings.category, age_ratings.rating, age_ratings.rating_cover_url, artworks.width, artworks.height, artworks.image_id, collection.name, game_modes.name, similar_games',
+  filter: '',
+  sort: '',
+  limit: 500,
+  page: 1,
+  search: ''
 }
 
 // ? IGDB query buiilder
 // ? Takes in query object and constructs IGDB query string
 export const queryBuilder = (query) => {
   let qs = `fields ${query.fields}; limit ${query.limit}; `;
-  qs += `${(query.filter !== 'where ') ? query.filter + '; ' : ''}`;
-  qs += `${(query.sort !== 'sort ') ? query.sort + '; ' : ''}`;
+  qs += `${(query.filter !== '') ? 'where ' + query.filter + '; ' : ''}`;
+  qs += `${(query.sort !== '') ? 'sort ' + query.sort + '; ' : ''}`;
   qs += `${(query.page !== 1) ? 'offset ' + ((query.page - 1) * query.limit) + '; ' : ''}`;
   qs += `${(query.search.trim() !== '') ? 'search "' + query.search.trim() + '";' : ''}`;
 
