@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout, reset } from '../features/auth/authSlice';
+import { logout } from '../features/auth/authSlice';
 import { reset as resetGame } from '../features/games/gameSlice.js';
+import { reset as resetUser } from '../features/user/userSlice.js';
 import { FaBars } from 'react-icons/fa';
 import { getWindowSize } from '../api/utils';
+import SearchBar from '../components/SearchBar';
 
 //TODO Change links to a ul with li of Link
 const Header = () => {
@@ -20,6 +22,7 @@ const Header = () => {
 
   // Initial render
   useEffect(() => {
+    // Makes sure menu isn't active on initial render
     const menu = document.getElementById('nav-links');
     if (menu.classList.contains === 'is-active')
       menu.classList.remove('is-active');
@@ -37,6 +40,12 @@ const Header = () => {
     }
   }, []);
 
+  // Reset the header's transparent effect when not viewing a game's details
+  useEffect(() => {
+    if (!(/^\/game-details\/[0-9]+$/).test(window.location.pathname))
+      resetHeader();
+  }, [window.location.pathname])
+
   // Close hamburger menu if its open while rotating phone device
   useEffect((showMobileMenu, toggleMenu) => {
     if (windowSize.innerWidth >= maxMobileWidth && showMobileMenu) {
@@ -47,7 +56,7 @@ const Header = () => {
   // Runs whenever user clicks on hamburger menu button
   useEffect(() => {
     const menu = document.getElementById('nav-links');
-    
+
     if (showMobileMenu)
       menu.classList.add('is-active');
     else
@@ -58,9 +67,9 @@ const Header = () => {
   const onLogout = () => {
     setShowMobileMenu(false);
     dispatch(logout());
-    dispatch(reset());
-    resetHeader();
+    // dispatch(reset());
     navigate('/');
+    dispatch(resetUser());
   };
 
   // Opens/closes mobile hamburger menu
@@ -78,7 +87,7 @@ const Header = () => {
         currentPage.style.transition = '0.56s';
         currentPage.style.transform = 'translateX(-43%)';
         // Returns the page back to normal after closing menu
-      } 
+      }
       else {
         setShowMobileMenu(false);
         document.body.style.position = 'static';
@@ -108,16 +117,18 @@ const Header = () => {
             {user ? (
               // If the user exists, show the logout button
               <>
-                <Link className="nav-link" to="/" onClick={() => { toggleMenu(); resetHeader(); }}>Games</Link>
-                <Link className="nav-link" to="/profile" onClick={() => { toggleMenu(); resetHeader(); }}>Profile</Link>
+                <SearchBar resetHeader={resetHeader}/>
+                <Link className="nav-link" to="/" onClick={() =>toggleMenu()}>Games</Link>
+                <Link className="nav-link" to="/profile" onClick={() =>toggleMenu()}>Profile</Link>
                 <span className="nav-link" onClick={onLogout}>Logout</span>
               </>
             ) : (
               // Otherwise, show normal nav
               <>
-                <Link className="nav-link" to="/" onClick={() => { toggleMenu(); resetHeader(); }}>Games</Link>
-                <Link className="nav-link" to="/login" onClick={() => { toggleMenu(); resetHeader(); }}>Log In</Link>
-                <Link className="nav-link" to="/signup" onClick={() => { toggleMenu(); resetHeader(); }}>Sign Up</Link>
+                <SearchBar />
+                <Link className="nav-link" to="/" onClick={() =>toggleMenu()}>Games</Link>
+                <Link className="nav-link" to="/login" onClick={() =>toggleMenu()}>Log In</Link>
+                <Link className="nav-link" to="/signup" onClick={() =>toggleMenu()}>Sign Up</Link>
               </>)}
           </nav>
         </header>

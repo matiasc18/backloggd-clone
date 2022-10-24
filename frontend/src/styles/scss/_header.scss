@@ -11,13 +11,15 @@
   z-index: 1000;
   // overflow: hidden; 
 
-  &.is-active-game, .is-active-game {
+  &.is-active-game,
+  .is-active-game {
     background: transparent;
-    box-shadow: none; 
+    box-shadow: none;
   }
 
   // Background blur
-  &::before, #nav-links::before {
+  &::before,
+  #nav-links::before {
     content: "";
     position: absolute;
     width: 100%;
@@ -95,6 +97,37 @@ header {
     right: 0;
   }
 
+  #search {
+    box-sizing: border-box;
+    padding: 0.6rem 1rem;
+    color: $tertiary-color;
+    background-color: $primary-color;
+    border: none;
+    max-width: 85%;
+    border-radius: 10px;
+    outline: none;
+    transition: all .3s;
+    position: relative;
+    margin-left: 1rem;
+    margin-right: 1rem;
+
+    &::-webkit-input-placeholder {
+      color: $tertiary-color;
+    }
+
+    &::-moz-placeholder {
+      color: $tertiary-color;
+    }
+
+    &::-ms-placeholder {
+      color: $tertiary-color;
+    }
+
+    &::placeholder {
+      color: $tertiary-color;
+    }
+  }
+
   .nav-link {
     position: relative;
     text-decoration: none;
@@ -159,6 +192,11 @@ header {
     visibility: visible;
     background-color: transparent;
 
+    #search {
+      width: 6rem;
+      margin: 0;
+    }
+
     .nav-link {
       letter-spacing: 0.25px;
       margin: 0;
@@ -198,6 +236,12 @@ header {
 
     &:hover {
       opacity: 0.7;
+    }
+  }
+
+  #nav-links {
+    #search {
+      width: 15rem;
     }
   }
 }
