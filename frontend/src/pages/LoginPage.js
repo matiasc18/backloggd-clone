@@ -18,7 +18,7 @@ const Login = () => {
 
   // Scrolls to top and sets focus on username field
   useEffect(() => {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
     userRef.current.focus();
   }, []);
 
@@ -40,7 +40,7 @@ const Login = () => {
       navigate('/');
 
     // Reset auth state
-    dispatch(reset());
+    // dispatch(reset());
   }, [user, isError, isSuccess, message, navigate, dispatch]);
 
   // Attempt login
