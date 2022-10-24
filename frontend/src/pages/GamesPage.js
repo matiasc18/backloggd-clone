@@ -5,25 +5,23 @@ import Games from '../components/Games';
 import { useSelector, useDispatch } from 'react-redux';
 import { getTrendingGames, reset } from '../features/games/gameSlice.js';
 
-//TODO Have games fetched in like usser goals instead (from tut)
 const GamesPage = () => {
   // Get total list of games
   const { games, isLoading } = useSelector((state) => state.game);
-  
+
   // Holds list of 30 games at a time
   const [displayedGames, setDisplayedGames] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   const dispatch = useDispatch();
-  
+
   // On initial render, get trending games
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (!games) {
       dispatch(getTrendingGames());
     }
   }, []);
-  
+
   useEffect(() => {
     if (games)
       setDisplayedGames(games.results.slice((currentPage - 1) * 30, currentPage * 30));
@@ -42,24 +40,25 @@ const GamesPage = () => {
     <main id="games-page">
       <h2>Trending Games</h2>
       <hr />
-      { games &&  
-        <Pagination 
-        gamesPerPage={30} 
-        totalGames={games.totalCount} 
-        currentPage={currentPage} 
-        updatePage={updatePage}
-        /> }
-      { isLoading && <LoadingBar />}
+      {games &&
+        <Pagination
+          gamesPerPage={30}
+          totalGames={games.totalGames}
+          currentPage={currentPage}
+          updatePage={updatePage}
+        />}
+      {isLoading && <LoadingBar />}
       <div id="games-container">
-        <Games games={displayedGames} list={1}/>
+        { games && games.totalGames === 0 && <h3>No games found</h3>}
+        <Games games={displayedGames} list={1} />
       </div>
-      { games && 
-        <Pagination 
-        gamesPerPage={30} 
-        totalGames={games.totalCount} 
-        currentPage={currentPage} 
-        updatePage={updatePage}
-        /> }
+      {games &&
+        <Pagination
+          gamesPerPage={30}
+          totalGames={games.totalGames}
+          currentPage={currentPage}
+          updatePage={updatePage}
+        />}
     </main>
   )
 }
