@@ -7,6 +7,28 @@ const Pagination = ({ gamesPerPage, totalGames, currentPage, updatePage }) => {
   // JSX to be inserted (array of page selector items)
   const insertion = [];
 
+  if (totalPages === 0 || totalPages === 1)
+    return (<></>)
+
+  if (totalPages > 1 && totalPages <= 7) {
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === currentPage)
+        insertion.push(<li key={i} className="page-selector is-active">{i}</li>);
+      else
+        insertion.push(<li key={i} className="page-selector" onClick={() => updatePage(i)}>{i}</li>);
+    }
+
+    return (
+      <div className="pagination">
+        <ul className="page-list">
+          {currentPage !== 1 ? <li className="page-arrow" onClick={() => updatePage(currentPage - 1)}><FaChevronLeft /></li> : <></>}
+          {insertion}
+          <li className="page-arrow" onClick={() => updatePage(currentPage + 1)}><FaChevronRight /></li>
+        </ul>
+      </div>
+    )
+  }
+
   //* List start
   //? Apperance when on pages 1 thru 3
   if (currentPage <= 3) {
