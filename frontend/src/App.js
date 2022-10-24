@@ -6,18 +6,22 @@ import GamesPage from './pages/GamesPage';
 import LoginPage from './pages/LoginPage';
 import Dashboard from './pages/Dashboard';
 import GameExpanded from './pages/GameExpanded';
+import SearchedPage from './pages/SearchedPage';
+import ScrollToTop from './components/ScrollToTop';
 
 // If something breaks, try putting className="App" outside of BrowserRouter (like it was before)
 function App() {
   return (
     <BrowserRouter>
       <div id="App">
-        {/* <Header /> */}
+        <ScrollToTop />
+        <Header />
         <Routes>
-          {/* <Route path='/' element={<GamesPage />} /> */}
-          {/* <Route path='/game-details/:id' element={<GameExpanded />} /> */}
-          {/* <Route path='/profile' element={<Dashboard />} /> */}
-          {/* <Route path='/signup' element={<SignupPage />} /> */}
+          <Route path='/' element={<GamesPage />} />
+          <Route path='/game-details/:id' element={<GameExpanded />} />
+          <Route path='/search/:gameSlug' element={<SearchedPage />} />
+          <Route path='/profile' element={<Dashboard />} />
+          <Route path='/signup' element={<SignupPage />} />
           <Route path='/login' element={<LoginPage />} />
         </Routes>
       </div>
