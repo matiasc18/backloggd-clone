@@ -4,6 +4,7 @@
 @use 'gamesPage';
 @use 'header';
 @use 'pagination';
+@use 'loadingBar';
 @use 'config' as *;
 
 /* override browser default */
@@ -16,6 +17,7 @@ html {
   background-color: $primary-color;
   padding: env(safe-area-inset);
   overflow-x: hidden;
+  scroll-behavior: auto;
 }
 
 body {
