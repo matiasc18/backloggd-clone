@@ -47,6 +47,18 @@ export const getUserGames = createAsyncThunk('user/allGames', async (_, thunkAPI
   }
 });
 
+//? Add game to user backlog
+export const addFavorite = createAsyncThunk('user/addFavorite', async (gameData, thunkAPI) => {
+  try {
+    const accessToken = thunkAPI.getState().auth.user.accessToken;
+    return await userService.addFavorite(gameData, accessToken);
+  } catch (err) {
+    // Or return server error message in payload
+    const message = err.response.data.error || err.message || err.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 //? Get all of the user's favorite games
 export const getFavorites = createAsyncThunk('user/favorites', async (_, thunkAPI) => {
   try {
@@ -63,12 +75,13 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    reset: (state) => {
-      state.isSuccess = false
-      state.isError = false
-      state.isLoading = false
-      state.message = ''
-    }
+    reset: (state) => initialState
+    // reset: (state) => {
+    //   state.isSuccess = false
+    //   state.isError = false
+    //   state.isLoading = false
+    //   state.message = ''
+    // }
   },
   extraReducers: (builder) => {
     builder
@@ -111,6 +124,21 @@ export const userSlice = createSlice({
         state.games = action.payload
       })
       .addCase(getUserGames.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+      })
+      //* Add favorite
+      .addCase(addFavorite.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(addFavorite.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.favorites = action.payload.favorites
+        state.message = action.payload.message
+      })
+      .addCase(addFavorite.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
