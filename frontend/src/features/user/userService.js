@@ -17,7 +17,7 @@ const getUser = async (accessToken) => {
 const addGames = async (gameData, accessToken) => {
   const response = await axios.request({
     method: 'post',
-    url: 'games/backlog/add',
+    url: 'users/games/add',
     data: {
       games: gameData
     },
@@ -26,8 +26,6 @@ const addGames = async (gameData, accessToken) => {
     }
   });
 
-  console.log(response.data);
-
   return response.data;
 };
 
@@ -35,7 +33,7 @@ const addGames = async (gameData, accessToken) => {
 const getUserGames = async (accessToken) => {
   const response = await axios.request({
     method: 'get',
-    url: 'games/backlog/all',
+    url: 'users/games/all',
     headers: {
       Authorization: `Bearer ${accessToken}`
     }
@@ -48,7 +46,23 @@ const getUserGames = async (accessToken) => {
 const getFavorites = async (accessToken) => {
   const response = await axios.request({
     method: 'get',
-    url: 'games/backlog/favorites',
+    url: 'users/favorites/all',
+    headers: {
+      Authorization: `Bearer ${accessToken}`
+    }
+  });
+
+  return response.data;
+};
+
+// Add a game to a user's favorites
+const addFavorite = async (gameData, accessToken) => {
+  const response = await axios.request({
+    method: 'post',
+    url: 'users/favorites/add',
+    data: {
+      games: gameData
+    },
     headers: {
       Authorization: `Bearer ${accessToken}`
     }
@@ -61,7 +75,8 @@ const userService = {
   getUser,
   addGames,
   getUserGames,
-  getFavorites
+  getFavorites,
+  addFavorite
 };
 
 export default userService;
