@@ -29,6 +29,7 @@
   max-height: 100%;
   width: 100%;
   z-index: 100;
+  max-width: 100%;
 
   .error-message {
     background-color: $secondary-comp;
@@ -45,6 +46,7 @@
     .game-card {
       position: relative;
       max-width: 20rem;
+      max-height: 26.666rem;
 
       &:active {
         transform: none;
@@ -108,6 +110,35 @@
         }
       }
     }
+
+    .expanded-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+
+      .game-platforms,
+      .game-genres {
+        margin: 0.5rem 0;
+        font-size: 2rem;
+      }
+
+      #platforms,
+      #genres {
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 0.75rem;
+
+
+        span {
+          margin: 0.5rem 0;
+          font-size: 0.65em;
+          background-color: $secondary-color;
+          padding: 0.5rem 0.7rem;
+          border-radius: 10px;
+          width: fit-content;
+        }
+      }
+    }
   }
 }
 
@@ -118,23 +149,34 @@
   }
 
   .gradient {
-    height: 75%;
+    height: 76%;
   }
 
   #game-expanded {
     justify-content: center;
+    align-items: center;
 
     #game {
       display: grid;
-      grid-template-columns: auto 2fr;
-      grid-template-rows: 100%;
+      grid-template-columns: auto 1fr;
+      grid-template-rows: auto auto;
+      // grid-template-areas: 
+      // "cover information information"
+      // "extra extra extra";
       align-items: initial;
-      margin: 0;
-      gap: 4rem;
+      margin-bottom: 5rem;
+      gap: 2rem;
+
+      .game-card {
+        align-self: center;
+        // grid-area: cover;
+        // min-width: 1rem;
+      }
 
       .game-details {
         align-items: flex-start;
         justify-content: flex-end;
+        // grid-area: information;
 
         #add-game {
           width: fit-content;
@@ -150,6 +192,10 @@
           text-align: start;
         }
       }
+
+      .expanded-details {
+        // grid-area: extra;
+      }
     }
   }
 }
@@ -160,8 +206,66 @@
     justify-content: flex-end;
 
     #game {
+      display: grid;
+      grid-template-columns: auto 4fr 2fr;
+      grid-template-rows: 100%;
+      align-items: initial;
+      margin: 0;
       margin-bottom: 5rem;
       gap: 5rem;
+
+      .game-card {
+        &:hover {
+          opacity: 1;
+          transform: none;
+          transition: none;
+          -webkit-transition: none;
+          cursor: auto;
+        }
+      }
+
+      .game-details {
+        #add-game {
+          &:hover {
+            background-color: $tertiary-color;
+            color: $secondary-color;
+          }
+
+          &:active {
+            background-color: $secondary-color;
+            color: $tertiary-color;
+          }
+        }
+      }
+
+      .expanded-details {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        .game-platforms,
+        .game-genres {
+          margin: 0.5rem 0;
+          font-size: 2rem;
+        }
+
+        #platforms,
+        #genres {
+          display: flex;
+          flex-wrap: wrap;
+          column-gap: 0.75rem;
+
+
+          span {
+            margin: 0.5rem 0;
+            font-size: 0.65em;
+            background-color: $secondary-color;
+            padding: 0.5rem 0.7rem;
+            border-radius: 10px;
+            width: fit-content;
+          }
+        }
+      }
     }
   }
 }
