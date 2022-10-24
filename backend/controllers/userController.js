@@ -2,10 +2,11 @@ const Users = require('../models/user.model.js');
 const Games = require('../models/game.model');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const frontloggd = require('../axios');
 
 //? @desc       Register user
 //? @route      POST /users/register
-//? @access     Public
+//* @access     Public
 // TODO Add username, pass, email validation check, and validate if not already validated
 const registerUser = async (req, res) => {
   const { username, email, password } = req.body;
@@ -39,7 +40,7 @@ const registerUser = async (req, res) => {
 
 //? @desc       Log in user
 //? @route      POST /users/login
-//? @access     Public
+//* @access     Public
 const loginUser = async (req, res) => {
   const { username, password } = req.body;
 
@@ -62,7 +63,7 @@ const loginUser = async (req, res) => {
 
 //? @desc       Get user data
 //? @route      GET /users/
-//? @access     Private
+//* @access     Private
 // TODO Possibly add more fields to the response
 // id gotten from accessToken in header auth (Bearer token)
 const getUserInfo = async (req, res) => {
@@ -72,8 +73,6 @@ const getUserInfo = async (req, res) => {
 
     return res.status(200).json({
       bio: user.bio,
-      games: user.games,
-      favorites: user.favorites,
       totalGames: user.totalGames,
       totalFavorites: user.totalFavorites,
       dateJoined: new Date(user.createdAt)
@@ -92,7 +91,7 @@ const getUserInfo = async (req, res) => {
 
 //? @desc       Update user data
 //? @route      POST /users/update
-//? @access     Private
+//* @access     Private
 // id gotten from accessToken in header auth (Bearer token)
 const updateUser = async (req, res) => {
   try {
@@ -108,7 +107,7 @@ const updateUser = async (req, res) => {
 
 //? @desc       Delete user
 //? @route      DELETE /users/:id
-//? @access     Private
+//* @access     Private
 const deleteUser = async (req, res) => {
   try {
     // Find user by id and delete
@@ -120,7 +119,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
-//? Generate JWT with user's id and username as payload
+//* Generate JWT with user's id and username as payload
 const genToken = (id, username) => {
   return jwt.sign(
     {
@@ -134,22 +133,25 @@ const genToken = (id, username) => {
 
 //? @desc       Add game(s) to a user
 //? @route      POST /users/games/add
-//? @access     Private
+//* @access     Private
 const addUserGames = async (req, res) => {
-  const { gamesToAdd } = req.body;
+  const { games } = req.body;
 
-  if (gamesToAdd) {
+  if (games) {
     try {
       const user = await Users.findById(req.user.id);
-      const duplicateIndexes = [];
+      const duplicateGames = [];
+      const gamesToAdd = [];
 
       // Removes duplicate games
-      for (let i = 0; i < gamesToAdd.length; i++) {
-        // If the user alreadu has the game, skip
-        if (user.games.some(id => id === gamesToAdd[i])) {
-          duplicateIndexes.push(i);
+      for (let i = 0; i < games.length; i++) {
+        // If the user already has the game, skip
+        if (user.games.some(game => game === games[i])) {
+          duplicateGames.push(games[i]);
           continue;
         }
+
+        gamesToAdd.push(games[i]);
 
         // Otherwise, add the game to their list
         await user.updateOne(
@@ -161,16 +163,15 @@ const addUserGames = async (req, res) => {
       }
 
       // No games added
-      if (duplicateIndexes.length === gamesToAdd.length) {
-        return res.status(409).json({ error: 'You already own all of these games' });
+      if (duplicateGames.length === games.length) {
+        return res.status(409).json({ error: games.length > 1 ? 'All games already in your backlog' : 'Already in your backlog' });
       }
 
-      const message = (gamesToAdd.length - duplicateIndexes.length === 1) ?
+      const message = (games.length - duplicateGames.length === 1) ?
         `Added to backlog`
-        : `Added (${gamesToAdd.length - duplicateIndexes.length}) to backlog`;
+        : `Added (${games.length - duplicateGames.length}) to backlog`;
 
-      // TODO Fix user.games (returns [] when adding first games)
-      return res.status(200).json({ message: message, total: gamesToAdd.length - duplicateIndexes.length });
+      return res.status(200).json({ message: message, total: games.length - duplicateGames.length, gamesAdded: gamesToAdd });
     } catch (err) {
       return res.status(400).json({ error: err });
     }
@@ -180,13 +181,47 @@ const addUserGames = async (req, res) => {
 
 //? @desc       Get user's games
 //? @route      GET /users/games/all
-//? @access     Private
+//* @access     Private
 const getUserGames = async (req, res) => {
+  const config = {
+    url: 'games/',
+    method: 'post',
+    data: {
+      query: {
+        fields: 'name, cover.image_id, rating',
+        filter: '',
+        sort: '',
+        limit: 500,
+        page: 1,
+        search: ''
+      },
+      queryString: 'fields name, cover.image_id, rating; limit 500;'
+    }
+  };
+
   try {
+    // Find user and their games
     const { games } = await Users.findById(req.user.id);
 
-    const userGames = await Games.find().where('game_id').in(games);
-    return res.status(200).json(userGames);
+    // Modify axios config for requesting to fl/games/
+    config.data.queryString += ' where id = (';
+    config.data.query.filter = 'id = (';
+    games.map((game, index) => {
+      if (index < games.length - 1) {
+        config.data.queryString += `${game}, `;
+        config.data.query.filter += `${game}, `;
+      }
+      else {
+        config.data.queryString += `${game});`;
+        config.data.query.filter += `${game})`;
+      }
+    });
+
+    console.log(config.data.queryString);
+
+    const userGames = await frontloggd.request(config);
+
+    return res.status(200).json(userGames.data);
   } catch (err) {
     return res.status(404).json({ err: err.message });
   }
@@ -194,13 +229,45 @@ const getUserGames = async (req, res) => {
 
 //? @desc       Get user's favorite games
 //? @route      GET /users/favorites/all
-//? @access     Private
+//* @access     Private
 const getFavorites = async (req, res) => {
+  const config = {
+    url: 'games/',
+    method: 'post',
+    data: {
+      query: {
+        fields: 'name, cover.image_id, rating',
+        filter: '',
+        sort: '',
+        limit: 500,
+        page: 1,
+        search: ''
+      },
+      queryString: 'fields name, cover.image_id, rating;'
+    }
+  };
+
   try {
+    // Find user and their favorites
     const { favorites } = await Users.findById(req.user.id);
 
-    const userFavorites = await Games.find().where('game_id').in(favorites);
-    return res.status(200).json(userFavorites);
+    // Modify axios config for requesting to fl/games/
+    config.data.queryString += ' where id = (';
+    config.data.query.filter = 'id = (';
+    favorites.map((game, index) => {
+      if (index < favorites.length - 1) {
+        config.data.queryString += `${game}, `;
+        config.data.query.filter += `${game}, `;
+      }
+      else {
+        config.data.queryString += `${game});`;
+        config.data.query.filter += `${game})`;
+      }
+    });
+
+    const userFavorites = await frontloggd.request(config);
+
+    return res.status(200).json(userFavorites.data);
   } catch (err) {
     return res.status(404).json({ err: err.message });
   }
@@ -208,16 +275,16 @@ const getFavorites = async (req, res) => {
 
 //? @desc       Add favorite game to a user
 //? @route      POST /users/favorites/add
-//? @access     Private
+//* @access     Private
 const addFavorite = async (req, res) => {
   const { game } = req.body;
 
   if (game) {
     try {
       // Update user's favorites list and favorites count
-      await Users.findOneAndUpdate({ _id: req.user.id },
+      await Users.updateOne({ _id: req.user.id },
         {
-          $push: { favorites: game.game_id },
+          $push: { favorites: game.id },
           $inc: { totalFavorites: 1 }
         }
       );

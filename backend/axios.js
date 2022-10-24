@@ -1,15 +1,14 @@
 const axios = require('axios');
 
-const igdb = axios.create({
-  method: 'post',
-  baseURL: process.env.IGDB_URI,
+const frontloggd = axios.create({
+  baseURL: (process.env.NODE_ENV === 'production') 
+    ? 'https://frontloggd.herokuapp.com/' 
+    : 'http://localhost:3500/',
   headers: {
-    'Accept': 'application/json',
-    'Client-ID': process.env.IGDB_CLIENT_ID,
-    'Authorization': `Bearer ${process.env.IGDB_ACCESS_TOKEN}`
+    'Content-Type': 'application/json'
   },
   responseType: 'json',
-  timeout: 10000, // 10 second timeout (1 second = too short)
+  timeout: 5000 // 5 second timeout
 });
 
-module.exports = igdb;
+module.exports = frontloggd;
