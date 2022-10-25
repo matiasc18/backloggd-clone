@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { QueryClientProvider, QueryClient } from 'react-query';
 import Header from './components/Header';
 import SignupPage from './pages/SignupPage';
 import GamesPage from './pages/GamesPage';
@@ -9,23 +10,26 @@ import GameExpanded from './pages/GameExpanded';
 import SearchedPage from './pages/SearchedPage';
 import ScrollToTop from './components/ScrollToTop';
 
-// If something breaks, try putting className="App" outside of BrowserRouter (like it was before)
+const queryClient = new QueryClient();
+
 function App() {
   return (
-    <BrowserRouter>
-      <div id="App">
-        <ScrollToTop />
-        <Header />
-        <Routes>
-          <Route path='/' element={<GamesPage />} />
-          <Route path='/game-details/:id' element={<GameExpanded />} />
-          <Route path='/search/:gameSlug' element={<SearchedPage />} />
-          <Route path='/profile' element={<Dashboard />} />
-          <Route path='/signup' element={<SignupPage />} />
-          <Route path='/login' element={<LoginPage />} />
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <div id="App">
+          <ScrollToTop />
+          <Header />
+          <Routes>
+            <Route path='/' element={<GamesPage />} />
+            <Route path='/game-details/:id' element={<GameExpanded />} />
+            <Route path='/search/:gameSlug' element={<SearchedPage />} />
+            <Route path='/profile' element={<Dashboard />} />
+            <Route path='/signup' element={<SignupPage />} />
+            <Route path='/login' element={<LoginPage />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 
