@@ -1,18 +1,18 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { reset } from '../features/games/gameSlice.js';
+// import { reset } from '../features/games/gameSlice.js';
 import { imgPath, getRatingColor } from '../api/utils';
 
 //* Render game cards
 const Games = ({ games, list }) => {
   // For re-routing / redux dispatch
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // Reset game state and redirect to gameExpanded component
   const openGame = (game) => {
-    dispatch(reset());
+    // dispatch(reset());
     navigate(`/game-details/${game.id}`);
   };
 
