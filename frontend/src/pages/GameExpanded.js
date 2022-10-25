@@ -1,78 +1,46 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+// import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getGameDetails } from '../features/games/gameSlice.js';
-import { addGames } from '../features/user/userSlice';
+// import { getGameDetails } from '../features/games/gameSlice.js';
+// import { addGames } from '../features/user/userSlice';
 import { imgPath, getRatingColor } from '../api/utils';
 import LoadingBar from '../components/LoadingBar';
+import { useQuery } from 'react-query';
+import axios from '../api/axios';
+import { addUserGames } from '../api/fetchUtils.js';
 
 // Displays game information for @param: id
 const GameExpanded = () => {
-  // For redux dispatch
-  const dispatch = useDispatch();
-
   const { id } = useParams();
-  const { gameDetails, isLoading } = useSelector((state) => state.game);
-  const { message } = useSelector((state) => state.user);
+  // data = success / error message after trying to add a game to your backlog
+  const { data, refetch } = useQuery(`add-game/${id}`, () => addUserGames([id]), { enabled: false }); 
+  // Fetch game details
+  const { data: gameDetails, isLoading } = useQuery(`game-details/${id}`, async () => {
+    const response = await axios.request({
+      method: 'get',
+      url: `games/${id}`
+    });
+    return response.data;
+  });
 
-  // Current game and background index
+  // Current game and background image index
   const [currentGame, setCurrentGame] = useState(null);
   const [bgIndex, setBgIndex] = useState(0);
 
-  // Scroll to top of screen on entry
+  // Once game details are GOT(TEN), set the current game
   useEffect(() => {
-    // window.scrollTo(0, 0);
-  }, []);
+    setCurrentGame(gameDetails);
+  }, [gameDetails]);
 
   // Once the game is loaded, blur the header + nav
   useEffect(() => {
     if (currentGame) {
-      console.log(currentGame);
+      // console.log(id, currentGame);
       document.getElementById('header-container').classList.add('is-active-game');
       document.getElementById('nav-links').classList.add('is-active-game');
       setBgIndex(Math.floor(Math.random() * currentGame.screenshots.length));
     }
-    // console.log('[currentGame] currentGame: ', currentGame);
-    // console.log('\n');
   }, [currentGame]);
-
-  // Get current game
-  useEffect(() => {
-    // If redux state doesn't contain any game info, get it
-    // console.log('[gameDetails]');
-    // console.log('gameDetails: ', gameDetails);
-    if (gameDetails.length === 0) {
-      // console.log('1 gameDetails length is 0: ', gameDetails[0]);
-      dispatch(getGameDetails(id));
-    }
-    // If redux state contains games
-    else {
-      // console.log('gameDetails length is not 0');
-      // console.log(gameDetails.length);
-      let newGame = gameDetails.find((game) => game.id === Number(id));
-      // console.log('newGame: ', newGame);
-
-      // If the current game exists in redux, display it
-      if (newGame) {
-        setCurrentGame(newGame);
-      }
-      // Otherwise, get game info
-      else {
-        // console.log('game doesnt already exist');
-        dispatch(getGameDetails(id));
-        // console.log('3 gameDetails: ', gameDetails);
-        // setCurrentGame(gameDetails[gameDetails.length - 1]);
-        // console.log('3 currentGame: ', currentGame);
-      }
-    }
-    // console.log('\n');
-  }, [gameDetails, dispatch, id]);
-
-  // Adds game to the user's list
-  const addGame = (e) => {
-    e.preventDefault();
-    dispatch(addGames([currentGame.id]));
-  };
 
   return (
     <>
@@ -88,8 +56,9 @@ const GameExpanded = () => {
               <h1>{currentGame.name}</h1>
               <p className="game-date">released on <strong>{currentGame.local_date}</strong> by <strong>{currentGame.involved_companies[0].company.name}</strong></p>
               <p className="game-summary">{currentGame.summary}</p>
-              <button id="add-game" onClick={addGame}>Add Game</button>
-              {message && <span className="error-message">{message}</span>}
+              <button id="add-game" onClick={refetch}>Add Game</button>
+              {data && data.message && <span className="error-message">{data.message}</span>}
+              {data && data.error && <span className="error-message">{data.error}</span>}
             </div>
             <section className="expanded-details">
               <p className="game-platforms">Platforms</p>
@@ -115,3 +84,58 @@ const GameExpanded = () => {
 }
 
 export default GameExpanded;
+
+  // // For redux dispatch
+  // const dispatch = useDispatch();
+
+  // const { id } = useParams();
+  // const { gameDetails, isLoading } = useSelector((state) => state.game);
+  // const { message } = useSelector((state) => state.user);
+
+  // // Current game and background index
+  // const [currentGame, setCurrentGame] = useState(null);
+  // const [bgIndex, setBgIndex] = useState(0);
+
+  // // Scroll to top of screen on entry
+  // useEffect(() => {
+  //   // window.scrollTo(0, 0);
+  // }, []);
+
+  // // Once the game is loaded, blur the header + nav
+  // useEffect(() => {
+  //   if (currentGame) {
+  //     console.log(currentGame);
+  //     document.getElementById('header-container').classList.add('is-active-game');
+  //     document.getElementById('nav-links').classList.add('is-active-game');
+  //     setBgIndex(Math.floor(Math.random() * currentGame.screenshots.length));
+  //   }
+  // }, [currentGame]);
+
+  // // Get current game
+  // useEffect(() => {
+  //   // If redux state doesn't contain any game info, get it
+  //   if (gameDetails.length === 0) {
+  //     dispatch(getGameDetails(id));
+  //   }
+  //   // If redux state contains games
+  //   else {
+  //     let newGame = gameDetails.find((game) => game.id === Number(id));
+
+  //     // If the current game exists in redux, display it
+  //     if (newGame) {
+  //       setCurrentGame(newGame);
+  //     }
+  //     // Otherwise, get game info
+  //     else {
+  //       dispatch(getGameDetails(id));
+  //       // setCurrentGame(gameDetails[gameDetails.length - 1]);
+  //     }
+  //   }
+  //   // console.log('\n');
+  // }, [gameDetails, dispatch, id]);
+
+  // // Adds game to the user's list
+  // const addGame = (e) => {
+  //   e.preventDefault();
+  //   dispatch(addGames([currentGame.id]));
+  // };
