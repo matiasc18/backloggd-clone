@@ -146,7 +146,7 @@ const addUserGames = async (req, res) => {
       // Removes duplicate games
       for (let i = 0; i < games.length; i++) {
         // If the user already has the game, skip
-        if (user.games.some(game => game === games[i])) {
+        if (user.games.some(game => game == games[i])) {
           duplicateGames.push(games[i]);
           continue;
         }
@@ -163,7 +163,7 @@ const addUserGames = async (req, res) => {
       }
 
       // No games added
-      if (duplicateGames.length === games.length) {
+      if (duplicateGames.length == games.length) {
         return res.status(409).json({ error: games.length > 1 ? 'All games already in your backlog' : 'Already in your backlog' });
       }
 
