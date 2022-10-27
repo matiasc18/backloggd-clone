@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { getUser, getFavorites, getUserGames, reset } from '../features/user/userSlice.js';
-import { reset as resetGames } from '../features/games/gameSlice.js';
+import { getUser, getFavorites, getUserGames } from '../features/user/userSlice.js';
 import Games from '../components/Games';
 import Pagination from '../components/Pagination';
 
@@ -11,44 +10,25 @@ const Dashboard = () => {
   // For re-routing / redux dispatch
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const [currentPage, setCurrentPage] = useState(1);
+  
   const { user } = useSelector((state) => state.auth);
   const { userInfo, games, favorites } = useSelector((state) => state.user);
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [displayedGames, setDisplayedGames] = useState([]);
-
-  // Scroll to top on page load
-  useEffect(() => {
-    // window.scrollTo(0, 0);
-  }, []);
+  const displayedGames = useMemo(() => {
+    if (games)
+      return games.results.slice((currentPage - 1) * 30, currentPage * 30);
+  }, [games]);
 
   // Runs whenever redux auth state changes
   useEffect(() => {
-    // If no logged in user, go home
-    if (!user) {
+    if (!user) { // If no one is signed in, go home
       navigate('/');
       return;
     }
-
     dispatch(getUserGames());
     dispatch(getFavorites());
     dispatch(getUser());
-
-    // Resets user state whenever the user leaves the page
-    // return () => {
-    //   dispatch(reset());
-    // };
   }, [user, navigate, dispatch]);
-
-  useEffect(() => {
-    if (games)
-      setDisplayedGames(games.results.slice((currentPage - 1) * 30, currentPage * 30));
-
-    return () => {
-      dispatch(resetGames());
-    };
-  }, [games, currentPage, dispatch]);
 
   //? Updates current page of results
   const updatePage = async (pageNumber) => {
@@ -57,7 +37,7 @@ const Dashboard = () => {
 
   return (
     <main id="dashboard">
-      {user && userInfo && games && favorites && <>
+      {user && userInfo && <>
         <section id="bio">
           <h2>{user.username}</h2>
           <hr />
@@ -69,7 +49,7 @@ const Dashboard = () => {
           <h2>Favorites</h2>
           <hr />
           <div id="user-favorites">
-            <Games games={favorites.results} list={1} />
+            {favorites && <Games games={favorites.results} list={1} />}
           </div>
         </section>
         <section id="dashboard-games">
@@ -83,7 +63,7 @@ const Dashboard = () => {
               updatePage={updatePage}
             />}
           <div id="user-games">
-            <Games games={displayedGames} list={2} />
+            {displayedGames && <Games games={displayedGames} list={2} />}
           </div>
           {games &&
             <Pagination
