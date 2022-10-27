@@ -269,7 +269,7 @@ const getFavorites = async (req, res) => {
 
     return res.status(200).json(userFavorites.data);
   } catch (err) {
-    return res.status(404).json({ err: err.message });
+    return res.status(404).json({ message: 'User does not have any favorite games' });
   }
 };
 
