@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
-// import { getGameDetails } from '../features/games/gameSlice.js';
-// import { addGames } from '../features/user/userSlice';
+import { useEffect, useState, useMemo } from 'react';
 import { imgPath, getRatingColor } from '../api/utils';
-import LoadingBar from '../components/LoadingBar';
-import { useQuery } from 'react-query';
-import axios from '../api/axios';
 import { addUserGames } from '../api/fetchUtils.js';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import LoadingBar from '../components/LoadingBar';
+import axios from '../api/axios';
 
 // Displays game information for @param: id
 const GameExpanded = () => {
   const { id } = useParams();
-  // data = success / error message after trying to add a game to your backlog
-  const { data, refetch } = useQuery(`add-game/${id}`, () => addUserGames([id]), { enabled: false }); 
-  // Fetch game details
-  const { data: gameDetails, isLoading } = useQuery(`game-details/${id}`, async () => {
+  const { data, refetch } = useQuery(`add-game/${id}`, // returns success || error message
+    () => addUserGames([id]), { enabled: false });
+  const { data: gameDetails, isLoading } = useQuery(`game-details/${id}`, async () => { // Fetch game's information
     const response = await axios.request({
       method: 'get',
       url: `games/${id}`
@@ -24,18 +20,12 @@ const GameExpanded = () => {
   });
 
   // Current game and background image index
-  const [currentGame, setCurrentGame] = useState(null);
+  const currentGame = useMemo(() => { if (gameDetails) return gameDetails; }, [gameDetails]);
   const [bgIndex, setBgIndex] = useState(0);
-
-  // Once game details are GOT(TEN), set the current game
-  useEffect(() => {
-    setCurrentGame(gameDetails);
-  }, [gameDetails]);
 
   // Once the game is loaded, blur the header + nav
   useEffect(() => {
     if (currentGame) {
-      // console.log(id, currentGame);
       document.getElementById('header-container').classList.add('is-active-game');
       document.getElementById('nav-links').classList.add('is-active-game');
       setBgIndex(Math.floor(Math.random() * currentGame.screenshots.length));

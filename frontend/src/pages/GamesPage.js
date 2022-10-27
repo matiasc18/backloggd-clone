@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import { queryBuilder, defaultQuery } from '../api/utils';
+import { useState, useMemo } from 'react';
+import { useQuery } from 'react-query';
 import Pagination from '../components/Pagination';
 import LoadingBar from '../components/LoadingBar';
 import Games from '../components/Games';
-// import { useSelector, useDispatch } from 'react-redux';
-// import { getTrendingGames, reset } from '../features/games/gameSlice.js';
-import { useQuery } from 'react-query';
-import { queryBuilder, defaultQuery } from '../api/utils';
 import axios from '../api/axios';
 
 const fetchTrendingGames = async () => {
@@ -14,13 +12,12 @@ const fetchTrendingGames = async () => {
     url: 'games/',
     data: queryBuilder(defaultQuery)
   });
-  
   return response.data;
 }
 
 const GamesPage = () => {
   // Get total list of games
-  const { data: games, status, error, isError, isLoading, isSuccess } = useQuery('trending-games', fetchTrendingGames);
+  const { data: games, error, isError, isLoading } = useQuery('trending-games', fetchTrendingGames);
   const [currentPage, setCurrentPage] = useState(1);
 
   // Holds list of 30 games at a time
