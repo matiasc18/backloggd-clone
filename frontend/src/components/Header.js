@@ -20,7 +20,6 @@ const Header = () => {
   const [windowSize, setWindowSize] = useState(getWindowSize());
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
-  // Initial render
   useEffect(() => {
     // Makes sure menu isn't active on initial render
     const menu = document.getElementById('nav-links');
