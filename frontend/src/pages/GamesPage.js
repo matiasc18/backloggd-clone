@@ -17,8 +17,11 @@ const fetchTrendingGames = async () => {
 
 const GamesPage = () => {
   // Get total list of games
-  const { data: games, error, isError, isLoading } = useQuery('trending-games', fetchTrendingGames);
+  const { data: games, error, isError, isLoading } = useQuery('trending-games', fetchTrendingGames,
+    { staleTime: 300000 }); // Will not refetch list of games for 5 minutes
   const [currentPage, setCurrentPage] = useState(1);
+
+  if (isLoading) console.log(isLoading);
 
   // Holds list of 30 games at a time
   const displayedGames = useMemo(() => {
