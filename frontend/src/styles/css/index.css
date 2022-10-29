@@ -153,7 +153,12 @@
   max-width: 120rem;
   margin: 1em auto;
 }
-#dashboard section h1, #dashboard section h2, #dashboard section h3, #dashboard section h4, #dashboard section h5, #dashboard section h6 {
+#dashboard section h1,
+#dashboard section h2,
+#dashboard section h3,
+#dashboard section h4,
+#dashboard section h5,
+#dashboard section h6 {
   display: flex;
   justify-content: center;
   margin: 0;
@@ -229,11 +234,17 @@
   #dashboard {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: auto auto;
-    grid-template-areas: "bio favorites" "games games";
+    grid-template-rows: -webkit-min-content 4rem auto auto;
+    grid-template-rows: min-content 4rem auto auto;
+    grid-template-areas: "header header" "nav nav" "bio favorites" "games games";
     width: 92.5%;
     -moz-column-gap: 3rem;
          column-gap: 3rem;
+  }
+  #dashboard #user-name {
+    margin: 0;
+    align-self: flex-end;
+    margin-bottom: 1rem;
   }
   #dashboard section #user-favorites,
 #dashboard section #user-games {
@@ -241,6 +252,48 @@
   }
   #dashboard section h2 {
     justify-content: flex-start;
+  }
+  #dashboard #dashboard-nav {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    grid-area: nav;
+    gap: 5rem;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(48, 75, 164);
+    border-radius: 10px;
+  }
+  #dashboard #dashboard-nav h2 {
+    margin: 0;
+  }
+  #dashboard #dashboard-nav .edit-profile {
+    position: absolute;
+    border: 0;
+    outline: 0;
+    background: none;
+    color: inherit;
+    right: 1rem;
+  }
+  #dashboard #dashboard-nav #dashboard-nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  #dashboard #dashboard-nav #dashboard-nav-links label {
+    display: inline-block;
+    margin: 0 2rem;
+    letter-spacing: 0.25px;
+    cursor: pointer;
+  }
+  #dashboard #dashboard-nav #dashboard-nav-links label input {
+    display: none;
+    visibility: hidden;
+  }
+  #dashboard #dashboard-nav #dashboard-nav-links label input:checked {
+    padding: 0.35em 0.7em;
+    border-radius: 10px;
+    border: 1px solid rgb(207, 207, 207);
   }
   #dashboard #bio {
     grid-area: bio;
@@ -267,7 +320,12 @@
          column-gap: 5rem;
     width: 100%;
   }
-  #dashboard section h1, #dashboard section h2, #dashboard section h3, #dashboard section h4, #dashboard section h5, #dashboard section h6 {
+  #dashboard section h1,
+#dashboard section h2,
+#dashboard section h3,
+#dashboard section h4,
+#dashboard section h5,
+#dashboard section h6 {
     justify-content: flex-start;
     margin-left: 0.5em;
   }
@@ -282,7 +340,6 @@
     margin-right: 2.5%;
   }
   #dashboard #dashboard-favorites #user-favorites {
-    grid-area: favorites;
     justify-content: center;
     gap: 2rem;
     margin: 1.5em 1em;
@@ -311,7 +368,6 @@
     margin: 0 1.5%;
   }
   #dashboard #dashboard-games #user-games {
-    grid-area: games;
     justify-content: center;
     -moz-column-gap: 1.5rem;
          column-gap: 1.5rem;
@@ -1062,6 +1118,11 @@ header #header-title:active {
             animation: borealisBar 2s linear infinite;
   }
 }
+footer {
+  height: 12.5rem;
+  background-color: rgb(48, 75, 164);
+}
+
 /* override browser default */
 html {
   font-size: 62.5%;
