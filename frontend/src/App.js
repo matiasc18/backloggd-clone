@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import Header from './components/Header';
 import SignupPage from './pages/SignupPage';
 import GamesPage from './pages/GamesPage';
@@ -9,6 +10,7 @@ import Dashboard from './pages/Dashboard';
 import GameExpanded from './pages/GameExpanded';
 import SearchedPage from './pages/SearchedPage';
 import ScrollToTop from './components/ScrollToTop';
+import Footer from './components/Footer';
 
 const queryClient = new QueryClient();
 
@@ -27,8 +29,10 @@ function App() {
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/login' element={<LoginPage />} />
           </Routes>
+          <Footer />
         </div>
       </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
 }
