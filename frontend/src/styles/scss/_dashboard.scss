@@ -1,4 +1,4 @@
-@use 'config' as *;
+@use "config" as *;
 
 #dashboard {
   display: flex;
@@ -11,7 +11,12 @@
   margin: 1em auto;
 
   section {
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       display: flex;
       justify-content: center;
       margin: 0;
@@ -102,12 +107,20 @@
   #dashboard {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: min-content 4rem auto auto;
     grid-template-areas:
+      "header header"
+      "nav nav"
       "bio favorites"
       "games games";
     width: 92.5%;
     column-gap: 3rem;
+
+    #user-name {
+      margin: 0;
+      align-self: flex-end;
+      margin-bottom: 1rem;
+    }
 
     section {
       #user-favorites,
@@ -117,6 +130,55 @@
 
       h2 {
         justify-content: flex-start;
+      }
+    }
+
+    #dashboard-nav {
+      display: flex;
+      flex-direction: row;
+      position: relative;
+      grid-area: nav;
+      gap: 5rem;
+      align-items: center;
+      justify-content: center;
+      background-color: $secondary-color;
+      border-radius: 10px;
+
+      h2 {
+        margin: 0;
+      }
+
+      .edit-profile {
+        position: absolute;
+        border: 0;
+        outline: 0;
+        background: none;
+        color: inherit;
+        right: 1rem;
+      }
+
+      #dashboard-nav-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        label {
+          display: inline-block;
+          margin: 0 2rem;
+          letter-spacing: 0.25px;
+          cursor: pointer;
+
+          input {
+            display: none;
+            visibility: hidden;
+
+            &:checked {
+              padding: 0.35em 0.7em;
+              border-radius: 10px;
+              border: 1px solid $tertiary-color;
+            }
+          }
+        }
       }
     }
 
@@ -155,7 +217,12 @@
     width: 100%;
 
     section {
-      h1, h2, h3, h4, h5, h6 {
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
         justify-content: flex-start;
         margin-left: 0.5em;
       }
@@ -174,7 +241,6 @@
       margin-right: 2.5%;
 
       #user-favorites {
-        grid-area: favorites;
         justify-content: center;
         gap: 2rem;
         margin: 1.5em 1em;
@@ -209,7 +275,6 @@
       margin: 0 1.5%;
 
       #user-games {
-        grid-area: games;
         justify-content: center;
         column-gap: 1.5rem;
         row-gap: 2.5rem;
