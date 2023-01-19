@@ -440,6 +440,7 @@
     background-color: rgb(48, 75, 164);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
+    max-height: 36.8px;
   }
   .game-card .game-info .game-title {
     max-width: 75%;
@@ -918,22 +919,9 @@ header #header-title:active {
   max-width: 100%;
 }
 
-#games-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 100%;
-  margin: 0.75em 0;
-  gap: 1rem;
-}
-
 @media (min-width: 30em) {
   #games-page {
     width: 90%;
-  }
-  #games-container {
-    margin: 1em 0.5em;
-    row-gap: 1.5rem;
   }
 }
 @media (min-width: 60em) {
@@ -943,13 +931,6 @@ header #header-title:active {
   }
   #games-page hr {
     margin: 1em 0 1.5em 0;
-  }
-  #games-container {
-    justify-content: center;
-    -moz-column-gap: 1.5rem;
-         column-gap: 1.5rem;
-    row-gap: 2.5rem;
-    margin: 1.5em 0;
   }
 }
 /*? Page selector container */
@@ -1119,10 +1100,120 @@ header #header-title:active {
   }
 }
 footer {
-  height: 12.5rem;
+  position: relative;
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  padding: 1.5rem 0 0 1.5rem;
+  height: 7.5rem;
   background-color: rgb(48, 75, 164);
+  color: rgb(207, 207, 207);
+}
+footer #github-link, footer #linkedin-link, footer #about-frontloggd {
+  display: inline-block;
+  align-self: center;
+  color: inherit;
+}
+footer #about-frontloggd {
+  text-decoration: none;
+}
+footer #igdb-shoutout {
+  color: inherit;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.75px;
+}
+footer #backloggd-clone {
+  display: block;
+  width: 100%;
+  text-align: center;
+  color: inherit;
+  position: absolute;
+  bottom: 0.75rem;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+footer #backloggd-clone a {
+  justify-content: center;
+  text-decoration: none;
+  color: rgb(207, 207, 207);
+}
+footer #backloggd-clone a:hover {
+  font-size: 1.1em;
+  transition: all 0.1s;
 }
 
+#landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(207, 207, 207);
+  width: 95%;
+  justify-self: center;
+  max-width: 75em;
+  margin-bottom: 1em;
+}
+#landing-page h1,
+#landing-page h2,
+#landing-page h3,
+#landing-page h4,
+#landing-page h5,
+#landing-page h6 {
+  margin: 0;
+  margin-top: 2.25rem;
+  max-width: 100%;
+  text-align: center;
+  letter-spacing: 0.25px;
+}
+#landing-page hr {
+  display: flex;
+  background-color: rgb(207, 207, 207);
+  margin: 0.5em 0 0.75em 0;
+  border-radius: 25px;
+  border: 0;
+  height: 0.5rem;
+  max-width: 100%;
+  width: 100%;
+}
+#landing-page #lp-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  width: 100%;
+}
+
+@media (min-width: 60em) {
+  #landing-page {
+    align-items: flex-start;
+  }
+  #landing-page h1,
+#landing-page h2,
+#landing-page h3,
+#landing-page h4,
+#landing-page h5,
+#landing-page h6 {
+    margin-left: 2.25rem;
+    text-align: left;
+  }
+  #landing-page hr {
+    margin: 1em 0 1.5em 0;
+  }
+  #landing-page #lp-container {
+    display: grid;
+    grid-template-columns: 3.5fr 6.5fr;
+    grid-template-rows: 1fr;
+    gap: 5rem;
+  }
+  #landing-page #lp-container #coming-soon .games-container .game-cover {
+    border-radius: 10px;
+  }
+  #landing-page #lp-container #coming-soon .games-container .game-info {
+    visibility: hidden;
+    display: none;
+  }
+}
 /* override browser default */
 html {
   font-size: 62.5%;
@@ -1162,4 +1253,29 @@ body {
   background-color: crimson;
   color: white;
   text-align: center;
+}
+
+.games-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+  margin: 0.75em 0;
+  gap: 1rem;
+}
+
+@media (min-width: 30em) {
+  .games-container {
+    margin: 1em 0.5em;
+    row-gap: 1.5rem;
+  }
+}
+@media (min-width: 60em) {
+  .games-container {
+    justify-content: center;
+    -moz-column-gap: 1.5rem;
+         column-gap: 1.5rem;
+    row-gap: 2.5rem;
+    margin: 1.5em 0;
+  }
 }
