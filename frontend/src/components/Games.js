@@ -5,10 +5,6 @@ import { imgPath, getRatingColor } from '../api/utils';
 const Games = ({ games, list }) => {
   const navigate = useNavigate(); // For re-routing
 
-  const openGame = (game) => {
-    navigate(`/game-details/${game.id}`);
-  };
-
   // Shortens long game tittles
   const checkLength = (title) => {
     let modifiedTitle = '';
@@ -25,11 +21,11 @@ const Games = ({ games, list }) => {
   return (
     <>
       {games && games.map((game) => (
-        <div key={(game.id) + list} className="game-card" onClick={() => openGame(game)}>
+        <div key={(game.id) + list} className="game-card" onClick={() => navigate(`/game-details/${game.id}`)}>
           <img className="game-cover" src={`${imgPath}/${game.cover.image_id}.jpg`} alt={`Cover art for ${game.name}`} />
           <div className="game-info">
             <span className="game-title">{checkLength(game.name)}</span>
-            <span className="game-rating" style={getRatingColor(Math.floor(game.rating))}>{Math.floor(game.rating)}</span>
+            {game.rating && <span className="game-rating" style={getRatingColor(Math.floor(game.rating))}>{Math.floor(game.rating)}</span>}
           </div>
         </div>
       ))}
