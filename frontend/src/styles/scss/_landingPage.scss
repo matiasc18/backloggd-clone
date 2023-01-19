@@ -1,0 +1,85 @@
+@use "config" as *;
+
+#landing-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: $tertiary-color;
+  width: 95%;
+  justify-self: center;
+  max-width: 75em;
+  margin-bottom: 1em;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    margin-top: 2.25rem;
+    max-width: 100%;
+    text-align: center;
+    letter-spacing: 0.25px;
+  }
+
+  hr {
+    display: flex;
+    background-color: $tertiary-color;
+    margin: 0.5em 0 0.75em 0;
+    border-radius: 25px;
+    border: 0;
+    height: 0.5rem;
+    max-width: 100%;
+    width: 100%;
+  }
+
+  #lp-container {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+//* Laptops and up
+//? MINIMUM WIDTH: 60em == 960px
+@media (min-width: $desktop) {
+  #landing-page {
+    align-items: flex-start;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin-left: 2.25rem;
+      text-align: left;
+    }
+
+    hr {
+      margin: 1em 0 1.5em 0;
+    }
+
+    #lp-container {
+      display: grid;
+      grid-template-columns: 3.5fr 6.5fr;
+      grid-template-rows: 1fr;
+      gap: 5rem;
+
+      #coming-soon {
+        .games-container {
+          .game-cover {
+            border-radius: 10px;
+          }
+
+          .game-info {
+            visibility: hidden;
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
