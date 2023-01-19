@@ -1,12 +1,13 @@
-@use 'authPage';
-@use 'dashboard';
-@use 'gameExpanded';
-@use 'gamesPage';
-@use 'header';
-@use 'pagination';
-@use 'loadingBar';
-@use 'footer';
-@use 'config' as *;
+@use "authPage";
+@use "dashboard";
+@use "gameExpanded";
+@use "gamesPage";
+@use "header";
+@use "pagination";
+@use "loadingBar";
+@use "footer";
+@use "landingPage";
+@use "config" as *;
 
 /* override browser default */
 html {
@@ -47,4 +48,34 @@ body {
   background-color: crimson;
   color: white;
   text-align: center;
+}
+
+//? Container holding all game cards
+.games-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  max-width: 100%;
+  margin: 0.75em 0;
+  gap: 1rem;
+}
+
+//* Tablets and up
+//? MINIMUM WIDTH: 30em == 480px
+@media (min-width: $tablet) {
+  .games-container {
+    margin: 1em 0.5em;
+    row-gap: 1.5rem;
+  }
+}
+
+//* Laptops and up
+//? MINIMUM WIDTH: 60em == 960px
+@media (min-width: $desktop) {
+  .games-container {
+    justify-content: center;
+    column-gap: 1.5rem;
+    row-gap: 2.5rem;
+    margin: 1.5em 0;
+  }
 }
