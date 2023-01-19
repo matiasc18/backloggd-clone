@@ -1,6 +1,55 @@
 @use 'config' as *;
 
+$footer-padding: 1.5rem 0 0 1.5rem;
+
 footer {
-  height: 12.5rem;
+  position: relative;
+  display: flex;
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+  padding: $footer-padding;
+  height: 7.5rem;
   background-color: $secondary-color;
+  color: $tertiary-color;
+
+  #github-link, #linkedin-link, #about-frontloggd {
+    display: inline-block;
+    align-self: center;
+    color: inherit;
+  }
+
+  #about-frontloggd {
+    text-decoration: none;
+  }
+
+  #igdb-shoutout {
+    color: inherit;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    font-weight: bold;
+    letter-spacing: 0.75px;
+  }
+
+  #backloggd-clone {
+    display: block;
+    width: 100%;
+    text-align: center;
+    color: inherit;
+    position: absolute;
+    bottom: 0.75rem;
+    font-weight: bold;
+    font-size: 1.25rem;
+
+    a {
+      justify-content: center;
+      text-decoration: none;
+      color: $tertiary-color;
+
+      &:hover {
+        font-size: 1.1em;
+        transition: all 0.1s;
+      }
+    }
+  }
 }
