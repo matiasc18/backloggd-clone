@@ -117,7 +117,7 @@ const Header = () => {
               // If the user exists, show the logout button
               <>
                 <SearchBar resetHeader={resetHeader}/>
-                <Link className="nav-link" to="/" onClick={() =>toggleMenu()}>Games</Link>
+                <Link className="nav-link" to="/games" onClick={() =>toggleMenu()}>Games</Link>
                 <Link className="nav-link" to="/profile" onClick={() =>toggleMenu()}>Profile</Link>
                 <span className="nav-link" onClick={onLogout}>Logout</span>
               </>
@@ -125,7 +125,7 @@ const Header = () => {
               // Otherwise, show normal nav
               <>
                 <SearchBar />
-                <Link className="nav-link" to="/" onClick={() =>toggleMenu()}>Games</Link>
+                <Link className="nav-link" to="/games" onClick={() =>toggleMenu()}>Games</Link>
                 <Link className="nav-link" to="/login" onClick={() =>toggleMenu()}>Log In</Link>
                 <Link className="nav-link" to="/signup" onClick={() =>toggleMenu()}>Sign Up</Link>
               </>)}
