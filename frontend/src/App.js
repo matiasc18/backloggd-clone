@@ -11,6 +11,7 @@ import GameExpanded from './pages/GameExpanded';
 import SearchedPage from './pages/SearchedPage';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
+import LandingPage from './pages/LandingPage';
 
 const queryClient = new QueryClient();
 
@@ -22,7 +23,8 @@ function App() {
           <ScrollToTop />
           <Header />
           <Routes>
-            <Route path='/' element={<GamesPage />} />
+            <Route path="/" element={<LandingPage />} />
+            <Route path='/games' element={<GamesPage />} />
             <Route path='/game-details/:id' element={<GameExpanded />} />
             <Route path='/search/:gameSlug' element={<SearchedPage />} />
             <Route path='/profile' element={<Dashboard />} />
