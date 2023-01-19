@@ -1,27 +1,16 @@
-import { queryBuilder, defaultQuery } from '../api/utils';
-import { useState, useMemo } from 'react';
-import { useQuery } from 'react-query';
+import { queryBuilder, trendingQuery } from '../api/utils';
 import Pagination from '../components/Pagination';
 import LoadingBar from '../components/LoadingBar';
+import { FetchTrendingGames } from '../hooks/fetchGames.js';
+import { useState, useMemo } from 'react';
 import Games from '../components/Games';
 import axios from '../api/axios';
-
-const fetchTrendingGames = async () => {
-  const response = await axios.request({
-    method: 'post',
-    url: 'games/',
-    data: queryBuilder(defaultQuery)
-  });
-  return response.data;
-}
+import { useQuery } from 'react-query';
 
 const GamesPage = () => {
   // Get total list of games
-  const { data: games, error, isError, isLoading } = useQuery('trending-games', fetchTrendingGames,
-    { staleTime: 300000 }); // Will not refetch list of games for 5 minutes
+  const { data: games, error, isError, isLoading } = FetchTrendingGames('trending');
   const [currentPage, setCurrentPage] = useState(1);
-
-  if (isLoading) console.log(isLoading);
 
   // Holds list of 30 games at a time
   const displayedGames = useMemo(() => {
@@ -48,7 +37,7 @@ const GamesPage = () => {
           updatePage={updatePage}
         />}
       {isLoading && <LoadingBar />}
-      <div id="games-container">
+      <div className="games-container">
         {games && games.totalGames === 0 && <h3>No games found</h3>}
         <Games games={displayedGames} list={1} />
       </div>
