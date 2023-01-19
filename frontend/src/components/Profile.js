@@ -13,7 +13,7 @@ const Profile = ({ user, userInfo }) => {
 
   const displayedGames = useMemo(() => {
     if (games) return games.results.slice((currentPage - 1) * 30, currentPage * 30);
-  }, [games]);
+  }, [games, currentPage]);
 
   useEffect(() => {
     dispatch(getUserGames());
