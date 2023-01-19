@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react';
 import { imgPath, getRatingColor } from '../api/utils';
-import { addUserGames } from '../api/fetchUtils.js';
+import { addUserGames } from '../hooks/hooks.js';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import LoadingBar from '../components/LoadingBar';
