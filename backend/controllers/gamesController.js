@@ -14,24 +14,30 @@ const getGames = async (req, res) => {
     data: req.body.queryString
   };
 
+  console.log(req.body.queryString);
+
   // Return list of all games + total game count
   try {
     // Get first 500 games + count of how many games
     const games = await igdb.request(config);
-    const totalGames = (await igdb.request({ ...config, url: '/games/count', data: `${query.filter !== '' ? 'where ' + query.filter + ';' : ''};` })).data.count;
-    // const totalGames = (await igdb.request({ ...config, url: '/games/count', data: `${query.filter}`})).data.count;
+    let totalGames;
+    if (query.limit > 10) {
+      totalGames = (await igdb.request({ ...config, url: '/games/count', data: `${query.filter !== '' ? 'where ' + query.filter + ';' : ''};` })).data.count;
+      // const totalGames = (await igdb.request({ ...config, url: '/games/count', data: `${query.filter}`})).data.count;
 
-    let total = totalGames;
-    // If there are more than 500 games with the current filter...
-    if (total > 500) {
-      // Make request for more games (index 501-1000, 1001-1500, etc.) and append to original games response
-      while (total > 500) {
-        query.page++;
-        config.data = queryBuilder(query).queryString;
-        games.data = games.data.concat((await igdb.request(config)).data);
-        total -= 500;
+      let total = totalGames;
+      // If there are more than 500 games with the current filter...
+      if (total > 500) {
+        // Make request for more games (index 501-1000, 1001-1500, etc.) and append to original games response
+        while (total > 500) {
+          query.page++;
+          config.data = queryBuilder(query).queryString;
+          games.data = games.data.concat((await igdb.request(config)).data);
+          total -= 500;
+        }
       }
     }
+    else totalGames = query.limit;
 
     return res.status(200).json({ totalGames: totalGames, results: games.data });
   } catch (err) {
@@ -84,7 +90,7 @@ const searchGames = async (req, res) => {
 
   try {
     const games = await igdb.request(config);
-    return res.status(200).json({totalGames: games.data.length, results: games.data});
+    return res.status(200).json({ totalGames: games.data.length, results: games.data });
   } catch (err) {
     return res.status(400).json({ err: err });
   }
