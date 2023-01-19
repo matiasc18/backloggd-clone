@@ -29,26 +29,11 @@
   }
 }
 
-//? Container holding all game cards
-#games-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  max-width: 100%;
-  margin: 0.75em 0;
-  gap: 1rem;
-}
-
 //* Tablets and up
 //? MINIMUM WIDTH: 30em == 480px
 @media (min-width: $tablet) {
   #games-page {
     width: 90%;
-  }
-
-  #games-container {
-    margin: 1em 0.5em;
-    row-gap: 1.5rem;
   }
 }
 
@@ -64,12 +49,5 @@
     hr {
       margin: 1em 0 1.5em 0;
     }
-  }
-
-  #games-container {
-    justify-content: center;
-    column-gap: 1.5rem;
-    row-gap: 2.5rem;
-    margin: 1.5em 0;
   }
 }
