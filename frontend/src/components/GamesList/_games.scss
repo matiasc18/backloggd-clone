@@ -1,4 +1,4 @@
-@use 'config' as *;
+@use "../../styles/scss/config" as *;
 
 .game-card {
   border-radius: 10px;
@@ -45,7 +45,7 @@
     grid-template-rows: auto 1fr;
     border-radius: 10px;
     max-width: 21.76rem;
-    
+
     &:hover {
       opacity: 0.6;
       transform: scale(1.05);
@@ -53,11 +53,11 @@
       -webkit-transition: 0.3s ease;
       cursor: pointer;
     }
-    
+
     &:active {
       transform: scale(1);
     }
-    
+
     .game-cover {
       filter: brightness(80%);
       border-bottom-left-radius: 0;

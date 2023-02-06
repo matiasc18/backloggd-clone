@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { USER_REGEX, PASS_REGEX, EMAIL_REGEX } from '../api/utils';
-import { register, reset } from '../features/auth/authSlice';
-import LoadingBar from '../components/LoadingBar';
+import { USER_REGEX, PASS_REGEX, EMAIL_REGEX } from '../../api/utils';
+import { register, reset } from '../../features/auth/authSlice';
+import LoadingBar from '../../components/LoadingBar/index.js';
 
 const SignupPage = () => {
   // For setting focus on first input field

@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { imgPath, getRatingColor } from '../api/utils';
+import { imgPath, getRatingColor } from '../../../api/utils';
 
 //* Render game cards
 const Games = ({ games, list }) => {

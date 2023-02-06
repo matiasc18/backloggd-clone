@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
-import Pagination from '../components/Pagination';
-import Games from '../components/Games';
-import LoadingBar from '../components/LoadingBar';
+import Pagination from '../../components/GamesList/utils/Pagination';
+import Games from '../../components/GamesList/utils/Games.js';
+import LoadingBar from '../../components/LoadingBar/index.js';
 import { useParams } from 'react-router-dom';
-import { SearchGames } from '../hooks/searchGames';
+import { useSearch } from './hooks/useSearch';
 
 //TODO Fix service worker for page reload on this page
 const SearchedPage = () => {
@@ -13,7 +13,7 @@ const SearchedPage = () => {
   }, [gameSlug]);
 
   // Conduct search
-  const { data: searchedGames, isLoading, isFetching, error, refetch } = SearchGames(gameName);
+  const { data: searchedGames, isLoading, isFetching, error, refetch } = useSearch(gameName);
 
   // 30 games displayed per page
   const [currentPage, setCurrentPage] = useState(1);

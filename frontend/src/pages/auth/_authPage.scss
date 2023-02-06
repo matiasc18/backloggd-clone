@@ -1,4 +1,4 @@
-@use 'config' as *;
+@use "../../styles/scss/config" as *;
 
 #auth-page {
   display: flex;
@@ -40,7 +40,7 @@
       border: 2px solid $tertiary-color;
       border-radius: 10px;
       outline: none;
-      transition: all .3s;
+      transition: all 0.3s;
 
       &:-webkit-autofill,
       &:-webkit-autofill:hover,
@@ -52,7 +52,7 @@
       }
 
       &::placeholder {
-        color: transparent
+        color: transparent;
       }
 
       &:focus {
@@ -68,11 +68,11 @@
       padding: 0 0.4em;
       background-color: $primary-color;
       transform: translate(0.3em, -1.75em);
-      transition: all .3s;
+      transition: all 0.3s;
     }
 
-    .auth-input:focus+.auth-label,
-    .auth-input:not(:placeholder-shown)+.auth-label {
+    .auth-input:focus + .auth-label,
+    .auth-input:not(:placeholder-shown) + .auth-label {
       transform: translateY(-3em) scale(0.8);
     }
 
@@ -102,7 +102,7 @@
       background-color: $tertiary-color;
       color: $secondary-color;
       transform: scale(1.05);
-      transition: .3s ease;
+      transition: 0.3s ease;
       border-radius: 10px;
       cursor: pointer;
     }

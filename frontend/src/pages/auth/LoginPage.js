@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
-import { login, reset } from '../features/auth/authSlice';
-import LoadingBar from '../components/LoadingBar';
+import { login, reset } from '../../features/auth/authSlice';
+import LoadingBar from '../../components/LoadingBar/index.js';
 
 const Login = () => {
   // For setting focus on first input field

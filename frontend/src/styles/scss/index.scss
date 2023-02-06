@@ -1,12 +1,13 @@
-@use "authPage";
-@use "dashboard";
-@use "gameExpanded";
-@use "gamesPage";
-@use "header";
-@use "pagination";
-@use "loadingBar";
-@use "footer";
-@use "landingPage";
+@use "../../pages/auth/authPage";
+@use "../../pages/dashboard/dashboard";
+@use "../../pages/gameExpanded/gameExpanded";
+@use "../../pages/games/gamesPage";
+@use "../../components/header/header";
+@use "../../components/GamesList/pagination";
+@use "../../components/GamesList/sortList";
+@use "../../components/loadingBar/loadingBar";
+@use "../../components/footer/footer";
+@use "../../pages/landing/landingPage";
 @use "config" as *;
 
 /* override browser default */

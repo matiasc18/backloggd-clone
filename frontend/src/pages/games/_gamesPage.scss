@@ -1,5 +1,5 @@
-@use 'config' as *;
-@use 'games';
+@use "../../components/GamesList/games";
+@use "../../styles/scss/config" as *;
 
 /*? HomePage container  */
 #games-page {
@@ -45,7 +45,7 @@
       justify-content: flex-start;
       margin-left: 0.5em;
     }
-  
+
     hr {
       margin: 1em 0 1.5em 0;
     }

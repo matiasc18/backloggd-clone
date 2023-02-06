@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../features/auth/authSlice';
-import { reset as resetGame } from '../features/games/gameSlice.js';
-import { reset as resetUser } from '../features/user/userSlice.js';
+import { logout } from '../../features/auth/authSlice';
+import { reset as resetUser } from '../../features/user/userSlice.js';
 import { FaBars } from 'react-icons/fa';
-import { getWindowSize } from '../api/utils';
-import SearchBar from '../components/SearchBar';
+import { getWindowSize } from '../../api/utils';
+import SearchBar from './utils/SearchBar.js';
 
 //TODO Change links to a ul with li of Link
 const Header = () => {
@@ -100,7 +99,6 @@ const Header = () => {
     document.getElementById('header-container').classList.remove('is-active-game');
     document.getElementById('nav-links').classList.remove('is-active-game');
     document.getElementById('nav-links').classList.remove('is-active');
-    dispatch(resetGame());
   };
 
   return (
@@ -118,7 +116,7 @@ const Header = () => {
               <>
                 <SearchBar resetHeader={resetHeader}/>
                 <Link className="nav-link" to="/games" onClick={() =>toggleMenu()}>Games</Link>
-                <Link className="nav-link" to="/profile" onClick={() =>toggleMenu()}>Profile</Link>
+                <Link className="nav-link" to="/dashboard/profile" onClick={() =>toggleMenu()}>Profile</Link>
                 <span className="nav-link" onClick={onLogout}>Logout</span>
               </>
             ) : (
