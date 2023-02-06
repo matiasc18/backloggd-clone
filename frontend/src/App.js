@@ -2,16 +2,16 @@ import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { QueryClientProvider, QueryClient } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import Header from './components/Header';
-import SignupPage from './pages/SignupPage';
-import GamesPage from './pages/GamesPage';
-import LoginPage from './pages/LoginPage';
-import Dashboard from './pages/Dashboard';
-import GameExpanded from './pages/GameExpanded';
-import SearchedPage from './pages/SearchedPage';
+import SignupPage from './pages/auth/SignupPage';
+import GamesPage from './pages/games/index.js';
+import LoginPage from './pages/auth/LoginPage';
+import Dashboard from './pages/dashboard/index.js';
+import GameExpanded from './pages/gameExpanded/index.js';
+import SearchedPage from './pages/searched/index.js';
+import LandingPage from './pages/landing/index.js';
 import ScrollToTop from './components/ScrollToTop';
-import Footer from './components/Footer';
-import LandingPage from './pages/LandingPage';
+import Header from './components/Header/index.js';
+import Footer from './components/Footer/index.js';
 
 const queryClient = new QueryClient();
 
@@ -27,7 +27,7 @@ function App() {
             <Route path='/games' element={<GamesPage />} />
             <Route path='/game-details/:id' element={<GameExpanded />} />
             <Route path='/search/:gameSlug' element={<SearchedPage />} />
-            <Route path='/profile' element={<Dashboard />} />
+            <Route path='/dashboard/:page' element={<Dashboard />} />
             <Route path='/signup' element={<SignupPage />} />
             <Route path='/login' element={<LoginPage />} />
           </Routes>
