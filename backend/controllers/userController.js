@@ -188,14 +188,14 @@ const getUserGames = async (req, res) => {
     method: 'post',
     data: {
       query: {
-        fields: 'name, cover.image_id, rating',
+        fields: 'name, cover.image_id, rating, first_release_date',
         filter: '',
         sort: '',
         limit: 500,
         page: 1,
         search: ''
       },
-      queryString: 'fields name, cover.image_id, rating; limit 500;'
+      queryString: 'fields name, cover.image_id, rating, first_release_date; limit 500;'
     }
   };
 
