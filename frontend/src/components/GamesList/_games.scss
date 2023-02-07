@@ -2,7 +2,6 @@
 
 .game-card {
   border-radius: 10px;
-  // flex: 1 1 30%;
   flex: 0 0 31%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   max-width: 14.502rem;
@@ -30,7 +29,6 @@
 //? MINIMUM WIDTH: 30em == 480px
 @media (min-width: $tablet) {
   .game-card {
-    // flex: 1 1 18%;
     flex: 0 0 18%;
     max-width: 21.76rem;
   }

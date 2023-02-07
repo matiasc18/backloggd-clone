@@ -1392,7 +1392,7 @@ footer {
   gap: 1.25rem;
   margin-top: 1.5rem;
   padding: 1.5rem 0 0 1.5rem;
-  height: 7.5rem;
+  height: 4rem;
   background-color: rgb(48, 75, 164);
   color: rgb(207, 207, 207);
 }
@@ -1481,17 +1481,63 @@ footer #backloggd-clone a:hover {
 #landing-page h4,
 #landing-page h5,
 #landing-page h6 {
-    margin-left: 2.25rem;
+    margin-left: 1rem;
     text-align: left;
   }
   #landing-page hr {
-    margin: 1em 0 1.5em 0;
+    margin: 1rem 0;
   }
   #landing-page #lp-container {
     display: grid;
-    grid-template-columns: 3.5fr 6.5fr;
+    grid-template-columns: 2fr 8fr;
     grid-template-rows: 1fr;
     gap: 5rem;
+  }
+  #landing-page #lp-container #coming-soon .games-container {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid {
+    display: flex;
+    gap: 1rem;
+    height: -webkit-min-content;
+    height: -moz-min-content;
+    height: min-content;
+    padding: 0.5rem;
+    align-items: center;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid:hover {
+    border: 2px solid rgb(207, 207, 207);
+    border-radius: 10px;
+  }
+  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid .coming-soon-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: rgb(207, 207, 207);
+  }
+  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid .coming-soon-info * {
+    display: block;
+  }
+  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid .coming-soon-info .game-release {
+    position: relative;
+    font-weight: normal;
+    font-size: 1.75rem;
+    color: rgba(207, 207, 207, 0.8);
+  }
+  #landing-page #lp-container #coming-soon .games-container .game-card {
+    max-width: 4rem;
+  }
+  #landing-page #lp-container #coming-soon .games-container .game-card:hover {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    -webkit-transition: none;
   }
   #landing-page #lp-container #coming-soon .games-container .game-cover {
     border-radius: 10px;
@@ -1499,6 +1545,9 @@ footer #backloggd-clone a:hover {
   #landing-page #lp-container #coming-soon .games-container .game-info {
     visibility: hidden;
     display: none;
+  }
+  #landing-page #lp-container #popular-this-month .games-container {
+    margin-top: 2rem;
   }
 }
 /* override browser default */
@@ -1563,6 +1612,6 @@ body {
     -moz-column-gap: 1.5rem;
          column-gap: 1.5rem;
     row-gap: 2.5rem;
-    margin: 1.5em 0;
+    margin: 1rem 0;
   }
 }

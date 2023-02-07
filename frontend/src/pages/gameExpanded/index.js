@@ -19,6 +19,8 @@ const GameExpanded = () => {
     return response.data;
   });
 
+  console.log(gameDetails);
+
   // Current game and background image index
   const currentGame = useMemo(() => { if (gameDetails) return gameDetails; }, [gameDetails]);
   const [bgIndex, setBgIndex] = useState(0);

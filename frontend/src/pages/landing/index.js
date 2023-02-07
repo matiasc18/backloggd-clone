@@ -1,5 +1,6 @@
 import Games from '../../components/GamesList/utils/Games';
 import { useFetchGames } from '../games/hooks/useFetchGames';
+import ComingSoon from './components/ComingSoon';
 
 const LandingPage = () => {
   const { data: popularThisMonth, error, isError, isLoading } = useFetchGames('popular-this-month');
@@ -14,7 +15,7 @@ const LandingPage = () => {
           <h2>Coming Soon</h2>
           <hr />
           <section className="games-container">
-            {comingSoon && <Games games={comingSoon.results} list={5} />}
+            {comingSoon && <ComingSoon games={comingSoon.results} list={5} />}
           </section>
         </div>
         <div id="popular-this-month">

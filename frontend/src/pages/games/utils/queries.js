@@ -27,7 +27,7 @@ export const comingSoonQuery = {
   fields: 'name, cover.image_id, first_release_date',
   filter: `cover != null & first_release_date != null & first_release_date >= ${getCurrentDate()} & first_release_date <= ${(3*MONTH) + getCurrentDate()}`,
   sort: 'first_release_date asc',
-  limit: 3,
+  limit: 6,
   page: 1,
   search: ''
 }
