@@ -14,8 +14,6 @@ const getGames = async (req, res) => {
     data: req.body.queryString
   };
 
-  console.log(req.body.queryString);
-
   // Return list of all games + total game count
   try {
     // Get first 500 games + count of how many games
