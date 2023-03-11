@@ -1,14 +1,21 @@
 @use "../../pages/auth/authPage";
-@use "../../pages/dashboard/dashboard";
-@use "../../pages/gameExpanded/gameExpanded";
-@use "../../pages/games/gamesPage";
-@use "../../components/header/header";
+@use "../../pages/UserDashboard/dashboard";
+@use "../../pages/ExpandedGame/gameExpanded";
+@use "../../pages/GamesPage/gamesPage";
+@use "../../components/Header/header";
 @use "../../components/GamesList/pagination";
 @use "../../components/GamesList/sortList";
 @use "../../components/loadingBar/loadingBar";
-@use "../../components/footer/footer";
-@use "../../pages/landing/landingPage";
+@use "../../components/Footer/footer";
+@use "../../pages/LandingPage/landingPage";
+@use "../../pages/ExpandedGame/components/starRating";
+@use "../../pages/ExpandedGame/components/modal";
 @use "config" as *;
+
+// @import "./fontawesome/scss/fontawesome.scss";
+@import "../scss-fa/fontawesome.scss";
+@import "../scss-fa/solid.scss";
+// @import "./fontawesome/scss/solid.scss";
 
 /* override browser default */
 html {
@@ -17,7 +24,7 @@ html {
   overflow-x: hidden;
   max-width: 100vw;
   box-sizing: border-box;
-  background-color: $primary-color;
+  background-color: $main;
   padding: env(safe-area-inset);
   overflow-x: hidden;
   scroll-behavior: auto;
@@ -28,10 +35,10 @@ body {
   width: 100%;
   font-size: 1.6rem;
   overflow-x: hidden;
-  background-color: $primary-color;
+  background-color: $main;
 }
 
-/* holds header and main */
+/* holds header and $main */
 #App {
   display: grid;
   grid-template-rows: auto 1fr;
@@ -58,15 +65,62 @@ body {
   justify-content: center;
   max-width: 100%;
   margin: 0.75em 0;
-  gap: 1rem;
+}
+
+.section-title {
+  color: $font-color;
+  margin: 0;
+  margin-top: 2.25rem;
+  max-width: 100%;
+  text-align: center;
+  letter-spacing: 0.25px;
+}
+
+.fl-button {
+  letter-spacing: 0.25px;
+  background-color: $comp-2;
+  color: $font-color;
+  border: none;
+  border-radius: 10px;
+  margin: 0;
+  padding: 0.35em 0.7em;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+hr {
+  display: flex;
+  background-color: $detail;
+  margin: 0.5em 0 0.75em 0;
+  border-radius: 25px;
+  border: 0;
+  height: 0.2rem;
+  max-width: 100%;
+  width: 100%;
 }
 
 //* Tablets and up
 //? MINIMUM WIDTH: 30em == 480px
 @media (min-width: $tablet) {
   .games-container {
-    margin: 1em 0.5em;
+    margin: 2rem 25px;
     row-gap: 1.5rem;
+    column-gap: 1rem;
+  }
+
+  .section-title {
+    margin-left: 0rem;
+    text-align: left;
+  }
+
+  .fl-button {
+    cursor: pointer;
+
+    &:active {
+      background-color: $main;
+      transform: scale(95%);
+      transition: 0.3s ease;
+      -webkit-transition: 0.3s ease;
+    }
   }
 }
 
@@ -74,9 +128,22 @@ body {
 //? MINIMUM WIDTH: 60em == 960px
 @media (min-width: $desktop) {
   .games-container {
-    justify-content: center;
     column-gap: 1.5rem;
     row-gap: 2.5rem;
-    margin: 1rem 0;
+    margin: 1.5rem 35px;
+  }
+
+  hr {
+    margin: 0.5rem 0 1rem 0;
+  }
+
+  .fl-button {
+    &:hover {
+      opacity: 0.6;
+      transform: scale(1.05);
+      transition: 0.3s ease;
+      -webkit-transition: 0.3s ease;
+      cursor: pointer;
+    }
   }
 }

@@ -1,8 +1,35 @@
-$primary-color: rgb(21, 36, 84);
-$secondary-color: rgb(48, 75, 164);
-$tertiary-color: rgb(207, 207, 207);
-$tertiary-comp: rgba(207, 207, 207, 0.80);
-$secondary-comp: rgb(37, 59, 131);
+//OG
+// $primary-color: rgb(21, 36, 84);
+// $secondary: rgb(48, 75, 164);
+// $tertiary: rgb(207, 207, 207);
+// $secondary-comp: rgba(207, 207, 207, 0.80);
+// $teritary-comp: rgb(37, 59, 131);
+
+//2nd
+// $main: rgb(12, 22, 53);
+// $comp: rgb(30, 53, 128);
+// $detail: rgb(207, 207, 207);
+// $detail-2: rgba(207, 207, 207, 0.80);
+// $comp-2: rgb(47, 75, 166);
+// $font-color: rgb(48, 75, 164);
+
+// $main: rgb(0, 0, 51);
+// $comp: rgb(25, 25, 112);
+// $comp-2: rgb(47, 75, 166);
+// $detail: rgb(207, 207, 207);
+// $detail-2: rgb(255, 153, 18);
+// $font-color: rgb(255, 215, 0);
+
+$main: rgb(10, 10, 49);
+$main: rgb(17, 17, 62);
+$main: rgb(20, 20, 57);
+$comp: rgb(33, 33, 111);
+$comp-2: rgb(41, 77, 183);
+$detail: rgb(255, 215, 0);
+$detail-2: rgb(255, 153, 18);
+$font-color: rgb(207, 207, 207);
+
+$ci-width: 18rem;
 
 //* Tablets and up
 //? MINIMUM WIDTH: 30em == 480px
