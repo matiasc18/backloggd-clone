@@ -1,12 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import Pagination from '../../components/GamesList/utils/Pagination';
 import Games from '../../components/GamesList/utils/Games.js';
-import LoadingBar from '../../components/LoadingBar/index.js';
+import LoadingBar from '../../components/LoadingBar';
 import { useParams } from 'react-router-dom';
 import { useSearch } from './hooks/useSearch';
 
 //TODO Fix service worker for page reload on this page
-const SearchedPage = () => {
+const SearchResults = () => {
   const { gameSlug } = useParams();
   const gameName = useMemo(() => {
     return gameSlug.replaceAll('-', ' '); // Deslugifies the game name slug
@@ -54,4 +54,4 @@ const SearchedPage = () => {
   )
 }
 
-export default SearchedPage;
+export default SearchResults;
