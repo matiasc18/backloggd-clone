@@ -1,5 +1,5 @@
 import { useFetchGames } from './hooks/useFetchGames.js';
-import GamesList from '../../components/GamesList/index.js';
+import GamesList from '../../components/GamesList';
 
 //TODO switching back to trending does nothing
 const GamesPage = () => {
@@ -8,12 +8,8 @@ const GamesPage = () => {
 
   return (
     <main id="games-page">
-      <h2>Trending Games</h2>
-      <hr />
       {isError && <span>{error.message}</span>}
-      {data && <div className="games-container">
-        <GamesList data={data} list={1} newClass={'games-container'}/>
-      </div>}
+      {data && <GamesList listTitle={<h2 className="section-title">Trending Games</h2>} data={data} list={1} newClass={'games-container'} />}
     </main>
   )
 }

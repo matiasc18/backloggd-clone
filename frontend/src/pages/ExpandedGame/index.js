@@ -3,11 +3,12 @@ import { imgPath, getRatingColor } from '../../api/utils';
 import { addGame } from './utils/addGame';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import LoadingBar from '../../components/LoadingBar/index.js';
+import LoadingBar from '../../components/LoadingBar';
 import axios from '../../api/axios';
+import ExpandedCard from './components/ExpandedCard';
 
 // Displays game information for @param: id
-const GameExpanded = () => {
+const ExpandedGame = () => {
   const { id } = useParams();
   const { data, refetch } = useQuery(`add-game/${id}`, // returns success || error message
     () => addGame([id]), { enabled: false });
@@ -18,8 +19,6 @@ const GameExpanded = () => {
     });
     return response.data;
   });
-
-  console.log(gameDetails);
 
   // Current game and background image index
   const currentGame = useMemo(() => { if (gameDetails) return gameDetails; }, [gameDetails]);
@@ -32,26 +31,23 @@ const GameExpanded = () => {
       document.getElementById('nav-links').classList.add('is-active-game');
       setBgIndex(Math.floor(Math.random() * currentGame.screenshots.length));
     }
-    console.log(currentGame);
   }, [currentGame]);
 
   return (
     <>
       {isLoading && <LoadingBar />}
       {currentGame && <>
-        <main id="game-expanded">
-          <div id="game">
-            <div className="game-card">
-              <img className="game-cover" src={`${imgPath}/${currentGame.cover.image_id}.jpg`} alt={`Cover art for ${currentGame.name}`} />
-              {currentGame.rating && <span className="game-rating" style={getRatingColor(Math.floor(currentGame.rating))}>{Math.floor(currentGame.rating)}</span>}
-            </div>
+        <main id="ge-container">
+          <div id="game-expanded">
+            <ExpandedCard currentGame={currentGame} refetch={refetch}/>
             <div className="game-details">
               <h1>{currentGame.name}</h1>
+              <span className="game-rating" style={getRatingColor(Math.floor(currentGame.rating))}>{Math.floor(currentGame.rating)}</span>
               <p className="game-date">released on <strong>{currentGame.local_date}</strong> by <strong>{currentGame.involved_companies[0].company.name}</strong></p>
               <p className="game-summary">{currentGame.summary}</p>
-              <button id="add-game" onClick={(refetch)}>Add Game</button>
               {data && data.message && <span className="error-message">{data.message}</span>}
               {data && data.error && <span className="error-message">{data.error}</span>}
+              <hr />
             </div>
             <section className="expanded-details">
               <p className="game-platforms">Platforms</p>
@@ -68,6 +64,7 @@ const GameExpanded = () => {
               </div>
             </section>
           </div>
+          <div id="poop"></div>
         </main>
         <div className="gradient"></div>
         <img className="game-background" src={`${imgPath}/${currentGame.screenshots[bgIndex].image_id}.jpg`} alt={`Background for ${currentGame.name}`}></img>
@@ -76,4 +73,4 @@ const GameExpanded = () => {
   )
 }
 
-export default GameExpanded;
+export default ExpandedGame;
