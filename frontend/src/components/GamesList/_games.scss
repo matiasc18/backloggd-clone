@@ -2,7 +2,8 @@
 
 .game-card {
   border-radius: 10px;
-  flex: 0 0 31%;
+  // flex: 0 0 31%;
+  background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   max-width: 14.502rem;
 
@@ -16,7 +17,6 @@
   }
 
   .game-cover {
-    width: 100%;
     max-width: 100%;
     aspect-ratio: 3 / 4;
     border-radius: 10px;
@@ -29,8 +29,9 @@
 //? MINIMUM WIDTH: 30em == 480px
 @media (min-width: $tablet) {
   .game-card {
-    flex: 0 0 18%;
-    max-width: 21.76rem;
+    flex: 1 1 18%;
+    max-width: 175px;
+    // max-width: 21.76rem;
   }
 }
 
@@ -38,11 +39,11 @@
 //? MINIMUM WIDTH: 60em == 960px
 @media (min-width: $desktop) {
   .game-card {
+    // flex: 1 1 120px;
+    flex: 1 1 15%;
     display: grid;
     position: relative;
     grid-template-rows: auto 1fr;
-    border-radius: 10px;
-    max-width: 21.76rem;
 
     &:hover {
       opacity: 0.6;
@@ -68,22 +69,29 @@
       align-items: center;
       visibility: visible;
       font-weight: bold;
-      padding: 1rem 1rem;
-      background-color: $secondary-color;
+      padding: 1rem 0.75rem;
+      font-size: 1.3rem;
+      background-color: $comp;
       border-bottom-left-radius: 10px;
       border-bottom-right-radius: 10px;
       max-height: 36.8px;
 
       .game-title {
+        color: $detail-2;
         max-width: 75%;
         margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2; /* number of lines to show */
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
       }
 
       .game-rating {
-        background-color: $primary-color;
+        background-color: $main;
         border-radius: 5px;
         padding: 0.25rem 0.5rem;
-        color: black;
       }
     }
   }

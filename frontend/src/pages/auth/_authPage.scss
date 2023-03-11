@@ -1,12 +1,12 @@
 @use "../../styles/scss/config" as *;
 
-#auth-page {
+.auth-page {
   display: flex;
   justify-content: center;
-  color: $tertiary-color;
+  color: $font-color;
   width: 100%;
 
-  #form-container {
+  .form-container {
     box-sizing: border-box;
     margin-top: 2em;
     padding: 1em;
@@ -14,7 +14,7 @@
     max-width: 30em;
     border-radius: 10px;
 
-    #auth-title {
+    .auth-title {
       margin: 0;
       text-align: center;
     }
@@ -35,9 +35,9 @@
       box-sizing: border-box;
       width: 100%;
       padding: 0.5em;
-      color: $tertiary-color;
+      color: $font-color;
       background-color: transparent !important;
-      border: 2px solid $tertiary-color;
+      border: 2px solid $font-color;
       border-radius: 10px;
       outline: none;
       transition: all 0.3s;
@@ -45,9 +45,9 @@
       &:-webkit-autofill,
       &:-webkit-autofill:hover,
       &:-webkit-autofill:focus {
-        -webkit-text-fill-color: $tertiary-color;
-        -webkit-box-shadow: 0 0 0px 1000px $primary-color inset;
-        box-shadow: 0 0 0px 1000px $primary-color inset;
+        -webkit-text-fill-color: $detail;
+        -webkit-box-shadow: 0 0 0px 1000px $main inset;
+        box-shadow: 0 0 0px 1000px $main inset;
         transition: background-color 5000s ease-in-out 0s;
       }
 
@@ -66,7 +66,8 @@
       width: fit-content;
       position: absolute;
       padding: 0 0.4em;
-      background-color: $primary-color;
+      background-color: $main;
+      color: $font-color;
       transform: translate(0.3em, -1.75em);
       transition: all 0.3s;
     }
@@ -77,7 +78,7 @@
     }
 
     .input-instructions {
-      background-color: $secondary-comp;
+      background-color: $comp;
       border-radius: 10px;
       font-size: 0.8em;
       margin: 0.8rem 1rem 0 1rem;
@@ -94,13 +95,12 @@
     padding: 0.35em 0.7em;
     border-radius: 10px;
     border: none;
-    color: $tertiary-color;
-    background-color: $secondary-color;
+    color: $font-color;
+    background-color: $comp;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
     &:hover {
-      background-color: $tertiary-color;
-      color: $secondary-color;
+      background-color: $comp-2;
       transform: scale(1.05);
       transition: 0.3s ease;
       border-radius: 10px;
@@ -113,8 +113,8 @@
       transform: none;
       transition: none;
       cursor: default;
-      background-color: $secondary-color;
-      color: $tertiary-color;
+      background-color: $comp;
+      color: $font-color;
     }
 
     &:active {
@@ -124,10 +124,10 @@
 
   span a {
     text-decoration: none;
-    color: $tertiary-color;
+    color: $comp-2;
 
     &:hover {
-      color: $secondary-color;
+      color: $detail-2;
     }
   }
 }
@@ -135,10 +135,10 @@
 //* Tablets and up
 //? MINIMUM WIDTH: 30em == 480px
 @media (min-width: $tablet) {
-  #form-container {
+  .form-container {
     margin-top: 3em;
 
-    #auth-title {
+    .auth-title {
       font-size: 2.5em;
     }
   }
@@ -151,7 +151,7 @@
 //* Laptops and up
 //? MINIMUM WIDTH: 60em == 960px
 @media (min-width: $desktop) {
-  #form-container {
+  .form-container {
     margin-top: 2em;
   }
 }

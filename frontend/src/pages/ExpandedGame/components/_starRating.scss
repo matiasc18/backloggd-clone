@@ -1,0 +1,42 @@
+@use "../../../styles/scss/config" as *;
+
+.ge-rating {
+  display: flex;
+  position: relative;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: $ci-width;
+
+  input {
+    position: relative;
+    display: flex;
+    width: 2rem;
+    height: 4rem;
+    align-items: center;
+    cursor: pointer;
+    appearance: none;
+    overflow: hidden;
+
+    &::after {
+      font-family: "Font Awesome 6 Free";
+      content: "\f005";
+      position: absolute;
+      color: $font-color;
+      transform: scale(1.75);
+      left: 0.9rem;
+    }
+
+    &:nth-child(2n + 1)::after {
+      left: initial;
+      right: 0.9rem;
+    }
+
+    &:hover ~ input::after,
+    &:hover::after,
+    &:checked ~ input::after,
+    &:checked::after {
+      color: $detail-2;
+    }
+  }
+}

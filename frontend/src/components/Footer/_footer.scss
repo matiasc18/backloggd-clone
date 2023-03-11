@@ -9,8 +9,8 @@ footer {
   margin-top: 1.5rem;
   padding: $footer-padding;
   height: 4rem;
-  background-color: $secondary-color;
-  color: $tertiary-color;
+  background-color: $comp;
+  color: $detail;
 
   #github-link, #linkedin-link, #about-frontloggd {
     display: inline-block;
@@ -44,7 +44,7 @@ footer {
     a {
       justify-content: center;
       text-decoration: none;
-      color: $tertiary-color;
+      color: $detail;
 
       &:hover {
         font-size: 1.1em;

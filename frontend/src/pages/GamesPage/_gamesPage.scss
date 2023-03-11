@@ -1,0 +1,41 @@
+@use "../../components/GamesList/games";
+@use "../../styles/scss/config" as *;
+
+/*? HomePage container  */
+#games-page {
+  background-color: $main;
+  color: $font-color;
+  width: 95%;
+  justify-self: center;
+  max-width: 75em;
+  margin-bottom: 1em;
+
+  // h2 {
+  //   display: flex;
+  //   justify-content: center;
+  //   margin: 0;
+  //   margin-top: 2.25rem;
+  //   font-size: 2em;
+  //   max-width: 100%;
+  //   letter-spacing: 0.25px;
+  // }
+}
+
+//* Tablets and up
+//? MINIMUM WIDTH: 30em == 480px
+@media (min-width: $tablet) {
+  #games-page {
+    width: 90%;
+  }
+}
+
+//* Laptops and up
+//? MINIMUM WIDTH: 60em == 960px
+@media (min-width: $desktop) {
+  #games-page {
+    // h2 {
+    //   justify-content: flex-start;
+    //   margin-left: 0.25rem;
+    // }
+  }
+}

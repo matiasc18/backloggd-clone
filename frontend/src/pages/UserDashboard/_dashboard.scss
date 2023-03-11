@@ -1,0 +1,233 @@
+@use "../../styles/scss/config" as *;
+
+#dashboard {
+  display: flex;
+  flex-direction: column;
+  background-color: $main;
+  color: $font-color;
+  width: 95%;
+  justify-self: center;
+  max-width: 120rem;
+  margin: 1em auto;
+
+  #bio {
+    .bio-details {
+      display: block;
+    }
+  }
+
+  #dashboard-favorites {
+    #user-favorites {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 100%;
+      margin: 0.75em 0;
+      gap: 1rem;
+
+      .game-card {
+        border-radius: 10px;
+        flex: 1 1 15%;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        max-width: 12rem;
+
+        .game-cover {
+          width: 100%;
+          max-width: 100%;
+          aspect-ratio: 3 / 4;
+          border-radius: 10px;
+          object-fit: cover;
+          height: 100%;
+        }
+
+        &:active {
+          transform: scale(95%);
+        }
+
+        .game-info {
+          visibility: hidden;
+          display: none;
+        }
+      }
+    }
+  }
+
+  #dashboard-games {
+    width: 100%;
+
+    .user-games {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 100%;
+      margin: 0.75em 0;
+      gap: 1rem;
+
+      .game-card {
+        flex: 0 0 31%;
+      }
+    }
+  }
+}
+
+//* Tablets and up
+@media (min-width: $tablet) {
+  #dashboard {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: min-content 4rem auto;
+    grid-template-areas:
+      "header header"
+      "nav nav"
+      "bio favorites";
+    width: 92.5%;
+    column-gap: 3rem;
+
+    #user-name {
+      margin: 0;
+      margin-bottom: 1rem;
+    }
+
+    #bio {
+      grid-area: bio;
+
+      hr {
+        height: 0.2rem;
+      }
+    }
+
+    #dashboard-favorites {
+      grid-area: favorites;
+
+      #user-favorites {
+        margin: 1em 0.5em;
+
+        .game-card {
+          flex: 1 1 17%;
+        }
+      }
+    }
+
+    #dashboard-games {
+      .user-games {
+        margin: 1em 0.5em;
+        row-gap: 1.5rem;
+
+        .game-card {
+          flex: 0 0 18%;
+        }
+      }
+    }
+  }
+}
+
+//* Laptops and up
+@media (min-width: $desktop) {
+  #dashboard {
+    display: flex;
+    align-items: flex-start;
+    width: 100%;
+
+    #dashboard-nav {
+      display: flex;
+      width: 100%;
+      padding-top: 0.5rem;
+      flex-direction: row;
+      position: relative;
+      // grid-area: nav;
+      align-items: center;
+      justify-content: center;
+      background-color: $comp;
+      border-radius: 10px;
+
+      .edit-profile {
+        position: absolute;
+        border: 0;
+        outline: 0;
+        background: none;
+        color: inherit;
+        right: 1rem;
+      }
+
+      #dashboard-nav-links {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: inline-block;
+          margin: 0 2rem;
+          padding: 0.3rem 0;
+          letter-spacing: 0.25px;
+          cursor: pointer;
+
+          &.selected-page {
+            border-bottom: 0.25rem solid $detail-2;
+            border-radius: 3px;
+          }
+        }
+      }
+    }
+
+    #profile-container {
+      width: calc(100% - (35px * 2));
+      justify-content: center;
+      display: grid;
+      grid-template-columns: 2fr 12fr;
+      grid-template-rows: 1fr;
+      grid-template-areas: "bio favorites";
+      gap: 3rem;
+      margin: 0 35px;
+
+      #bio {
+        font-size: 1rem;
+      }
+
+      #dashboard-favorites {
+        #user-favorites {
+          justify-content: center;
+          gap: 2rem;
+          margin: 1.5em 1em;
+
+          .game-card {
+            flex: 1 1 17%;
+            flex-shrink: 0;
+            display: grid;
+            grid-template-rows: auto 1fr;
+            border-radius: 10px;
+
+            &:hover {
+              opacity: 0.6;
+              transform: scale(1.05);
+              transition: 0.3s ease;
+              -webkit-transition: 0.3s ease;
+              cursor: pointer;
+            }
+  
+            &:active {
+              transform: scale(1);
+            }
+  
+            .game-cover {
+              height: auto;
+            }
+          }
+        }
+      }
+    }
+
+    #dashboard-games {
+      margin: 0 1.5%;
+
+      .user-games {
+        justify-content: center;
+        column-gap: 1.5rem;
+        row-gap: 2.5rem;
+        margin: 1.5em 0;
+
+        .game-card {
+          flex: 0 0 18%;
+        }
+      }
+    }
+  }
+}
