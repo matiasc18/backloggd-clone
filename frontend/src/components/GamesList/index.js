@@ -4,7 +4,7 @@ import Pagination from './utils/Pagination';
 import SortList from './utils/SortList';
 
 //* Render game cards
-const GamesList = ({ data, list, newClass }) => {
+const GamesList = ({ data, list, newClass, listTitle }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const [games, setGames] = useState(null);
@@ -39,14 +39,16 @@ const GamesList = ({ data, list, newClass }) => {
     <>
       {displayedGames &&
         <div className="game-bar">
-          <Pagination
+          {/* <Pagination
             gamesPerPage={30}
             totalGames={games.totalGames}
             currentPage={currentPage}
             updatePage={(pageNumber) => { setCurrentPage(pageNumber) }}
-          />
+          /> */}
+          {listTitle}
           <SortList displayedGames={games.results} updateGames={updateGames} />
         </div>}
+      <hr />
       <div className={newClass}>
         {displayedGames && <Games games={displayedGames} list={list} />}
       </div>
