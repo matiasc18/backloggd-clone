@@ -3,19 +3,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Profile from './components/Profile.js';
-import GamesList from '../../components/GamesList/index.js';
+import GamesList from '../../components/GamesList';
 import { useUserGames } from './hooks/useUserGames.js';
 
 const pageSelector = (user, userInfo, page, data) => {
   switch (page) {
     case 'profile':
-      return <Profile user={user} userInfo={userInfo} />
+      return user && userInfo ? <Profile user={user} userInfo={userInfo} /> : <></>
     case 'games':
       return <>
-        <section id="dashboard-games">
-          <h2>Games</h2>
+        <section id="dashboard-games" className="dashboard-container">
+          <h2 className="section-title">Games</h2>
           <hr />
-          <GamesList data={data} list={2} newClass={'user-games'}/>
+          {data && <GamesList data={data} list={2} newClass={'user-games'} />}
         </section>
       </>
   }
@@ -23,7 +23,7 @@ const pageSelector = (user, userInfo, page, data) => {
 }
 
 // User profile screen
-const Dashboard = () => {
+const UserDashboard = () => {
   // For re-routing / redux dispatch
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -69,10 +69,10 @@ const Dashboard = () => {
           </ul>
           <button className="edit-profile">Edit Profile</button>
         </section>
-        {data && pageSelector(user, userInfo, page, data)}
+        {pageSelector(user, userInfo, page, data)}
       </>}
     </main>
   )
 }
 
-export default Dashboard;
+export default UserDashboard;
