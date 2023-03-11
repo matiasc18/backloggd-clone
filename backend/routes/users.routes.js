@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { registerUser, loginUser, getUserInfo, deleteUser, addUserGames, getUserGames, getFavorites, addFavorite, updateUser } = require('../controllers/userController');
+const { registerUser, loginUser, getUserInfo, deleteUser, addUserGames, getUserGames, getFavorites, addFavorite, updateUser, addNewLog } = require('../controllers/userController');
 const { protect } = require('../middleware/authMiddleware');
 
 //* POST 
@@ -33,5 +33,10 @@ router.route('/favorites/all').get(protect, getFavorites)
 //* POST
 //? Add favorite game to user's backlog
 router.route('/favorites/add').post(protect, addFavorite);
+
+//!NEW
+//* POST
+//? Create a user's log for a specific game
+router.route('/games/addLog').post(protect, addNewLog);
 
 module.exports = router;
