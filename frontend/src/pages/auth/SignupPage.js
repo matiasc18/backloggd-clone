@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { USER_REGEX, PASS_REGEX, EMAIL_REGEX } from '../../api/utils';
 import { register, reset } from '../../features/auth/authSlice';
-import LoadingBar from '../../components/LoadingBar/index.js';
+import LoadingBar from '../../components/LoadingBar';
 
 const SignupPage = () => {
   // For setting focus on first input field
@@ -86,9 +86,9 @@ const SignupPage = () => {
   };
 
   return (
-    <main id="auth-page">
-      <div id="form-container">
-        <h1 id="auth-title">Register</h1>
+    <div className="auth-page">
+      <div className="form-container">
+        <h1 className="auth-title">Register</h1>
         <form id="signup-form" className="auth-form" autoComplete="off" onSubmit={ handleSubmit }>
           <div className="input-group">
             <input 
@@ -165,7 +165,7 @@ const SignupPage = () => {
         </form>
         { isLoading && <LoadingBar /> }
       </div>
-    </main>
+    </div>
   )
 };
 

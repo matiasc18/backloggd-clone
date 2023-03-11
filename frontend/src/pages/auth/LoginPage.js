@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { login, reset } from '../../features/auth/authSlice';
-import LoadingBar from '../../components/LoadingBar/index.js';
+import LoadingBar from '../../components/LoadingBar';
 
 const Login = () => {
   // For setting focus on first input field
@@ -36,7 +36,7 @@ const Login = () => {
       setErrorMessage(message);
 
     // Redirect the user to dashboard once registered
-    if (isSuccess || user)
+    if (isSuccess && user)
       navigate('/');
 
     // Reset auth state
@@ -52,9 +52,9 @@ const Login = () => {
   };
 
   return (
-    <main id="auth-page">
-      <div id="form-container">
-        <h1 id="auth-title">Login</h1>
+    <div className="auth-page">
+      <div className="form-container">
+        <h1 className="auth-title">Login</h1>
         <form id="login-form" className="auth-form" autoComplete="off" onSubmit={ handleSubmit }>
           <div className="input-group">
             <input 
@@ -86,7 +86,7 @@ const Login = () => {
         </form>
         { isLoading && <LoadingBar /> }
       </div>
-    </main>
+    </div>
   )
 }
 
