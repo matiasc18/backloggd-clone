@@ -183,6 +183,9 @@ const addUserGames = async (req, res) => {
 //? @route      GET /users/games/all
 //* @access     Private
 const getUserGames = async (req, res) => {
+  if (req.user.totalGames < 1)
+    return res.status(404).json({ err: 'No games in your library' });
+
   const config = {
     url: 'games/',
     method: 'post',
@@ -297,6 +300,54 @@ const addFavorite = async (req, res) => {
   return res.status(400).json({ error: 'No body received' });
 };
 
+//? @desc       Add new log for a game
+//? @route      POST /users/games/addLog
+//* @access     Private
+const addNewLog = async (req, res) => {
+  const { games } = req.body;
+
+  if (games) {
+    try {
+      const user = await Users.findById(req.user.id);
+      const duplicateGames = [];
+      const gamesToAdd = [];
+
+      // Removes duplicate games
+      for (let i = 0; i < games.length; i++) {
+        // If the user already has the game, skip
+        if (user.games.some(game => game == games[i])) {
+          duplicateGames.push(games[i]);
+          continue;
+        }
+
+        gamesToAdd.push(games[i]);
+
+        // Otherwise, add the game to their list
+        await user.updateOne(
+          {
+            $push: { games: gamesToAdd[i] },
+            $inc: { totalGames: 1 }
+          }
+        );
+      }
+
+      // No games added
+      if (duplicateGames.length == games.length) {
+        return res.status(409).json({ error: games.length > 1 ? 'All games already in your backlog' : 'Already in your backlog' });
+      }
+
+      const message = (games.length - duplicateGames.length === 1) ?
+        `Added to backlog`
+        : `Added (${games.length - duplicateGames.length}) to backlog`;
+
+      return res.status(200).json({ message: message, total: games.length - duplicateGames.length, gamesAdded: gamesToAdd });
+    } catch (err) {
+      return res.status(400).json({ error: err });
+    }
+  }
+  return res.status(400).json({ error: 'No body received' });
+}
+
 module.exports = {
   registerUser,
   loginUser,
@@ -306,5 +357,6 @@ module.exports = {
   getUserGames,
   addFavorite,
   getFavorites,
-  updateUser
+  updateUser,
+  addNewLog
 }
