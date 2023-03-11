@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../features/auth/authSlice';
+import { reset } from '../../features/auth/authSlice';
 import { reset as resetUser } from '../../features/user/userSlice.js';
 import { FaBars } from 'react-icons/fa';
 import { getWindowSize } from '../../api/utils';
@@ -65,7 +66,7 @@ const Header = () => {
   const onLogout = () => {
     setShowMobileMenu(false);
     dispatch(logout());
-    // dispatch(reset());
+    dispatch(reset());
     navigate('/');
     dispatch(resetUser());
   };
@@ -114,18 +115,18 @@ const Header = () => {
             {user ? (
               // If the user exists, show the logout button
               <>
+                <Link className="nav-link" to="/dashboard/profile" onClick={() => toggleMenu()} style={{fontWeight: 'bold', letterSpacing: '0.5px'}}>{user.username}</Link>
+                <Link className="nav-link" to="/games" onClick={() => toggleMenu()}>Games</Link>
                 <SearchBar resetHeader={resetHeader}/>
-                <Link className="nav-link" to="/games" onClick={() =>toggleMenu()}>Games</Link>
-                <Link className="nav-link" to="/dashboard/profile" onClick={() =>toggleMenu()}>Profile</Link>
                 <span className="nav-link" onClick={onLogout}>Logout</span>
               </>
             ) : (
               // Otherwise, show normal nav
               <>
+                <Link className="nav-link" to="/login" onClick={() => toggleMenu()}>Log In</Link>
+                <Link className="nav-link" to="/signup" onClick={() => toggleMenu()}>Sign Up</Link>
+                <Link className="nav-link" to="/games" onClick={() => toggleMenu()}>Games</Link>
                 <SearchBar />
-                <Link className="nav-link" to="/games" onClick={() =>toggleMenu()}>Games</Link>
-                <Link className="nav-link" to="/login" onClick={() =>toggleMenu()}>Log In</Link>
-                <Link className="nav-link" to="/signup" onClick={() =>toggleMenu()}>Sign Up</Link>
               </>)}
           </nav>
         </header>
