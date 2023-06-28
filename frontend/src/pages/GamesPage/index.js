@@ -9,7 +9,7 @@ const GamesPage = () => {
   return (
     <main id="games-page">
       {isError && <span>{error.message}</span>}
-      {data && <GamesList listTitle={<h2 className="section-title">Trending Games</h2>} data={data} list={1} newClass={'games-container'} />}
+      {data && <GamesList listTitle={<h2 className="section-title">{data.totalGames} games  </h2>} data={data} list={1} newClass={'games-container'} />}
     </main>
   )
 }
