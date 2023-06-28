@@ -17,6 +17,7 @@ app.use(express.json());
 
 // Connect to MongoDB
 const uri = process.env.MONGODB_URI;
+mongoose.set("strictQuery", false);
 mongoose.connect(uri);
 const connection = mongoose.connection;
 connection.once('open', () => {
