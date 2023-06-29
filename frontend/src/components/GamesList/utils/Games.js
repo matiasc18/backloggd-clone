@@ -22,10 +22,10 @@ const Games = ({ games, list }) => {
       {games && games.map((game) => (
         <div key={(game.id) + list} className="game-card" onClick={() => navigate(`/game-details/${game.id}`)}>
           <img className="game-cover" src={`${imgPath}/${game.cover.image_id}.jpg`} alt={`Cover art for ${game.name}`} />
-          <div className="game-info">
+          {/* <div className="game-info">
             <span className="game-title">{checkLength(game.name)}</span>
             {game.rating && <span className="game-rating" style={getRatingColor(Math.floor(game.rating))}>{Math.floor(game.rating)}</span>}
-          </div>
+          </div> */}
         </div>
       ))}
     </>
