@@ -38,27 +38,21 @@ const GamesList = ({ data, list, newClass, listTitle }) => {
   return (
     <>
       {displayedGames &&
-        <div className="game-bar">
-          {/* <Pagination
+        <>
+          <div className="game-bar">
+            {listTitle}
+            <SortList displayedGames={games.results} updateGames={updateGames} />
+          </div>
+          <div className={newClass}>
+            <Games games={displayedGames} list={list} />
+          </div>
+          <Pagination
             gamesPerPage={30}
             totalGames={games.totalGames}
             currentPage={currentPage}
             updatePage={(pageNumber) => { setCurrentPage(pageNumber) }}
-          /> */}
-          {listTitle}
-          <SortList displayedGames={games.results} updateGames={updateGames} />
-        </div>}
-      <hr />
-      <div className={newClass}>
-        {displayedGames && <Games games={displayedGames} list={list} />}
-      </div>
-      {displayedGames &&
-        <Pagination
-          gamesPerPage={30}
-          totalGames={games.totalGames}
-          currentPage={currentPage}
-          updatePage={(pageNumber) => { setCurrentPage(pageNumber) }}
-        />}
+          />
+        </>}
     </>
   )
 }
