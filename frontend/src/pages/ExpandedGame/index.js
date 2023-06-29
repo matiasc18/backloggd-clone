@@ -27,8 +27,6 @@ const ExpandedGame = () => {
   // Once the game is loaded, blur the header + nav
   useEffect(() => {
     if (currentGame) {
-      document.getElementById('header-container').classList.add('is-active-game');
-      document.getElementById('nav-links').classList.add('is-active-game');
       setBgIndex(Math.floor(Math.random() * currentGame.screenshots.length));
     }
   }, [currentGame]);
@@ -39,7 +37,7 @@ const ExpandedGame = () => {
       {currentGame && <>
         <main id="ge-container">
           <div id="game-expanded">
-            <ExpandedCard currentGame={currentGame} refetch={refetch}/>
+            <ExpandedCard currentGame={currentGame} refetch={refetch} />
             <div className="game-details">
               <h1>{currentGame.name}</h1>
               <span className="game-rating" style={getRatingColor(Math.floor(currentGame.rating))}>{Math.floor(currentGame.rating)}</span>
