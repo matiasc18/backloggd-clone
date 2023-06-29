@@ -7,7 +7,7 @@
   color: $font-color;
   width: 95%;
   justify-self: center;
-  max-width: 120rem;
+  max-width: $max-width;
   margin: 1em auto;
 
   #bio {
