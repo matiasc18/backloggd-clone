@@ -44,10 +44,13 @@
     display: grid;
     position: relative;
     grid-template-rows: auto 1fr;
+    border: 0.5px solid $comp-2;
+    box-sizing: border-box;
+    max-width: none;
 
     &:hover {
-      opacity: 0.6;
-      transform: scale(1.05);
+      opacity: 0.4;
+      // transform: scale(1.05);
       transition: 0.3s ease;
       -webkit-transition: 0.3s ease;
       cursor: pointer;
@@ -59,8 +62,8 @@
 
     .game-cover {
       filter: brightness(80%);
-      border-bottom-left-radius: 0;
-      border-bottom-right-radius: 0;
+      // border-bottom-left-radius: 0;
+      // border-bottom-right-radius: 0;
     }
 
     .game-info {
