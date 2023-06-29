@@ -20,6 +20,16 @@
 // $detail-2: rgb(255, 153, 18);
 // $font-color: rgb(255, 215, 0);
 
+// $main: rgb(10, 10, 49);
+// $main: rgb(17, 17, 62);
+// $main: rgb(20, 20, 57);
+// $comp: rgb(33, 33, 111);
+// $comp-2: rgb(41, 77, 183);
+// $detail: rgb(255, 215, 0);
+// $detail-2: rgb(255, 153, 18);
+// $font-color: rgb(207, 207, 207);
+
+// New Look
 $main: rgb(10, 10, 49);
 $main: rgb(17, 17, 62);
 $main: rgb(20, 20, 57);
@@ -35,7 +45,14 @@ $ci-width: 18rem;
 //? MINIMUM WIDTH: 30em == 480px
 $tablet: 30em;
 
+//* Small computers and up
+//? MINIMUM WIDTH: 47.5em == 760px
+$desktop-sm: 47.5em;
+
 //* Laptops and up
 //? MINIMUM WIDTH: 60em == 960px
 //? ALT: 64em == 1024px
 $desktop: 60em;
+
+// Max width for any page
+$max-width: 120rem;
