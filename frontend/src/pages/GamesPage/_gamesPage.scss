@@ -7,8 +7,9 @@
   color: $font-color;
   width: 95%;
   justify-self: center;
-  max-width: 75em;
+  max-width: $max-width;
   margin-bottom: 1em;
+  transition: transform 0.3s;
 
   // h2 {
   //   display: flex;
@@ -19,6 +20,17 @@
   //   max-width: 100%;
   //   letter-spacing: 0.25px;
   // }
+
+  .games-count {
+    color: $font-color;
+    margin: 0;
+    max-width: 100%;
+    text-align: center;
+    letter-spacing: 0.25px;
+    text-align: left;
+    font-size: 1em;
+    font-weight: 444;
+  }
 }
 
 //* Tablets and up
