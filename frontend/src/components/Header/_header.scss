@@ -10,7 +10,7 @@
 
 header {
   display: flex;
-  max-width: 1300px;
+  max-width: $max-width;
   align-items: center;
   position: relative;
   justify-content: space-between;
@@ -42,10 +42,17 @@ header {
     font-weight: 444;
 
     .nav-button {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       text-decoration: none;
       color: $font-color;
       font-size: 0.9em;
     }
+  }
+
+  .menu-button {
+    cursor: pointer;
   }
 }
 
@@ -195,11 +202,10 @@ header {
   header {
     font-size: min(1.3em, 3.331vw);
     align-items: center;
+  }
 
-    #search {
-      width: 6rem;
-      margin: 0;
-    }
+  .nav-dropdown {
+    margin-bottom: 0;
   }
 
   // #nav-links {
@@ -246,6 +252,70 @@ header {
   header {
     flex-wrap: nowrap;
 
+    nav {
+      .nav-button {
+        &:hover {
+          color: white;
+        }
+
+        &.desktop-dropdown {
+          position: relative;
+          padding: 0.75rem;
+          cursor: pointer;
+
+          &:hover {
+            background-color: $comp-2;
+            border-top-left-radius: 7.5px;
+            border-top-right-radius: 7.5px;
+          }
+
+          &:hover .desktop-dropdown-list {
+            display: flex;
+            visibility: visible;
+          }
+        }
+      }
+
+      .desktop-dropdown-list {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: $comp-2;
+        top: 100%;
+        left: 0;
+        right: 0;
+        height: fit-content;
+        border-bottom-left-radius: 7.5px;
+        border-bottom-right-radius: 7.5px;
+        visibility: hidden;
+        display: none;
+        font-size: 0.8em;
+
+        .desktop-dropdown-option {
+          text-decoration: none;
+          color: $font-color;
+          padding: 0.5rem 1.25rem;
+
+          
+          &:last-child {
+            border-bottom-left-radius: 7.5px;
+            border-bottom-right-radius: 7.5px;
+            padding-bottom: 0.75rem;
+          }
+          
+          &.border-top {
+            border-top: 0.5px solid $font-color;
+          }
+
+          &:hover {
+            background-color: $comp;
+            border-color: $comp;
+          }
+        }
+      }
+    }
+
     #search {
       width: 15rem;
     }
@@ -265,5 +335,10 @@ header {
         opacity: 0.7;
       }
     }
+  }
+
+  .nav-dropdown {
+    visibility: hidden;
+    display: none;
   }
 }
