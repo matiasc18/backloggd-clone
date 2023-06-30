@@ -324,7 +324,7 @@
   }
 }
 .game-card {
-  border-radius: 10px;
+  border-radius: 7.5px;
   background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   max-width: 14.502rem;
@@ -339,7 +339,7 @@
 .game-card .game-cover {
   max-width: 100%;
   aspect-ratio: 3/4;
-  border-radius: 10px;
+  border-radius: 7.5px;
   -o-object-fit: cover;
      object-fit: cover;
   height: 100%;
@@ -413,7 +413,7 @@
 
 header {
   display: flex;
-  max-width: 1300px;
+  max-width: 120rem;
   align-items: center;
   position: relative;
   justify-content: space-between;
@@ -443,9 +443,15 @@ header nav {
   font-weight: 444;
 }
 header nav .nav-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   text-decoration: none;
   color: rgb(207, 207, 207);
   font-size: 0.9em;
+}
+header .menu-button {
+  cursor: pointer;
 }
 
 #search {
@@ -552,15 +558,65 @@ header nav .nav-button {
     font-size: min(1.3em, 3.331vw);
     align-items: center;
   }
-  header #search {
-    width: 6rem;
-    margin: 0;
+  .nav-dropdown {
+    margin-bottom: 0;
   }
 }
 @media (min-width: 60em) {
   header {
     flex-wrap: nowrap;
     /** Hide menu button */
+  }
+  header nav .nav-button:hover {
+    color: white;
+  }
+  header nav .nav-button.desktop-dropdown {
+    position: relative;
+    padding: 0.75rem;
+    cursor: pointer;
+  }
+  header nav .nav-button.desktop-dropdown:hover {
+    background-color: rgb(41, 77, 183);
+    border-top-left-radius: 7.5px;
+    border-top-right-radius: 7.5px;
+  }
+  header nav .nav-button.desktop-dropdown:hover .desktop-dropdown-list {
+    display: flex;
+    visibility: visible;
+  }
+  header nav .desktop-dropdown-list {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: rgb(41, 77, 183);
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: -moz-fit-content;
+    height: fit-content;
+    border-bottom-left-radius: 7.5px;
+    border-bottom-right-radius: 7.5px;
+    visibility: hidden;
+    display: none;
+    font-size: 0.8em;
+  }
+  header nav .desktop-dropdown-list .desktop-dropdown-option {
+    text-decoration: none;
+    color: rgb(207, 207, 207);
+    padding: 0.5rem 1.25rem;
+  }
+  header nav .desktop-dropdown-list .desktop-dropdown-option:last-child {
+    border-bottom-left-radius: 7.5px;
+    border-bottom-right-radius: 7.5px;
+    padding-bottom: 0.75rem;
+  }
+  header nav .desktop-dropdown-list .desktop-dropdown-option.border-top {
+    border-top: 0.5px solid rgb(207, 207, 207);
+  }
+  header nav .desktop-dropdown-list .desktop-dropdown-option:hover {
+    background-color: rgb(33, 33, 111);
+    border-color: rgb(33, 33, 111);
   }
   header #search {
     width: 15rem;
@@ -574,6 +630,10 @@ header nav .nav-button {
   }
   header #header-title:hover {
     opacity: 0.7;
+  }
+  .nav-dropdown {
+    visibility: hidden;
+    display: none;
   }
 }
 #ge-container {
@@ -1104,7 +1164,7 @@ footer #backloggd-clone a:hover {
   max-width: 120rem;
   margin-bottom: 1em;
 }
-#landing-page #lp-container {
+#landing-page #lp-body {
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -1115,96 +1175,156 @@ footer #backloggd-clone a:hover {
   #landing-page {
     align-items: flex-start;
   }
-  #landing-page #landing-auth {
+  #landing-page #lp-header {
     display: flex;
-    width: 100%;
-    align-self: center;
     justify-content: space-between;
-    border: 3px solid rgb(33, 33, 111);
-    border-radius: 10px;
-  }
-  #landing-page #landing-auth .auth-page {
-    width: 25%;
-  }
-  #landing-page #landing-auth .auth-page .form-container {
-    font-size: 75%;
-  }
-  #landing-page #landing-auth .auth-page .form-container .auth-title {
-    text-align: center;
-  }
-  #landing-page #lp-container {
-    display: grid;
-    grid-template-columns: 8fr 2fr;
-    grid-template-rows: 1fr;
-    gap: 5rem;
-  }
-  #landing-page #lp-container #coming-soon .games-container {
-    flex-direction: column;
-    gap: 0rem;
-    margin: 0;
-  }
-  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid {
-    display: flex;
-    gap: 1.5rem;
-    height: -moz-max-content;
-    height: max-content;
-    padding: 0.5rem 0.5rem 0.5rem 0;
-    margin-left: 0.5rem;
-    align-items: center;
-    box-sizing: border-box;
-    border: 1px solid transparent;
-    cursor: pointer;
-  }
-  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid:hover {
-    border: 1px solid rgb(41, 77, 183);
-    border-radius: 10px;
-  }
-  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid .game-card {
-    flex: none;
     width: 100%;
-    max-width: 40px;
+    padding: 1.5rem 0;
+    border-bottom: 0.5px solid rgb(41, 77, 183);
+    gap: 3rem;
   }
-  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid .game-card .game-cover {
-    border-radius: 5px;
+  #landing-page #lp-header #lp-header-left {
+    display: flex;
+    gap: 2rem;
+    flex-basis: 70%;
   }
-  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid .coming-soon-info {
+  #landing-page #lp-header #lp-header-left .profile-picture {
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 7.5px;
+  }
+  #landing-page #lp-header #lp-header-left div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  #landing-page #lp-header #lp-header-left div .lp-user {
+    text-decoration: none;
+    color: rgb(207, 207, 207);
+    font-size: 1.75em;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+  }
+  #landing-page #lp-header #lp-header-left div > div {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+  #landing-page #lp-header #lp-header-left div > div > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    color: rgb(255, 153, 18);
+  }
+  #landing-page #lp-header #lp-header-left div > div > span:hover {
+    color: rgb(255, 215, 0);
+  }
+  #landing-page #lp-header #lp-header-left div > div > span > span {
+    font-size: 2em;
+    font-weight: 333;
+  }
+  #landing-page #lp-header #lp-header-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-basis: 30%;
+    gap: 0.75rem;
+  }
+  #landing-page #lp-header #lp-header-right h1 {
+    margin: 0;
+    font-size: 4em;
+  }
+  #landing-page #lp-header #lp-header-right span {
+    color: rgb(207, 207, 207);
+  }
+  #landing-page #lp-header #lp-header-right span a {
+    text-decoration: none;
+    color: rgb(255, 153, 18);
+  }
+  #landing-page #lp-header #lp-header-right span a:hover {
+    color: rgb(255, 215, 0);
+  }
+  #landing-page #lp-body {
+    display: grid;
+    grid-template-columns: 7fr 3fr;
+    grid-template-rows: 1fr;
+    gap: 3rem;
+    margin-top: 2.25rem;
+  }
+  #landing-page #lp-body #coming-soon .coming-soon-container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  #landing-page #lp-body #coming-soon .coming-soon-container .coming-soon-grid {
+    display: flex;
+    gap: 1.5rem;
+    margin-left: 0.5rem;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+  }
+  #landing-page #lp-body #coming-soon .coming-soon-container .coming-soon-grid .game-card {
+    flex: none;
     width: 100%;
-    font-size: 1.3rem;
+    max-width: 40px;
+    border-radius: 5px;
+  }
+  #landing-page #lp-body #coming-soon .coming-soon-container .coming-soon-grid .game-card .game-cover {
+    border-radius: 5px;
+  }
+  #landing-page #lp-body #coming-soon .coming-soon-container .coming-soon-grid .coming-soon-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    font-size: 1em;
     font-weight: bold;
     color: rgb(207, 207, 207);
   }
-  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid .coming-soon-info * {
+  #landing-page #lp-body #coming-soon .coming-soon-container .coming-soon-grid .coming-soon-info * {
     display: block;
   }
-  #landing-page #lp-container #coming-soon .games-container .coming-soon-grid .coming-soon-info .game-release {
+  #landing-page #lp-body #coming-soon .coming-soon-container .coming-soon-grid .coming-soon-info .game-release {
     position: relative;
     font-weight: normal;
     font-size: 1.75rem;
     font-size: 1.5rem;
-    color: rgb(255, 153, 18);
+    color: rgb(255, 215, 0);
   }
-  #landing-page #lp-container #coming-soon .games-container .game-card {
+  #landing-page #lp-body #coming-soon .coming-soon-container .game-card {
     width: 100px;
     max-width: 100px;
   }
-  #landing-page #lp-container #coming-soon .games-container .game-card:hover {
+  #landing-page #lp-body #coming-soon .coming-soon-container .game-card:hover {
     opacity: 1;
     transform: none;
     transition: none;
     -webkit-transition: none;
   }
-  #landing-page #lp-container #coming-soon .games-container .game-cover {
-    border-radius: 10px;
-  }
-  #landing-page #lp-container #coming-soon .games-container .game-info {
+  #landing-page #lp-body #coming-soon .coming-soon-container .game-info {
     visibility: hidden;
     display: none;
   }
-  #landing-page #lp-container #popular-this-month .games-container {
+  #landing-page #lp-body #popular-this-month .games-container {
+    grid-template-columns: repeat(5, 1fr);
     margin-top: 1.5rem;
+  }
+  #landing-page #popular-this-month > h2, #landing-page #coming-soon > h2, #landing-page #lp-reviews > h2 {
+    font-weight: 444;
+    margin: 0;
+  }
+  #landing-page #popular-this-month > h2 > *, #landing-page #coming-soon > h2 > *, #landing-page #lp-reviews > h2 > * {
+    color: rgb(255, 153, 18);
+    text-decoration: none;
+  }
+  #landing-page #lp-reviews {
+    display: flex;
+    flex-direction: column;
   }
 }
 .ge-rating {
@@ -9746,28 +9866,18 @@ body {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-hr {
-  display: flex;
-  background-color: rgb(255, 215, 0);
-  margin: 0.5em 0 0.75em 0;
-  border-radius: 25px;
-  border: 0;
-  height: 0.2rem;
-  max-width: 100%;
-  width: 100%;
-}
-
 .log-game-button {
-  background-color: rgb(225, 46, 111);
+  background-color: rgb(255, 153, 18);
   flex-basis: 100%;
-  color: rgb(207, 207, 207);
+  color: white;
   text-align: center;
-  padding: 0.75rem 0;
+  padding: 0.75rem 1rem;
   border-radius: 5px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  cursor: pointer;
 }
 
 @media (min-width: 30em) {
@@ -9796,9 +9906,6 @@ hr {
     -moz-column-gap: 1.5rem;
          column-gap: 1.5rem;
     margin: 1.5rem 0;
-  }
-  hr {
-    margin: 0.5rem 0 1rem 0;
   }
   .fl-button:hover {
     opacity: 0.6;
