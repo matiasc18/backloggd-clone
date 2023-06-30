@@ -1,7 +1,7 @@
 @use "../../styles/scss/config" as *;
 
 .game-card {
-  border-radius: 10px;
+  border-radius: 7.5px;
   // flex: 0 0 31%;
   background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -19,7 +19,7 @@
   .game-cover {
     max-width: 100%;
     aspect-ratio: 3 / 4;
-    border-radius: 10px;
+    border-radius: 7.5px;
     object-fit: cover;
     height: 100%;
   }
