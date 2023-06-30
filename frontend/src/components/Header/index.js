@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { logout } from '../../features/auth/authSlice';
 import { reset } from '../../features/auth/authSlice';
 import { reset as resetUser } from '../../features/user/userSlice.js';
-import { FaBars, FaBookOpen, FaCog, FaGamepad, FaGift, FaHeart, FaHistory, FaLayerGroup, FaPlay, FaSignOutAlt, FaSignal, FaUser, FaUserFriends, FaPlus } from 'react-icons/fa';
+import { FaBars, FaBookOpen, FaCog, FaGamepad, FaGift, FaHeart, FaHistory, FaLayerGroup, FaPlay, FaSignOutAlt, FaSignal, FaUser, FaUserFriends, FaPlus, FaChevronDown } from 'react-icons/fa';
 import { getWindowSize } from '../../api/utils';
 import SearchBar from './utils/SearchBar.js';
 import { ImBooks } from 'react-icons/im';
@@ -19,6 +19,7 @@ const Header = () => {
 
   // Keeps track of the device's current window size
   const [windowSize, setWindowSize] = useState(getWindowSize());
+  const screenWidth = useMemo(() => windowSize.innerWidth, [windowSize]);
   const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   useEffect(() => {
@@ -57,8 +58,45 @@ const Header = () => {
         <header>
           <Link to="/" id="header-title">frontloggd</Link>
           <nav>
-            <Link className="nav-button" to="/games" onClick={() => setShowMobileMenu(false)}>Games</Link>
-            <FaBars size="1.75em" className="menu-button" style={showMobileMenu ? { opacity: 0.7 } : {}} onClick={toggleMenu} />
+            {screenWidth >= 760 &&
+              <>
+                {user &&
+                  <div className="nav-button desktop-dropdown">{user.username}
+                    <FaChevronDown />
+                    <div className="desktop-dropdown-list">
+                      <Link className="desktop-dropdown-option" to="/dashboard/profile">Profile</Link>
+                      <span className="desktop-dropdown-option border-top">Played</span>
+                      <span className="desktop-dropdown-option">Playing</span>
+                      <span className="desktop-dropdown-option">Backlog</span>
+                      <span className="desktop-dropdown-option">Wishlist</span>
+                      <span className="desktop-dropdown-option border-top">Journal</span>
+                      <span className="desktop-dropdown-option">Activity</span>
+                      <span className="desktop-dropdown-option">Reviews</span>
+                      <span className="desktop-dropdown-option">Lists</span>
+                      <span className="desktop-dropdown-option">Friends</span>
+                      <span className="desktop-dropdown-option">Likes</span>
+                      <span className="desktop-dropdown-option border-top">Settings</span>
+                      <span className="desktop-dropdown-option" onClick={onLogout}>Log Out</span>
+                    </div>
+                  </div>
+                }
+                {!user &&
+                  <>
+                    <Link className="nav-button" to="/login" onClick={() => setShowMobileMenu(false)}>Log In</Link>
+                    <Link className="nav-button" to="/signup" onClick={() => setShowMobileMenu(false)}>Register</Link>
+                  </>
+                }
+                <Link className="nav-button" to="/games" onClick={() => setShowMobileMenu(false)}>Games</Link>
+                <SearchBar />
+                {user && <span className="log-game-button"><FaPlus />Log a Game</span>}
+              </>
+            }
+            {screenWidth < 760 &&
+              <>
+                <Link className="nav-button" to="/games" onClick={() => setShowMobileMenu(false)}>Games</Link>
+                <FaBars size="1.75em" className="menu-button" style={showMobileMenu ? { opacity: 0.7 } : {}} onClick={toggleMenu} />
+              </>
+            }
           </nav>
         </header>
       </div>
