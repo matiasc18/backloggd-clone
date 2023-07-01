@@ -117,7 +117,7 @@ header {
 
 .user-dropdown {
   &.show-dropdown {
-    height: 32rem;
+    height: 30rem;
   }
 
   #search {
@@ -128,7 +128,7 @@ header {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 0.75rem;
+    gap: 1rem;
 
     .dropdown-button {
       padding: 0.75rem 0;
@@ -144,25 +144,21 @@ header {
       gap: 0.5rem;
 
       &.grid-1 {
+        flex-basis: calc(100% - 1rem);
+      }
+
+      &.grid-3 {
         flex-basis: calc(33% - 1rem);
       }
 
       &.grid-2 {
-        flex-basis: calc(25% - 1rem);
-        flex-direction: column;
-        gap: 0.25rem;
-      }
-
-      &.grid-3 {
         flex-basis: calc(50% - 1rem);
       }
 
       &.grid-4 {
-        flex-basis: calc(33% - 1rem);
-      }
-
-      &.grid-5 {
-        flex-basis: calc(50% - 1rem);
+        flex-basis: calc(25% - 1rem);
+        flex-direction: column;
+        gap: 0.25rem;
       }
     }
   }
@@ -251,6 +247,8 @@ header {
 @media (min-width: $desktop) {
   header {
     flex-wrap: nowrap;
+    width: 95%;
+    margin: 0;
 
     nav {
       .nav-button {
@@ -317,7 +315,7 @@ header {
     }
 
     #search {
-      width: 15rem;
+      width: 22.5rem;
     }
 
     /** Hide menu button */
