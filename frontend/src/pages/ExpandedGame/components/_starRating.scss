@@ -4,9 +4,9 @@
   display: flex;
   position: relative;
   flex-direction: row-reverse;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
-  max-width: $ci-width;
+  // max-width: $ci-width;
 
   input {
     position: relative;
@@ -23,13 +23,14 @@
       content: "\f005";
       position: absolute;
       color: $font-color;
-      transform: scale(1.75);
-      left: 0.9rem;
+      // transform: scale(1.75);
+      transform: scale(2);
+      left: 1.1rem;
     }
 
     &:nth-child(2n + 1)::after {
       left: initial;
-      right: 0.9rem;
+      right: 1.1rem;
     }
 
     &:hover ~ input::after,
