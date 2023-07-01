@@ -9,19 +9,93 @@
   justify-self: center;
   max-width: $max-width;
   margin-bottom: 1em;
+  z-index: 2;
 
-  // h1,
-  // h2,
-  // h3,
-  // h4,
-  // h5,
-  // h6 {
-  //   margin: 0;
-  //   margin-top: 2.25rem;
-  //   max-width: 100%;
-  //   text-align: center;
-  //   letter-spacing: 0.25px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url("/public/lp_background.jpg");
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-position: center;
+    background-size: cover;
+    pointer-events: none;
+    max-height: 100vh;
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background: linear-gradient(180deg, rgba(125, 185, 232, 0) 0, $main);
+    z-index: -1;
+  }
+
+  // &::after {
+  //   content: "";
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   width: 100%;
+  //   height: 100%;
+  //   background-color: rgba(0, 0, 0, 0.2); /* Adjust the opacity value to control the dimness */
+  //   pointer-events: none;
   // }
+
+  #lp-banner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+    h2 {
+      font-size: 4em;
+    }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 4rem;
+
+      span {
+        flex-grow: 1;
+        padding: 1.5rem 1.5rem;
+        border-radius: 7.5px;
+        border: 0.5px solid $font-color;
+        text-align: center;
+        font-size: 1.5em;
+        background-color: $button;
+        cursor: pointer;
+
+        &:nth-child(2) {
+          background-color: #00249b;
+        }
+
+        &:nth-child(1) {
+          background-color: #107c10;
+        }
+
+        &:nth-child(3) {
+          background-color: #e60012;
+        }
+
+        &:last-child {
+          background-color: #0883c5;
+        }
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+  }
 
   #lp-body {
     display: flex;
@@ -42,7 +116,7 @@
       justify-content: space-between;
       width: 100%;
       padding: 1.5rem 0;
-      border-bottom: 0.5px solid $comp-2;
+      border-bottom: 0.5px solid $main-3;
       gap: 3rem;
 
       #lp-header-left {
@@ -51,10 +125,10 @@
         flex-basis: 70%;
 
         .profile-picture {
-          background-color: white;
           width: 100px;
           height: 100px;
           border-radius: 7.5px;
+          border: 0.5px solid $font-color;
         }
 
         div {
@@ -80,10 +154,10 @@
               flex-direction: column;
               align-items: center;
               cursor: pointer;
-              color: $detail-2;
+              color: $main-3;
 
               &:hover {
-                color: $detail;
+                color: $button;
               }
 
               > span {
@@ -113,10 +187,10 @@
 
           a {
             text-decoration: none;
-            color: $detail-2;
+            color: $secondary-2;
 
             &:hover {
-              color: $detail;
+              color: $secondary;
             }
           }
         }
@@ -125,10 +199,20 @@
 
     #lp-body {
       display: grid;
-      grid-template-columns: 7fr 3fr;
+      grid-template-columns: 8fr 3fr;
       grid-template-rows: 1fr;
       gap: 3rem;
       margin-top: 2.25rem;
+      border-bottom: 0.5px solid $secondary;
+
+      .lp-body-left {
+        section {
+          .games-container {
+            grid-template-columns: repeat(5, 1fr);
+            margin-top: 1.5rem;
+          }
+        }
+      }
 
       #coming-soon {
         .coming-soon-container {
@@ -174,7 +258,7 @@
                 font-weight: normal;
                 font-size: 1.75rem;
                 font-size: 1.5rem;
-                color: $detail;
+                color: $secondary;
               }
             }
           }
@@ -197,22 +281,17 @@
           }
         }
       }
-
-      #popular-this-month {
-        .games-container {
-          grid-template-columns: repeat(5, 1fr);
-          margin-top: 1.5rem;
-        }
-      }
     }
 
-    #popular-this-month, #coming-soon, #lp-reviews {
+    .lp-body-left > section,
+    #coming-soon,
+    #lp-reviews {
       > h2 {
         font-weight: 444;
         margin: 0;
 
         > * {
-          color: $detail-2;
+          color: $main-3;
           text-decoration: none;
         }
       }
@@ -221,6 +300,13 @@
     #lp-reviews {
       display: flex;
       flex-direction: column;
+      margin-top: 2.25rem;
     }
   }
+}
+
+.bg-credits {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
