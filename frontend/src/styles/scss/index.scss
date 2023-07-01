@@ -81,10 +81,15 @@ body {
 
 .fl-button {
   letter-spacing: 0.25px;
+<<<<<<< HEAD
   background-color: $main-3;
   color: $font-color;
+=======
+  background-color: $detail-2;
+  color: white;
+>>>>>>> c82c9afb644790dad6e01ed0995e14ca8decd8a1
   border: none;
-  border-radius: 10px;
+  border-radius: 7.5px;
   margin: 0;
   padding: 0.35em 0.7em;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -122,10 +127,7 @@ body {
     cursor: pointer;
 
     &:active {
-      background-color: $main;
-      transform: scale(95%);
-      transition: 0.3s ease;
-      -webkit-transition: 0.3s ease;
+      background-color: $comp-2;
     }
   }
 }
@@ -133,6 +135,11 @@ body {
 //* Laptops and up
 //? MINIMUM WIDTH: 60em == 960px
 @media (min-width: $desktop) {
+  #App {
+    grid-template-rows: auto 1fr;
+  }
+
+
   .games-container {
     column-gap: 1.5rem;
     // row-gap: 2.5rem;
@@ -141,11 +148,8 @@ body {
 
   .fl-button {
     &:hover {
-      opacity: 0.6;
-      transform: scale(1.05);
-      transition: 0.3s ease;
-      -webkit-transition: 0.3s ease;
       cursor: pointer;
+      background-color: $detail;
     }
   }
 }
