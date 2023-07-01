@@ -9,13 +9,18 @@ footer {
   margin-top: 1.5rem;
   padding: $footer-padding;
   height: 4rem;
-  background-color: $comp;
-  color: $detail;
+  background-color: $main-2;
+  color: $font-color;
+  z-index: 1;
 
   #github-link, #linkedin-link, #about-frontloggd {
     display: inline-block;
     align-self: center;
     color: inherit;
+
+    &:hover {
+      color: $secondary;
+    }
   }
 
   #about-frontloggd {
@@ -29,6 +34,11 @@ footer {
     bottom: 1rem;
     font-weight: bold;
     letter-spacing: 0.75px;
+    cursor: pointer;
+
+    &:hover {
+      color: $secondary;
+    }
   }
 
   #backloggd-clone {
@@ -40,16 +50,15 @@ footer {
     bottom: 0.75rem;
     font-weight: bold;
     font-size: 1.25rem;
+  }
 
-    a {
-      justify-content: center;
-      text-decoration: none;
-      color: $detail;
+  a {
+    justify-content: center;
+    text-decoration: none;
+    color: $main-3;
 
-      &:hover {
-        font-size: 1.1em;
-        transition: all 0.1s;
-      }
+    &:hover {
+      color: $secondary;
     }
   }
 }
