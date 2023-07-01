@@ -62,7 +62,6 @@ const ExpandedGame = () => {
               </div>
             </section>
           </div>
-          <div id="poop"></div>
         </main>
         <div className="gradient"></div>
         <img className="game-background" src={`${imgPath}/${currentGame.screenshots[bgIndex].image_id}.jpg`} alt={`Background for ${currentGame.name}`}></img>
