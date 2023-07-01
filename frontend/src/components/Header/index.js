@@ -52,6 +52,8 @@ const Header = () => {
     }
   };
 
+  console.log(screenWidth);
+
   return (
     <>
       <div id="header-container">
@@ -69,9 +71,7 @@ const Header = () => {
                       <span className="desktop-dropdown-option">Playing</span>
                       <span className="desktop-dropdown-option">Backlog</span>
                       <span className="desktop-dropdown-option">Wishlist</span>
-                      <span className="desktop-dropdown-option border-top">Journal</span>
-                      <span className="desktop-dropdown-option">Activity</span>
-                      <span className="desktop-dropdown-option">Reviews</span>
+                      <span className="desktop-dropdown-option border-top">Reviews</span>
                       <span className="desktop-dropdown-option">Lists</span>
                       <span className="desktop-dropdown-option">Friends</span>
                       <span className="desktop-dropdown-option">Likes</span>
@@ -88,7 +88,6 @@ const Header = () => {
                 }
                 <Link className="nav-button" to="/games" onClick={() => setShowMobileMenu(false)}>Games</Link>
                 <SearchBar />
-                {user && <span className="log-game-button"><FaPlus />Log a Game</span>}
               </>
             }
             {screenWidth < 760 &&
@@ -103,22 +102,18 @@ const Header = () => {
       <div className={`${showMobileMenu ? 'nav-dropdown show-dropdown' : 'nav-dropdown'} ${user ? 'user-dropdown' : ''}`}>
         {user ? (
           <div id="user-buttons">
-            <Link className="dropdown-button grid-1" to="/dashboard/profile" onClick={() => setShowMobileMenu(false)}><FaUser size={20} />Profile</Link>
-            <span className="dropdown-button grid-1"><FaCog size={20} />Settings</span>
-            <span className="dropdown-button grid-1" onClick={onLogout}><FaSignOutAlt size={20} />Log Out</span>
-            <span className="dropdown-button grid-2"><FaGamepad size={24} />Played</span>
-            <span className="dropdown-button grid-2"><FaPlay size={20} />Playing</span>
-            <span className="dropdown-button grid-2"><ImBooks size={20} />Backlog</span>
-            <span className="dropdown-button grid-2"><FaGift size={20} />Wishlist</span>
-            <span className="dropdown-button grid-3"><FaBookOpen size={20} />Journal</span>
-            <span className="dropdown-button grid-3"><FaHistory size={20} />Activity</span>
-            <span className="dropdown-button grid-4"><FaSignal size={20} />Reviews</span>
-            <span className="dropdown-button grid-4"><FaLayerGroup size={20} />Lists</span>
-            <span className="dropdown-button grid-4"><FaHeart size={20} />Likes</span>
-            <span className="dropdown-button grid-5"><FaUserFriends size={20} />Following</span>
-            <span className="dropdown-button grid-5"><FaUserFriends size={20} />Followers</span>
             <SearchBar />
-            <span className="log-game-button"><FaPlus />Log a Game</span>
+            <span className="dropdown-button grid-4"><FaGamepad size={24} />Played</span>
+            <span className="dropdown-button grid-4"><FaPlay size={20} />Playing</span>
+            <span className="dropdown-button grid-4"><ImBooks size={20} />Backlog</span>
+            <span className="dropdown-button grid-4"><FaGift size={20} />Wishlist</span>
+            <span className="dropdown-button grid-1"><FaUserFriends size={20} />Friends</span>
+            <Link className="dropdown-button grid-2" to="/dashboard/profile" onClick={() => setShowMobileMenu(false)}><FaUser size={20} />Profile</Link>
+            <span className="dropdown-button grid-2"><FaCog size={20} />Settings</span>
+            <span className="dropdown-button grid-3"><FaSignal size={20} />Reviews</span>
+            <span className="dropdown-button grid-3"><FaLayerGroup size={20} />Lists</span>
+            <span className="dropdown-button grid-3"><FaHeart size={20} />Likes</span>
+            <span className="dropdown-button grid-1" onClick={onLogout}><FaSignOutAlt size={20} />Log Out</span>
           </div>
         ) : (
           <>
