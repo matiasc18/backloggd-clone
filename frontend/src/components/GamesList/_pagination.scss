@@ -26,7 +26,7 @@
       cursor: default;
       padding: 0.25em 0.5em;
       border-radius: 5px;
-      background-color: $comp;
+      background-color: $main-2;
       box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
       &:hover {
@@ -40,7 +40,7 @@
 
     //? Active page selector
     .page-selector.is-active {
-      background-color: $comp-2;
+      background-color: $main-3;
       color: $font-color;
 
       &:hover {
@@ -58,7 +58,7 @@
     }
 
     .page-dots {
-      border-left: 4px solid $detail;
+      border-left: 4px solid $secondary;
       border-radius: 10px;
       height: 100%;
     }
