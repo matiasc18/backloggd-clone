@@ -45,7 +45,7 @@
       &:-webkit-autofill,
       &:-webkit-autofill:hover,
       &:-webkit-autofill:focus {
-        -webkit-text-fill-color: $detail;
+        -webkit-text-fill-color: $secondary;
         -webkit-box-shadow: 0 0 0px 1000px $main inset;
         box-shadow: 0 0 0px 1000px $main inset;
         transition: background-color 5000s ease-in-out 0s;
@@ -78,7 +78,7 @@
     }
 
     .input-instructions {
-      background-color: $comp;
+      background-color: $main-2;
       border-radius: 10px;
       font-size: 0.8em;
       margin: 0.8rem 1rem 0 1rem;
@@ -96,11 +96,11 @@
     border-radius: 10px;
     border: none;
     color: $font-color;
-    background-color: $comp;
+    background-color: $main-2;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
     &:hover {
-      background-color: $comp-2;
+      background-color: $main-3;
       transform: scale(1.05);
       transition: 0.3s ease;
       border-radius: 10px;
@@ -113,7 +113,7 @@
       transform: none;
       transition: none;
       cursor: default;
-      background-color: $comp;
+      background-color: $main-2;
       color: $font-color;
     }
 
@@ -124,10 +124,10 @@
 
   span a {
     text-decoration: none;
-    color: $comp-2;
+    color: $main-3;
 
     &:hover {
-      color: $detail-2;
+      color: $secondary-2;
     }
   }
 }

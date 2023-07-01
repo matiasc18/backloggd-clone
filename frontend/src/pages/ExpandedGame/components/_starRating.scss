@@ -36,7 +36,7 @@
     &:hover::after,
     &:checked ~ input::after,
     &:checked::after {
-      color: $detail-2;
+      color: $secondary-2;
     }
   }
 }

@@ -136,7 +136,7 @@
       // grid-area: nav;
       align-items: center;
       justify-content: center;
-      background-color: $comp;
+      background-color: $main-2;
       border-radius: 10px;
 
       .edit-profile {
@@ -161,7 +161,7 @@
           cursor: pointer;
 
           &.selected-page {
-            border-bottom: 0.25rem solid $detail-2;
+            border-bottom: 0.25rem solid $secondary-2;
             border-radius: 3px;
           }
         }

@@ -16,13 +16,13 @@
   /* Dropdown Button */
   .sort-button {
     display: flex;
-    background-color: $comp;
+    background-color: $main-2;
     border-radius: 7.5px;
     font-size: min(1.2em, (1.5vw + 0.65em));
     padding: 0.25em 0.3em 0.25em 0.5em;
     border: none;
     cursor: pointer;
-    color: $detail-2;
+    color: $secondary-2;
     font-weight: bold;
     align-items: center;
     gap: 0.5rem;
@@ -44,9 +44,9 @@
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: $comp;
+    background-color: $main-2;
     min-width: max-content;
-    border: 1px solid $comp-2;
+    border: 1px solid $main-3;
     border-radius: 5px;
     z-index: 1;
     margin: 20px 0;
@@ -74,13 +74,13 @@
 
       &.selected-sort {
         font-weight: bold;
-        background-color: $comp-2;
-        color: $detail-2;
+        background-color: $main-3;
+        color: $secondary-2;
       }
 
       /* Change color of dropdown links on hover */
       &:hover {
-        background-color: $comp-2;
+        background-color: $main-3;
         border-radius: 4px;
       }
     }

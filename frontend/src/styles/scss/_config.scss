@@ -7,37 +7,39 @@
 
 //2nd
 // $main: rgb(12, 22, 53);
-// $comp: rgb(30, 53, 128);
-// $detail: rgb(207, 207, 207);
-// $detail-2: rgba(207, 207, 207, 0.80);
-// $comp-2: rgb(47, 75, 166);
+// $main-2: rgb(30, 53, 128);
+// $secondary: rgb(207, 207, 207);
+// $secondary-2: rgba(207, 207, 207, 0.80);
+// $main-3: rgb(47, 75, 166);
 // $font-color: rgb(48, 75, 164);
 
 // $main: rgb(0, 0, 51);
-// $comp: rgb(25, 25, 112);
-// $comp-2: rgb(47, 75, 166);
-// $detail: rgb(207, 207, 207);
-// $detail-2: rgb(255, 153, 18);
+// $main-2: rgb(25, 25, 112);
+// $main-3: rgb(47, 75, 166);
+// $secondary: rgb(207, 207, 207);
+// $secondary-2: rgb(255, 153, 18);
 // $font-color: rgb(255, 215, 0);
 
-// $main: rgb(10, 10, 49);
-// $main: rgb(17, 17, 62);
-// $main: rgb(20, 20, 57);
-// $comp: rgb(33, 33, 111);
-// $comp-2: rgb(41, 77, 183);
-// $detail: rgb(255, 215, 0);
-// $detail-2: rgb(255, 153, 18);
-// $font-color: rgb(207, 207, 207);
-
-// New Look
 $main: rgb(10, 10, 49);
 $main: rgb(17, 17, 62);
 $main: rgb(20, 20, 57);
-$comp: rgb(33, 33, 111);
-$comp-2: rgb(41, 77, 183);
-$detail: rgb(255, 215, 0);
-$detail-2: rgb(255, 153, 18);
+$main-2: rgb(33, 33, 111);
+$main-3: rgb(41, 77, 183);
+$secondary: rgb(255, 215, 0);
+$secondary-2: rgb(255, 153, 18);
 $font-color: rgb(207, 207, 207);
+
+// New Look
+$main: rgb(9, 12, 51);
+$main-2: rgb(27, 35, 152);
+$main-3: rgb(159, 183, 255);
+$secondary: rgb(255, 132, 0);
+$secondary-2: rgb(255, 178, 95);
+$font-color: rgb(255, 255, 255);
+$button: rgb(48, 52, 255);
+
+// background image attributtion
+// <a href="https://www.freepik.com/free-vector/night-ocean-landscape-full-moon-stars-shine_17740155.htm#query=game%20background&position=0&from_view=keyword&track=ais">Image by upklyak</a> on Freepik
 
 $ci-width: 18rem;
 

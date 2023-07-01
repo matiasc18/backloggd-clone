@@ -15,7 +15,7 @@
 
     &:before {
       content: '';
-      border: 3px solid $detail;
+      border: 3px solid $secondary;
       border-radius: 20px;
       position: absolute;
       top: -10px;
@@ -31,7 +31,7 @@
       right: 100%;
       bottom: 0;
       left: 0;
-      background: $comp-2;
+      background: $main-3;
       width: 0;
       animation: borealisBar 1s linear infinite;
     }

@@ -60,7 +60,7 @@ header {
   box-sizing: border-box;
   padding: 0.6rem 1rem;
   color: $font-color;
-  background-color: $comp;
+  background-color: $main-2;
   border: none;
   max-width: 85%;
   border-radius: 5px;
@@ -69,19 +69,19 @@ header {
   position: relative;
 
   &::-webkit-input-placeholder {
-    color: #888;
+    color: rgb(131, 138, 235);
   }
 
   &::-moz-placeholder {
-    color: #888;
+    color: rgb(131, 138, 235);
   }
 
   &::-ms-placeholder {
-    color: #888;
+    color: rgb(131, 138, 235);
   }
 
   &::placeholder {
-    color: #888;
+    color: rgb(131, 138, 235);
   }
 }
 
@@ -132,7 +132,7 @@ header {
 
     .dropdown-button {
       padding: 0.75rem 0;
-      background-color: $comp-2;
+      background-color: $main-2;
       margin: 0;
       flex-grow: 1;
       font-size: 1em;
@@ -175,7 +175,7 @@ header {
 //   align-items: center;
 //   gap: 1em;
 //   height: 100%;
-//   background-color: $comp-2;
+//   background-color: $main-2;
 //   width: 100%;
 //   font-size: 2rem;
 
@@ -238,7 +238,7 @@ header {
   //     }
 
   //     &:hover {
-  //       background-color: $comp-2;
+  //       background-color: $main-2;
   //       border-radius: 10px;
   //       cursor: pointer;
   //     }
@@ -264,7 +264,7 @@ header {
           cursor: pointer;
 
           &:hover {
-            background-color: $comp-2;
+            background-color: $main-2;
             border-top-left-radius: 7.5px;
             border-top-right-radius: 7.5px;
           }
@@ -281,7 +281,7 @@ header {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        background-color: $comp-2;
+        background-color: $main-2;
         top: 100%;
         left: 0;
         right: 0;
@@ -309,15 +309,15 @@ header {
           }
 
           &:hover {
-            background-color: $comp;
-            border-color: $comp;
+            background-color: $main-2;
+            border-color: $main-2;
           }
         }
       }
     }
 
     #search {
-      width: 15rem;
+      width: 20rem;
     }
 
     /** Hide menu button */

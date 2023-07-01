@@ -2,7 +2,7 @@
 .auth-page {
   display: flex;
   justify-content: center;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   width: 100%;
 }
 .auth-page .form-container {
@@ -32,16 +32,16 @@
   box-sizing: border-box;
   width: 100%;
   padding: 0.5em;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   background-color: transparent !important;
-  border: 2px solid rgb(207, 207, 207);
+  border: 2px solid rgb(255, 255, 255);
   border-radius: 10px;
   outline: none;
   transition: all 0.3s;
 }
 .auth-form .input-group .auth-input:-webkit-autofill, .auth-form .input-group .auth-input:-webkit-autofill:hover, .auth-form .input-group .auth-input:-webkit-autofill:focus {
-  -webkit-text-fill-color: rgb(255, 215, 0);
-  box-shadow: 0 0 0px 1000px rgb(20, 20, 57) inset;
+  -webkit-text-fill-color: rgb(255, 132, 0);
+  box-shadow: 0 0 0px 1000px rgb(9, 12, 51) inset;
   -webkit-transition: background-color 5000s ease-in-out 0s;
   transition: background-color 5000s ease-in-out 0s;
 }
@@ -61,8 +61,8 @@
   width: fit-content;
   position: absolute;
   padding: 0 0.4em;
-  background-color: rgb(20, 20, 57);
-  color: rgb(207, 207, 207);
+  background-color: rgb(9, 12, 51);
+  color: rgb(255, 255, 255);
   transform: translate(0.3em, -1.75em);
   transition: all 0.3s;
 }
@@ -74,7 +74,7 @@
   transform: translateY(-3em) scale(0.8);
 }
 .auth-form .input-group .input-instructions {
-  background-color: rgb(33, 33, 111);
+  background-color: rgb(27, 35, 152);
   border-radius: 10px;
   font-size: 0.8em;
   margin: 0.8rem 1rem 0 1rem;
@@ -90,12 +90,12 @@
   padding: 0.35em 0.7em;
   border-radius: 10px;
   border: none;
-  color: rgb(207, 207, 207);
-  background-color: rgb(33, 33, 111);
+  color: rgb(255, 255, 255);
+  background-color: rgb(27, 35, 152);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .auth-form #auth-submit:hover {
-  background-color: rgb(41, 77, 183);
+  background-color: rgb(159, 183, 255);
   transform: scale(1.05);
   transition: 0.3s ease;
   border-radius: 10px;
@@ -106,18 +106,18 @@
   transform: none;
   transition: none;
   cursor: default;
-  background-color: rgb(33, 33, 111);
-  color: rgb(207, 207, 207);
+  background-color: rgb(27, 35, 152);
+  color: rgb(255, 255, 255);
 }
 .auth-form #auth-submit:active {
   transform: scale(95%);
 }
 .auth-form span a {
   text-decoration: none;
-  color: rgb(41, 77, 183);
+  color: rgb(159, 183, 255);
 }
 .auth-form span a:hover {
-  color: rgb(255, 153, 18);
+  color: rgb(255, 178, 95);
 }
 
 @media (min-width: 30em) {
@@ -139,8 +139,8 @@
 #dashboard {
   display: flex;
   flex-direction: column;
-  background-color: rgb(20, 20, 57);
-  color: rgb(207, 207, 207);
+  background-color: rgb(9, 12, 51);
+  color: rgb(255, 255, 255);
   width: 95%;
   justify-self: center;
   max-width: 120rem;
@@ -244,7 +244,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    background-color: rgb(33, 33, 111);
+    background-color: rgb(27, 35, 152);
     border-radius: 10px;
   }
   #dashboard #dashboard-nav .edit-profile {
@@ -268,7 +268,7 @@
     cursor: pointer;
   }
   #dashboard #dashboard-nav #dashboard-nav-links li.selected-page {
-    border-bottom: 0.25rem solid rgb(255, 153, 18);
+    border-bottom: 0.25rem solid rgb(255, 178, 95);
     border-radius: 3px;
   }
   #dashboard #profile-container {
@@ -324,10 +324,20 @@
   }
 }
 .game-card {
+  position: relative;
   border-radius: 7.5px;
-  background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   max-width: 14.502rem;
+}
+.game-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  border-radius: 7.5px;
 }
 .game-card:active {
   transform: scale(95%);
@@ -357,7 +367,7 @@
     display: grid;
     position: relative;
     grid-template-rows: auto 1fr;
-    border: 0.5px solid rgb(41, 77, 183);
+    border: 0.5px solid rgb(159, 183, 255);
     box-sizing: border-box;
     max-width: none;
   }
@@ -381,13 +391,13 @@
     font-weight: bold;
     padding: 1rem 0.75rem;
     font-size: 1.3rem;
-    background-color: rgb(33, 33, 111);
+    background-color: rgb(27, 35, 152);
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     max-height: 36.8px;
   }
   .game-card .game-info .game-title {
-    color: rgb(255, 153, 18);
+    color: rgb(255, 178, 95);
     max-width: 75%;
     margin: 0;
     overflow: hidden;
@@ -398,7 +408,7 @@
     -webkit-box-orient: vertical;
   }
   .game-card .game-info .game-rating {
-    background-color: rgb(20, 20, 57);
+    background-color: rgb(9, 12, 51);
     border-radius: 5px;
     padding: 0.25rem 0.5rem;
   }
@@ -419,7 +429,7 @@ header {
   justify-content: space-between;
   width: 100%;
   margin: 0 30px;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   z-index: 1001;
   -webkit-tap-highlight-color: transparent;
   flex-wrap: wrap;
@@ -430,7 +440,7 @@ header #header-title {
   font-size: 1.5em;
   font-weight: bold;
   letter-spacing: 1px;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   letter-spacing: 2px;
 }
 header #header-title:active {
@@ -447,7 +457,7 @@ header nav .nav-button {
   align-items: center;
   gap: 0.5rem;
   text-decoration: none;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   font-size: 0.9em;
 }
 header .menu-button {
@@ -457,8 +467,8 @@ header .menu-button {
 #search {
   box-sizing: border-box;
   padding: 0.6rem 1rem;
-  color: rgb(207, 207, 207);
-  background-color: rgb(33, 33, 111);
+  color: rgb(255, 255, 255);
+  background-color: rgb(27, 35, 152);
   border: none;
   max-width: 85%;
   border-radius: 5px;
@@ -467,19 +477,19 @@ header .menu-button {
   position: relative;
 }
 #search::-webkit-input-placeholder {
-  color: #888;
+  color: rgb(131, 138, 235);
 }
 #search::-moz-placeholder {
-  color: #888;
+  color: rgb(131, 138, 235);
 }
 #search::-ms-placeholder {
-  color: #888;
+  color: rgb(131, 138, 235);
 }
 #search::-moz-placeholder {
-  color: #888;
+  color: rgb(131, 138, 235);
 }
 #search::placeholder {
-  color: #888;
+  color: rgb(131, 138, 235);
 }
 
 .nav-dropdown {
@@ -497,7 +507,7 @@ header .menu-button {
 }
 .nav-dropdown .dropdown-button {
   text-decoration: none;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   font-size: 1.1em;
   margin-left: 2.5%;
 }
@@ -524,7 +534,7 @@ header .menu-button {
 }
 .user-dropdown #user-buttons .dropdown-button {
   padding: 0.75rem 0;
-  background-color: rgb(41, 77, 183);
+  background-color: rgb(27, 35, 152);
   margin: 0;
   flex-grow: 1;
   font-size: 1em;
@@ -576,7 +586,7 @@ header .menu-button {
     cursor: pointer;
   }
   header nav .nav-button.desktop-dropdown:hover {
-    background-color: rgb(41, 77, 183);
+    background-color: rgb(27, 35, 152);
     border-top-left-radius: 7.5px;
     border-top-right-radius: 7.5px;
   }
@@ -589,7 +599,7 @@ header .menu-button {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: rgb(41, 77, 183);
+    background-color: rgb(27, 35, 152);
     top: 100%;
     left: 0;
     right: 0;
@@ -603,7 +613,7 @@ header .menu-button {
   }
   header nav .desktop-dropdown-list .desktop-dropdown-option {
     text-decoration: none;
-    color: rgb(207, 207, 207);
+    color: rgb(255, 255, 255);
     padding: 0.5rem 1.25rem;
   }
   header nav .desktop-dropdown-list .desktop-dropdown-option:last-child {
@@ -612,14 +622,14 @@ header .menu-button {
     padding-bottom: 0.75rem;
   }
   header nav .desktop-dropdown-list .desktop-dropdown-option.border-top {
-    border-top: 0.5px solid rgb(207, 207, 207);
+    border-top: 0.5px solid rgb(255, 255, 255);
   }
   header nav .desktop-dropdown-list .desktop-dropdown-option:hover {
-    background-color: rgb(33, 33, 111);
-    border-color: rgb(33, 33, 111);
+    background-color: rgb(27, 35, 152);
+    border-color: rgb(27, 35, 152);
   }
   header #search {
-    width: 15rem;
+    width: 20rem;
   }
   header .menu-button {
     visibility: hidden;
@@ -640,15 +650,15 @@ header .menu-button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   min-height: 100%;
   width: 100%;
   z-index: 100;
   max-width: 100%;
 }
 #ge-container .error-message {
-  color: rgb(20, 20, 57);
-  background-color: rgb(255, 153, 18);
+  color: rgb(9, 12, 51);
+  background-color: rgb(255, 178, 95);
 }
 #ge-container #game-expanded {
   display: flex;
@@ -682,7 +692,7 @@ header .menu-button {
   margin-bottom: 0.5rem;
 }
 #ge-container #game-expanded .game-details .game-rating {
-  background-color: rgb(33, 33, 111);
+  background-color: rgb(27, 35, 152);
   border-radius: 5px;
   padding: 0.25rem 0.5rem;
   font-size: 2.5rem;
@@ -720,7 +730,7 @@ header .menu-button {
 #ge-container #game-expanded .expanded-details #genres span {
   margin: 0.5rem 0;
   font-size: 0.65em;
-  background-color: rgb(33, 33, 111);
+  background-color: rgb(27, 35, 152);
   padding: 0.5rem 0.7rem;
   border-radius: 10px;
   width: -moz-fit-content;
@@ -782,8 +792,8 @@ header .menu-button {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: rgb(33, 33, 111);
-    border: 1px solid rgb(41, 77, 183);
+    background-color: rgb(27, 35, 152);
+    border: 1px solid rgb(159, 183, 255);
     border-radius: 10px;
     width: 100%;
     padding: 4rem 0 1.5rem 0;
@@ -791,7 +801,7 @@ header .menu-button {
   }
   #ge-container #game-expanded #game #card-interaction hr {
     margin: 0;
-    background-color: rgb(41, 77, 183);
+    background-color: rgb(159, 183, 255);
   }
   #ge-container #game-expanded #game #card-interaction .ci-element {
     width: 18rem;
@@ -840,7 +850,7 @@ header .menu-button {
   #ge-container #game-expanded .expanded-details #genres span {
     margin: 0.5rem 0;
     font-size: 0.65em;
-    background-color: rgb(33, 33, 111);
+    background-color: rgb(27, 35, 152);
     padding: 0.5rem 0.7rem;
     border-radius: 10px;
     width: -moz-fit-content;
@@ -863,7 +873,7 @@ header .menu-button {
   top: 0;
   height: 65%;
   width: 100%;
-  background: linear-gradient(180deg, rgba(125, 185, 232, 0) 0, rgb(20, 20, 57));
+  background: linear-gradient(180deg, rgba(125, 185, 232, 0) 0, rgb(9, 12, 51));
   z-index: 99;
 }
 
@@ -874,8 +884,8 @@ header .menu-button {
 
 /*? HomePage container  */
 #games-page {
-  background-color: rgb(20, 20, 57);
-  color: rgb(207, 207, 207);
+  background-color: rgb(9, 12, 51);
+  color: rgb(255, 255, 255);
   width: 95%;
   justify-self: center;
   max-width: 120rem;
@@ -883,7 +893,7 @@ header .menu-button {
   transition: transform 0.3s;
 }
 #games-page .games-count {
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   margin: 0;
   max-width: 100%;
   text-align: center;
@@ -904,7 +914,7 @@ header .menu-button {
   justify-content: center;
   font-size: min(1.2em, 1.5vw + 0.65em);
   font-weight: bold;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   /*? List of page numbers */
 }
 .pagination .page-list {
@@ -924,7 +934,7 @@ header .menu-button {
   cursor: default;
   padding: 0.25em 0.5em;
   border-radius: 5px;
-  background-color: rgb(33, 33, 111);
+  background-color: rgb(27, 35, 152);
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .pagination .page-list .page-selector:hover,
@@ -936,8 +946,8 @@ header .menu-button {
   cursor: pointer;
 }
 .pagination .page-list .page-selector.is-active {
-  background-color: rgb(41, 77, 183);
-  color: rgb(207, 207, 207);
+  background-color: rgb(159, 183, 255);
+  color: rgb(255, 255, 255);
 }
 .pagination .page-list .page-selector.is-active:hover {
   opacity: 1;
@@ -951,7 +961,7 @@ header .menu-button {
   padding: 0.25em;
 }
 .pagination .page-list .page-dots {
-  border-left: 4px solid rgb(255, 215, 0);
+  border-left: 4px solid rgb(255, 132, 0);
   border-radius: 10px;
   height: 100%;
 }
@@ -981,13 +991,13 @@ header .menu-button {
 }
 .sort-dropdown .sort-button {
   display: flex;
-  background-color: rgb(33, 33, 111);
+  background-color: rgb(27, 35, 152);
   border-radius: 7.5px;
   font-size: min(1.2em, 1.5vw + 0.65em);
   padding: 0.25em 0.3em 0.25em 0.5em;
   border: none;
   cursor: pointer;
-  color: rgb(255, 153, 18);
+  color: rgb(255, 178, 95);
   font-weight: bold;
   align-items: center;
   gap: 0.5rem;
@@ -1004,10 +1014,10 @@ header .menu-button {
 .sort-dropdown .dropdown-content {
   display: none;
   position: absolute;
-  background-color: rgb(33, 33, 111);
+  background-color: rgb(27, 35, 152);
   min-width: -moz-max-content;
   min-width: max-content;
-  border: 1px solid rgb(41, 77, 183);
+  border: 1px solid rgb(159, 183, 255);
   border-radius: 5px;
   z-index: 1;
   margin: 20px 0;
@@ -1019,7 +1029,7 @@ header .menu-button {
   display: block;
 }
 .sort-dropdown .dropdown-content li {
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   padding: 6px 12px;
   text-decoration: none;
   display: block;
@@ -1033,11 +1043,11 @@ header .menu-button {
 }
 .sort-dropdown .dropdown-content li.selected-sort {
   font-weight: bold;
-  background-color: rgb(41, 77, 183);
-  color: rgb(255, 153, 18);
+  background-color: rgb(159, 183, 255);
+  color: rgb(255, 178, 95);
 }
 .sort-dropdown .dropdown-content li:hover {
-  background-color: rgb(41, 77, 183);
+  background-color: rgb(159, 183, 255);
   border-radius: 4px;
 }
 
@@ -1056,7 +1066,7 @@ header .menu-button {
 }
 .loader-container .loader:before {
   content: "";
-  border: 3px solid rgb(255, 215, 0);
+  border: 3px solid rgb(255, 132, 0);
   border-radius: 20px;
   position: absolute;
   top: -10px;
@@ -1071,7 +1081,7 @@ header .menu-button {
   right: 100%;
   bottom: 0;
   left: 0;
-  background: rgb(41, 77, 183);
+  background: rgb(159, 183, 255);
   width: 0;
   animation: borealisBar 1s linear infinite;
 }
@@ -1115,13 +1125,17 @@ footer {
   margin-top: 1.5rem;
   padding: 1.5rem 0 0 1.5rem;
   height: 4rem;
-  background-color: rgb(33, 33, 111);
-  color: rgb(255, 215, 0);
+  background-color: rgb(27, 35, 152);
+  color: rgb(255, 255, 255);
+  z-index: 1;
 }
 footer #github-link, footer #linkedin-link, footer #about-frontloggd {
   display: inline-block;
   align-self: center;
   color: inherit;
+}
+footer #github-link:hover, footer #linkedin-link:hover, footer #about-frontloggd:hover {
+  color: rgb(255, 132, 0);
 }
 footer #about-frontloggd {
   text-decoration: none;
@@ -1133,6 +1147,10 @@ footer #igdb-shoutout {
   bottom: 1rem;
   font-weight: bold;
   letter-spacing: 0.75px;
+  cursor: pointer;
+}
+footer #igdb-shoutout:hover {
+  color: rgb(255, 132, 0);
 }
 footer #backloggd-clone {
   display: block;
@@ -1144,25 +1162,89 @@ footer #backloggd-clone {
   font-weight: bold;
   font-size: 1.25rem;
 }
-footer #backloggd-clone a {
+footer a {
   justify-content: center;
   text-decoration: none;
-  color: rgb(255, 215, 0);
+  color: rgb(159, 183, 255);
 }
-footer #backloggd-clone a:hover {
-  font-size: 1.1em;
-  transition: all 0.1s;
+footer a:hover {
+  color: rgb(255, 132, 0);
 }
 
 #landing-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   width: 95%;
   justify-self: center;
   max-width: 120rem;
   margin-bottom: 1em;
+  z-index: 2;
+}
+#landing-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: url("/public/lp_background.jpg");
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-position: center;
+  background-size: cover;
+  pointer-events: none;
+  max-height: 100vh;
+}
+#landing-page::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(125, 185, 232, 0) 0, rgb(9, 12, 51));
+  z-index: -1;
+}
+#landing-page #lp-banner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+#landing-page #lp-banner h2 {
+  font-size: 4em;
+}
+#landing-page #lp-banner div {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+#landing-page #lp-banner div span {
+  flex-grow: 1;
+  padding: 1.5rem 1.5rem;
+  border-radius: 7.5px;
+  border: 0.5px solid rgb(255, 255, 255);
+  text-align: center;
+  font-size: 1.5em;
+  background-color: rgb(48, 52, 255);
+  cursor: pointer;
+}
+#landing-page #lp-banner div span:nth-child(2) {
+  background-color: #00249b;
+}
+#landing-page #lp-banner div span:nth-child(1) {
+  background-color: #107c10;
+}
+#landing-page #lp-banner div span:nth-child(3) {
+  background-color: #e60012;
+}
+#landing-page #lp-banner div span:last-child {
+  background-color: #0883c5;
+}
+#landing-page #lp-banner div span:hover {
+  opacity: 0.7;
 }
 #landing-page #lp-body {
   display: flex;
@@ -1180,7 +1262,7 @@ footer #backloggd-clone a:hover {
     justify-content: space-between;
     width: 100%;
     padding: 1.5rem 0;
-    border-bottom: 0.5px solid rgb(41, 77, 183);
+    border-bottom: 0.5px solid rgb(159, 183, 255);
     gap: 3rem;
   }
   #landing-page #lp-header #lp-header-left {
@@ -1189,10 +1271,10 @@ footer #backloggd-clone a:hover {
     flex-basis: 70%;
   }
   #landing-page #lp-header #lp-header-left .profile-picture {
-    background-color: white;
     width: 100px;
     height: 100px;
     border-radius: 7.5px;
+    border: 0.5px solid rgb(255, 255, 255);
   }
   #landing-page #lp-header #lp-header-left div {
     display: flex;
@@ -1201,7 +1283,7 @@ footer #backloggd-clone a:hover {
   }
   #landing-page #lp-header #lp-header-left div .lp-user {
     text-decoration: none;
-    color: rgb(207, 207, 207);
+    color: rgb(255, 255, 255);
     font-size: 1.75em;
     font-weight: bold;
     letter-spacing: 0.5px;
@@ -1216,10 +1298,10 @@ footer #backloggd-clone a:hover {
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    color: rgb(255, 153, 18);
+    color: rgb(159, 183, 255);
   }
   #landing-page #lp-header #lp-header-left div > div > span:hover {
-    color: rgb(255, 215, 0);
+    color: rgb(48, 52, 255);
   }
   #landing-page #lp-header #lp-header-left div > div > span > span {
     font-size: 2em;
@@ -1238,21 +1320,26 @@ footer #backloggd-clone a:hover {
     font-size: 4em;
   }
   #landing-page #lp-header #lp-header-right span {
-    color: rgb(207, 207, 207);
+    color: rgb(255, 255, 255);
   }
   #landing-page #lp-header #lp-header-right span a {
     text-decoration: none;
-    color: rgb(255, 153, 18);
+    color: rgb(255, 178, 95);
   }
   #landing-page #lp-header #lp-header-right span a:hover {
-    color: rgb(255, 215, 0);
+    color: rgb(255, 132, 0);
   }
   #landing-page #lp-body {
     display: grid;
-    grid-template-columns: 7fr 3fr;
+    grid-template-columns: 8fr 3fr;
     grid-template-rows: 1fr;
     gap: 3rem;
     margin-top: 2.25rem;
+    border-bottom: 0.5px solid rgb(255, 132, 0);
+  }
+  #landing-page #lp-body .lp-body-left section .games-container {
+    grid-template-columns: repeat(5, 1fr);
+    margin-top: 1.5rem;
   }
   #landing-page #lp-body #coming-soon .coming-soon-container {
     display: flex;
@@ -1284,7 +1371,7 @@ footer #backloggd-clone a:hover {
     width: 100%;
     font-size: 1em;
     font-weight: bold;
-    color: rgb(207, 207, 207);
+    color: rgb(255, 255, 255);
   }
   #landing-page #lp-body #coming-soon .coming-soon-container .coming-soon-grid .coming-soon-info * {
     display: block;
@@ -1294,7 +1381,7 @@ footer #backloggd-clone a:hover {
     font-weight: normal;
     font-size: 1.75rem;
     font-size: 1.5rem;
-    color: rgb(255, 215, 0);
+    color: rgb(255, 132, 0);
   }
   #landing-page #lp-body #coming-soon .coming-soon-container .game-card {
     width: 100px;
@@ -1310,23 +1397,30 @@ footer #backloggd-clone a:hover {
     visibility: hidden;
     display: none;
   }
-  #landing-page #lp-body #popular-this-month .games-container {
-    grid-template-columns: repeat(5, 1fr);
-    margin-top: 1.5rem;
-  }
-  #landing-page #popular-this-month > h2, #landing-page #coming-soon > h2, #landing-page #lp-reviews > h2 {
+  #landing-page .lp-body-left > section > h2,
+  #landing-page #coming-soon > h2,
+  #landing-page #lp-reviews > h2 {
     font-weight: 444;
     margin: 0;
   }
-  #landing-page #popular-this-month > h2 > *, #landing-page #coming-soon > h2 > *, #landing-page #lp-reviews > h2 > * {
-    color: rgb(255, 153, 18);
+  #landing-page .lp-body-left > section > h2 > *,
+  #landing-page #coming-soon > h2 > *,
+  #landing-page #lp-reviews > h2 > * {
+    color: rgb(159, 183, 255);
     text-decoration: none;
   }
   #landing-page #lp-reviews {
     display: flex;
     flex-direction: column;
+    margin-top: 2.25rem;
   }
 }
+.bg-credits {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .ge-rating {
   display: flex;
   position: relative;
@@ -1351,7 +1445,7 @@ footer #backloggd-clone a:hover {
   font-family: "Font Awesome 6 Free";
   content: "\f005";
   position: absolute;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   transform: scale(1.75);
   left: 0.9rem;
 }
@@ -1360,7 +1454,7 @@ footer #backloggd-clone a:hover {
   right: 0.9rem;
 }
 .ge-rating input:hover ~ input::after, .ge-rating input:hover::after, .ge-rating input:checked ~ input::after, .ge-rating input:checked::after {
-  color: rgb(255, 153, 18);
+  color: rgb(255, 178, 95);
 }
 
 #log-modal {
@@ -1371,9 +1465,9 @@ footer #backloggd-clone a:hover {
   width: 65rem;
   height: 50rem;
   min-height: 50rem;
-  color: rgb(207, 207, 207);
-  background-color: rgb(33, 33, 111);
-  border: 1px solid rgb(41, 77, 183);
+  color: rgb(255, 255, 255);
+  background-color: rgb(27, 35, 152);
+  border: 1px solid rgb(159, 183, 255);
   border-radius: 10px;
   z-index: 1000;
   overflow-y: scroll;
@@ -1394,10 +1488,10 @@ footer #backloggd-clone a:hover {
   cursor: pointer;
 }
 #log-modal #modal-nav span.active {
-  background-color: rgb(20, 20, 57);
+  background-color: rgb(9, 12, 51);
 }
 #log-modal #modal-nav span:hover {
-  background-color: rgb(20, 20, 57);
+  background-color: rgb(9, 12, 51);
 }
 #log-modal #modal-body {
   display: flex;
@@ -1406,7 +1500,7 @@ footer #backloggd-clone a:hover {
   padding: 0 2rem 2rem 2rem;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  background-color: rgb(20, 20, 57);
+  background-color: rgb(9, 12, 51);
 }
 #log-modal #modal-body .section-title {
   margin-top: 1.5rem;
@@ -1423,7 +1517,7 @@ footer #backloggd-clone a:hover {
 }
 #log-modal #modal-body #game-log #log-side .game-card {
   margin-bottom: 1rem;
-  border: 0.5px solid rgb(41, 77, 183);
+  border: 0.5px solid rgb(159, 183, 255);
 }
 #log-modal #modal-body #game-log #log-side .fl-button {
   width: 50%;
@@ -1511,10 +1605,10 @@ footer #backloggd-clone a:hover {
   margin-top: 1rem;
   resize: vertical;
   padding: 0.5rem 0 0 0.5rem;
-  background-color: rgb(33, 33, 111);
-  border: 1px solid rgb(41, 77, 183);
+  background-color: rgb(27, 35, 152);
+  border: 1px solid rgb(159, 183, 255);
   border-radius: 5px;
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
 }
 #log-modal #modal-body #game-log #log-main #log-settings #log-review div {
   margin: 1rem;
@@ -9804,7 +9898,7 @@ html {
   overflow-x: hidden;
   max-width: 100vw;
   box-sizing: border-box;
-  background-color: rgb(20, 20, 57);
+  background-color: rgb(9, 12, 51);
   padding: env(safe-area-inset);
   overflow-x: hidden;
   scroll-behavior: auto;
@@ -9815,7 +9909,7 @@ body {
   width: 100%;
   font-size: 1.6rem;
   overflow-x: hidden;
-  background-color: rgb(20, 20, 57);
+  background-color: rgb(9, 12, 51);
 }
 
 /* holds header and $main */
@@ -9847,7 +9941,7 @@ body {
 }
 
 .section-title {
-  color: rgb(207, 207, 207);
+  color: rgb(255, 255, 255);
   margin: 0;
   margin-top: 2.25rem;
   max-width: 100%;
@@ -9857,8 +9951,8 @@ body {
 
 .fl-button {
   letter-spacing: 0.25px;
-  background-color: rgb(41, 77, 183);
-  color: rgb(207, 207, 207);
+  background-color: rgb(159, 183, 255);
+  color: rgb(255, 255, 255);
   border: none;
   border-radius: 10px;
   margin: 0;
@@ -9867,7 +9961,7 @@ body {
 }
 
 .log-game-button {
-  background-color: rgb(255, 153, 18);
+  background-color: rgb(48, 52, 255);
   flex-basis: 100%;
   color: white;
   text-align: center;
@@ -9895,7 +9989,7 @@ body {
     cursor: pointer;
   }
   .fl-button:active {
-    background-color: rgb(20, 20, 57);
+    background-color: rgb(9, 12, 51);
     transform: scale(95%);
     transition: 0.3s ease;
     -webkit-transition: 0.3s ease;

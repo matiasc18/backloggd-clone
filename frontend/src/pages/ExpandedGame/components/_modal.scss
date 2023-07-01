@@ -13,8 +13,8 @@
   // left: 50%;
   // transform: translate(-50%, -50%);
   color: $font-color;
-  background-color: $comp;
-  border: 1px solid $comp-2;
+  background-color: $main-2;
+  border: 1px solid $main-3;
   border-radius: 10px;
   z-index: 1000;
   overflow-y: scroll;
@@ -69,7 +69,7 @@
 
         .game-card {
           margin-bottom: 1rem;
-          border: 0.5px solid $comp-2;
+          border: 0.5px solid $main-3;
         }
 
         .fl-button {
@@ -123,11 +123,11 @@
               // #platform {
               //   margin-top: 0.25rem;
               //   height: 3rem;
-              //   background-color: $comp;
+              //   background-color: $main-2;
               //   color: $font-color;
               //   font-weight: 400;
               //   border-radius: 10px;
-              //   border: 0.5px solid $comp;
+              //   border: 0.5px solid $main-2;
               // }
 
               .sort-dropdown {
@@ -181,8 +181,8 @@
               margin-top: 1rem;
               resize: vertical;
               padding: 0.5rem 0 0 0.5rem;
-              background-color: $comp;
-              border: 1px solid $comp-2;
+              background-color: $main-2;
+              border: 1px solid $main-3;
               border-radius: 5px;
               color: $font-color;
             }
