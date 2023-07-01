@@ -143,7 +143,7 @@
   color: rgb(255, 255, 255);
   width: 95%;
   justify-self: center;
-  max-width: 120rem;
+  max-width: 180rem;
   margin: 1em auto;
 }
 #dashboard #bio .bio-details {
@@ -423,7 +423,7 @@
 
 header {
   display: flex;
-  max-width: 120rem;
+  max-width: 180rem;
   align-items: center;
   position: relative;
   justify-content: space-between;
@@ -521,7 +521,7 @@ header .menu-button {
 }
 
 .user-dropdown.show-dropdown {
-  height: 32rem;
+  height: 30rem;
 }
 .user-dropdown #search {
   flex-basis: 100%;
@@ -530,7 +530,7 @@ header .menu-button {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 1rem;
 }
 .user-dropdown #user-buttons .dropdown-button {
   padding: 0.75rem 0;
@@ -546,21 +546,18 @@ header .menu-button {
   gap: 0.5rem;
 }
 .user-dropdown #user-buttons .dropdown-button.grid-1 {
+  flex-basis: calc(100% - 1rem);
+}
+.user-dropdown #user-buttons .dropdown-button.grid-3 {
   flex-basis: calc(33% - 1rem);
 }
 .user-dropdown #user-buttons .dropdown-button.grid-2 {
-  flex-basis: calc(25% - 1rem);
-  flex-direction: column;
-  gap: 0.25rem;
-}
-.user-dropdown #user-buttons .dropdown-button.grid-3 {
   flex-basis: calc(50% - 1rem);
 }
 .user-dropdown #user-buttons .dropdown-button.grid-4 {
-  flex-basis: calc(33% - 1rem);
-}
-.user-dropdown #user-buttons .dropdown-button.grid-5 {
-  flex-basis: calc(50% - 1rem);
+  flex-basis: calc(25% - 1rem);
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 @media (min-width: 30em) {
@@ -575,6 +572,8 @@ header .menu-button {
 @media (min-width: 60em) {
   header {
     flex-wrap: nowrap;
+    width: 95%;
+    margin: 0;
     /** Hide menu button */
   }
   header nav .nav-button:hover {
@@ -629,7 +628,11 @@ header .menu-button {
     border-color: rgb(27, 35, 152);
   }
   header #search {
+<<<<<<< HEAD
     width: 20rem;
+=======
+    width: 22.5rem;
+>>>>>>> c82c9afb644790dad6e01ed0995e14ca8decd8a1
   }
   header .menu-button {
     visibility: hidden;
@@ -667,7 +670,7 @@ header .menu-button {
   max-height: 100%;
   width: 90%;
   margin-top: 5rem;
-  max-width: 120rem;
+  max-width: 180rem;
 }
 #ge-container #game-expanded .game-card {
   position: relative;
@@ -745,7 +748,6 @@ header .menu-button {
     height: 76%;
   }
   #ge-container {
-    justify-content: center;
     align-items: center;
   }
   #ge-container #game-expanded {
@@ -768,24 +770,21 @@ header .menu-button {
   }
 }
 @media (min-width: 60em) {
-  #ge-container {
-    display: block;
-    width: 100%;
-  }
   #ge-container #game-expanded {
     display: grid;
-    grid-template-columns: 20.5rem 6fr 2fr;
+    grid-template-columns: 3fr 10fr 5fr;
     grid-template-rows: 100%;
     align-items: end;
     margin: 0 auto;
     gap: 5rem;
-    height: 95%;
+    margin-top: 50rem;
   }
   #ge-container #game-expanded #game {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     height: 100%;
+    gap: 1rem;
   }
   #ge-container #game-expanded #game #card-interaction {
     position: relative;
@@ -796,20 +795,27 @@ header .menu-button {
     border: 1px solid rgb(159, 183, 255);
     border-radius: 10px;
     width: 100%;
-    padding: 4rem 0 1.5rem 0;
+    padding: 1rem 0;
     gap: 1rem;
+  }
+  #ge-container #game-expanded #game #card-interaction:last-child {
+    padding: 0;
+    background-color: transparent;
+    border: none;
   }
   #ge-container #game-expanded #game #card-interaction hr {
     margin: 0;
     background-color: rgb(159, 183, 255);
   }
   #ge-container #game-expanded #game #card-interaction .ci-element {
-    width: 18rem;
+    width: calc(100% - 1.5rem);
   }
   #ge-container #game-expanded #game #card-interaction .game-card {
     position: absolute;
-    max-width: 18rem;
-    bottom: calc(100% - 3rem);
+    bottom: calc(100% + 1rem);
+    width: 100%;
+    max-width: none;
+    max-height: none;
   }
   #ge-container #game-expanded #game #card-interaction .game-card:hover {
     opacity: 1;
@@ -820,8 +826,13 @@ header .menu-button {
   }
   #ge-container #game-expanded #game #card-interaction #ge-buttons {
     display: flex;
-    gap: 1rem;
+    justify-content: space-evenly;
     align-items: center;
+    cursor: pointer;
+    width: 95%;
+  }
+  #ge-container #game-expanded #game #card-interaction #ge-buttons > *:hover {
+    color: rgb(255, 153, 18);
   }
   #ge-container #game-expanded #game #card-interaction #add-to-list {
     margin: 0;
@@ -861,7 +872,7 @@ header .menu-button {
   position: absolute;
   top: 0;
   width: 100%;
-  height: 65%;
+  height: 75rem;
   -o-object-fit: cover;
      object-fit: cover;
   z-index: 98;
@@ -871,15 +882,10 @@ header .menu-button {
 .gradient {
   position: absolute;
   top: 0;
-  height: 65%;
+  height: 75rem;
   width: 100%;
   background: linear-gradient(180deg, rgba(125, 185, 232, 0) 0, rgb(9, 12, 51));
   z-index: 99;
-}
-
-#poop {
-  height: 100%;
-  width: 100%;
 }
 
 /*? HomePage container  */
@@ -888,7 +894,7 @@ header .menu-button {
   color: rgb(255, 255, 255);
   width: 95%;
   justify-self: center;
-  max-width: 120rem;
+  max-width: 180rem;
   margin-bottom: 1em;
   transition: transform 0.3s;
 }
@@ -1178,7 +1184,7 @@ footer a:hover {
   color: rgb(255, 255, 255);
   width: 95%;
   justify-self: center;
-  max-width: 120rem;
+  max-width: 180rem;
   margin-bottom: 1em;
   z-index: 2;
 }
@@ -1425,9 +1431,8 @@ footer a:hover {
   display: flex;
   position: relative;
   flex-direction: row-reverse;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
-  max-width: 18rem;
 }
 .ge-rating input {
   position: relative;
@@ -1445,13 +1450,19 @@ footer a:hover {
   font-family: "Font Awesome 6 Free";
   content: "\f005";
   position: absolute;
+<<<<<<< HEAD
   color: rgb(255, 255, 255);
   transform: scale(1.75);
   left: 0.9rem;
+=======
+  color: rgb(207, 207, 207);
+  transform: scale(2);
+  left: 1.1rem;
+>>>>>>> c82c9afb644790dad6e01ed0995e14ca8decd8a1
 }
 .ge-rating input:nth-child(2n+1)::after {
   left: initial;
-  right: 0.9rem;
+  right: 1.1rem;
 }
 .ge-rating input:hover ~ input::after, .ge-rating input:hover::after, .ge-rating input:checked ~ input::after, .ge-rating input:checked::after {
   color: rgb(255, 178, 95);
@@ -9951,10 +9962,15 @@ body {
 
 .fl-button {
   letter-spacing: 0.25px;
+<<<<<<< HEAD
   background-color: rgb(159, 183, 255);
   color: rgb(255, 255, 255);
+=======
+  background-color: rgb(255, 153, 18);
+  color: white;
+>>>>>>> c82c9afb644790dad6e01ed0995e14ca8decd8a1
   border: none;
-  border-radius: 10px;
+  border-radius: 7.5px;
   margin: 0;
   padding: 0.35em 0.7em;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -9989,23 +10005,27 @@ body {
     cursor: pointer;
   }
   .fl-button:active {
+<<<<<<< HEAD
     background-color: rgb(9, 12, 51);
     transform: scale(95%);
     transition: 0.3s ease;
     -webkit-transition: 0.3s ease;
+=======
+    background-color: rgb(41, 77, 183);
+>>>>>>> c82c9afb644790dad6e01ed0995e14ca8decd8a1
   }
 }
 @media (min-width: 60em) {
+  #App {
+    grid-template-rows: auto 1fr;
+  }
   .games-container {
     -moz-column-gap: 1.5rem;
          column-gap: 1.5rem;
     margin: 1.5rem 0;
   }
   .fl-button:hover {
-    opacity: 0.6;
-    transform: scale(1.05);
-    transition: 0.3s ease;
-    -webkit-transition: 0.3s ease;
     cursor: pointer;
+    background-color: rgb(255, 215, 0);
   }
 }
