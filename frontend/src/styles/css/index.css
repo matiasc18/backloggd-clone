@@ -628,11 +628,7 @@ header .menu-button {
     border-color: rgb(27, 35, 152);
   }
   header #search {
-<<<<<<< HEAD
-    width: 20rem;
-=======
     width: 22.5rem;
->>>>>>> c82c9afb644790dad6e01ed0995e14ca8decd8a1
   }
   header .menu-button {
     visibility: hidden;
@@ -832,7 +828,7 @@ header .menu-button {
     width: 95%;
   }
   #ge-container #game-expanded #game #card-interaction #ge-buttons > *:hover {
-    color: rgb(255, 153, 18);
+    color: rgb(255, 132, 0);
   }
   #ge-container #game-expanded #game #card-interaction #add-to-list {
     margin: 0;
@@ -1450,15 +1446,9 @@ footer a:hover {
   font-family: "Font Awesome 6 Free";
   content: "\f005";
   position: absolute;
-<<<<<<< HEAD
   color: rgb(255, 255, 255);
-  transform: scale(1.75);
-  left: 0.9rem;
-=======
-  color: rgb(207, 207, 207);
   transform: scale(2);
   left: 1.1rem;
->>>>>>> c82c9afb644790dad6e01ed0995e14ca8decd8a1
 }
 .ge-rating input:nth-child(2n+1)::after {
   left: initial;
@@ -9962,13 +9952,8 @@ body {
 
 .fl-button {
   letter-spacing: 0.25px;
-<<<<<<< HEAD
   background-color: rgb(159, 183, 255);
   color: rgb(255, 255, 255);
-=======
-  background-color: rgb(255, 153, 18);
-  color: white;
->>>>>>> c82c9afb644790dad6e01ed0995e14ca8decd8a1
   border: none;
   border-radius: 7.5px;
   margin: 0;
@@ -10005,14 +9990,7 @@ body {
     cursor: pointer;
   }
   .fl-button:active {
-<<<<<<< HEAD
-    background-color: rgb(9, 12, 51);
-    transform: scale(95%);
-    transition: 0.3s ease;
-    -webkit-transition: 0.3s ease;
-=======
-    background-color: rgb(41, 77, 183);
->>>>>>> c82c9afb644790dad6e01ed0995e14ca8decd8a1
+    background-color: rgb(255, 132, 0);
   }
 }
 @media (min-width: 60em) {
@@ -10026,6 +10004,6 @@ body {
   }
   .fl-button:hover {
     cursor: pointer;
-    background-color: rgb(255, 215, 0);
+    background-color: rgb(255, 132, 0);
   }
 }

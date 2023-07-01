@@ -81,13 +81,8 @@ body {
 
 .fl-button {
   letter-spacing: 0.25px;
-<<<<<<< HEAD
   background-color: $main-3;
   color: $font-color;
-=======
-  background-color: $detail-2;
-  color: white;
->>>>>>> c82c9afb644790dad6e01ed0995e14ca8decd8a1
   border: none;
   border-radius: 7.5px;
   margin: 0;
@@ -127,7 +122,7 @@ body {
     cursor: pointer;
 
     &:active {
-      background-color: $comp-2;
+      background-color: $secondary;
     }
   }
 }
@@ -149,7 +144,7 @@ body {
   .fl-button {
     &:hover {
       cursor: pointer;
-      background-color: $detail;
+      background-color: $secondary;
     }
   }
 }
